@@ -4,7 +4,6 @@ import FloatingCart from './components/FloatingCart'
 import './App.css'
 
 // Pages
-import HomePage from './pages/HomePage'
 import LandingPage from './pages/LandingPage'
 import Shop from './pages/Shop'
 import Collections from './pages/Collections'
@@ -24,7 +23,6 @@ function App() {
       <Router>
         <Routes>
           <Route path="/" element={<LandingPage />} />
-          <Route path="/old-home" element={<HomePage />} />
           <Route path="/shop" element={<Shop />} />
           <Route path="/collections" element={<Collections />} />
           <Route path="/custom" element={<CustomPage />} />

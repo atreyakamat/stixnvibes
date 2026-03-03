@@ -10,13 +10,36 @@
     -webkit-box-orient: vertical;
     overflow: hidden;
   }
-  
+
   .line-clamp-3 {
     display: -webkit-box;
     -webkit-line-clamp: 3;
     line-clamp: 3;
     -webkit-box-orient: vertical;
     overflow: hidden;
+  }
+
+  /* Neo-brutalism Utilities */
+  .neo-shadow-sm {
+    shadow: [4px_4px_0px_0px_rgba(0,0,0,1)];
+  }
+
+  .neo-shadow-md {
+    shadow: [8px_8px_0px_0px_rgba(0,0,0,1)];
+  }
+
+  .neo-shadow-lg {
+    shadow: [12px_12px_0px_0px_rgba(0,0,0,1)];
+  }
+
+  .neo-border {
+    border-width: 3px;
+    border-color: #000;
+  }
+
+  .neo-border-thick {
+    border-width: 4px;
+    border-color: #000;
   }
 }
 
@@ -52,7 +75,8 @@ body {
   min-width: 320px;
   min-height: 100vh;
   font-family: 'Plus Jakarta Sans', 'Noto Sans', sans-serif;
-  color: #181111;
+  color: #000;
+  background-color: #f0f0f0;
 }
 
 #root {
@@ -70,20 +94,26 @@ body {
   transform: scale(1.05);
 }
 
-/* Custom scrollbar */
+/* Neo-brutalism Scrollbar */
 ::-webkit-scrollbar {
-  width: 8px;
+  width: 12px;
 }
 
 ::-webkit-scrollbar-track {
-  background: #f1f1f1;
+  background: #000;
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #c1c1c1;
-  border-radius: 4px;
+  background: #FFDE03;
+  border: 3px solid #000;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: #a1a1a1;
+  background: #ff4d4d;
+}
+
+/* Selection style */
+::selection {
+  background-color: #FFDE03;
+  color: #000;
 }

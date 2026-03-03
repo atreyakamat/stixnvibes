@@ -30,6 +30,7 @@ export default {
       animation: {
         marquee: "marquee var(--duration) linear infinite",
         "marquee-vertical": "marquee-vertical var(--duration) linear infinite",
+        shimmer: "shimmer 2s linear infinite",
       },
       keyframes: {
         marquee: {
@@ -40,6 +41,10 @@ export default {
           from: { transform: "translateY(0%)" },
           to: { transform: "translateY(-100%)" },
         },
+        shimmer: {
+          from: { transform: "translateX(-100%)" },
+          to: { transform: "translateX(100%)" },
+        }
       },
     },
     container: {
