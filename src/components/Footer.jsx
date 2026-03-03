@@ -38,7 +38,7 @@ function Footer() {
           <div>
             <h3 className="text-2xl font-black text-black mb-8 uppercase italic underline decoration-[4px] decoration-[#42c4ef] underline-offset-8">Quick Links</h3>
             <ul className="space-y-4">
-              {['Shop', 'Collections', 'About', 'Contact'].map(item => (
+              {['Custom', 'Contact'].map(item => (
                 <li key={item}>
                   <Link 
                     to={`/${item.toLowerCase()}`} 

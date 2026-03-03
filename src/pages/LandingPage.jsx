@@ -4,7 +4,6 @@ import Footer from '../components/Footer'
 import { Link } from 'react-router-dom'
 import { motion } from 'framer-motion'
 import { Marquee } from '../components/MarqueeComponent'
-import { getTrendingProducts, getFeaturedCollections } from '../data/dataUtils'
 
 // Refraction/Glass constants
 const GLASS_PANEL = "bg-white/10 backdrop-blur-2xl border border-white/20 shadow-[0_8px_32px_0_rgba(31,38,135,0.07)]"
@@ -47,40 +46,7 @@ const Button = ({ children, className = "", ...props }) => {
   )
 }
 
-const ProductCard = ({ product }) => (
-  <motion.div 
-    className={`rounded-3xl ${GLASS_CARD} hover:-translate-y-2 hover:shadow-[0_12px_40px_0_rgba(0,0,0,0.2)] transition-all duration-500 overflow-hidden group`}
-  >
-    <div className="aspect-square relative overflow-hidden bg-black/5">
-      <img 
-        src={product.image} 
-        alt={product.title} 
-        className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
-      />
-      <div className="absolute top-3 right-3">
-        <span className="bg-white/20 backdrop-blur-md border border-white/30 text-white px-3 py-1 rounded-full text-[10px] font-bold uppercase tracking-wider shadow-lg">
-          {product.type}
-        </span>
-      </div>
-    </div>
-    <div className="p-5">
-      <h3 className="font-bold text-white text-lg mb-2 truncate uppercase">{product.title}</h3>
-      <div className="flex items-center justify-between mt-4">
-        <span className="text-white font-black text-xl">₹{product.price}</span>
-        <Link to="/shop">
-          <button className="text-xs font-bold uppercase tracking-widest text-white/70 hover:text-white transition-colors">
-            Grab It
-          </button>
-        </Link>
-      </div>
-    </div>
-  </motion.div>
-)
-
 function LandingPage() {
-  const trendingProducts = getTrendingProducts(8);
-  const featuredCollections = getFeaturedCollections().slice(0, 3);
-  
   const testimonials = [
     { id: 1, name: "Alex J.", text: "These stickers went through rain, coffee spills, and still slayed. Stuck on my laptop like trauma — forever.", rating: 5 },
     { id: 2, name: "Morgan S.", text: "Ordered a custom polaroid set and literally screamed. Colors? Perfect. Quality? Chef's kiss. Me? Obsessed.", rating: 5 },
@@ -139,11 +105,8 @@ function LandingPage() {
                 Premium custom stickers for your laptop, journal, or chaos. Waterproof, non-tearable, and 100% aesthetic.
               </p>
               <div className="flex flex-wrap justify-center gap-6">
-                <Link to="/shop">
-                  <Button className="bg-gradient-to-r from-purple-500/50 to-pink-500/50 hover:from-purple-500/70 hover:to-pink-500/70">Shop Now</Button>
-                </Link>
                 <Link to="/custom">
-                  <Button>Make Your Own</Button>
+                  <Button className="h-16 px-10 text-xl bg-gradient-to-r from-pink-500/50 to-purple-500/50">Start Designing</Button>
                 </Link>
               </div>
             </motion.div>
@@ -163,7 +126,7 @@ function LandingPage() {
           {/* USPs Section */}
           <section className="py-24 relative">
             <div className="container mx-auto px-4">
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                 <motion.div 
                   whileHover={{ y: -10 }}
                   className={`p-10 rounded-3xl ${GLASS_CARD} text-center space-y-6`}
@@ -175,85 +138,12 @@ function LandingPage() {
                 
                 <motion.div 
                   whileHover={{ y: -10 }}
-                  className={`p-10 rounded-3xl ${GLASS_CARD} text-center space-y-6 md:translate-y-6`}
+                  className={`p-10 rounded-3xl ${GLASS_CARD} text-center space-y-6`}
                 >
                   <div className="text-6xl drop-shadow-[0_0_15px_rgba(255,255,255,0.3)]">🎨</div>
                   <h3 className="text-2xl font-bold uppercase tracking-wide">Custom AF</h3>
                   <p className="text-white/70 font-medium text-lg leading-relaxed">From Polaroid memories to brand logos. We bring your vision to life.</p>
                 </motion.div>
-                
-                <motion.div 
-                  whileHover={{ y: -10 }}
-                  className={`p-10 rounded-3xl ${GLASS_CARD} text-center space-y-6`}
-                >
-                  <div className="text-6xl drop-shadow-[0_0_15px_rgba(255,255,255,0.3)]">✨</div>
-                  <h3 className="text-2xl font-bold uppercase tracking-wide">Artist Collabs</h3>
-                  <p className="text-white/70 font-medium text-lg leading-relaxed">Unique drops from indie artists around the world. Exclusively here.</p>
-                </motion.div>
-              </div>
-            </div>
-          </section>
-
-          {/* Trending Section */}
-          <section className="py-24 relative">
-            <div className="container mx-auto px-4">
-              <div className={`flex flex-col md:flex-row md:items-end justify-between mb-16 gap-8 p-8 rounded-3xl ${GLASS_PANEL}`}>
-                <div>
-                  <span className="text-purple-300 font-bold uppercase tracking-[0.3em] text-sm">The Most Wanted</span>
-                  <h2 className="text-4xl md:text-6xl font-black text-white mt-2 uppercase tracking-tighter drop-shadow-md">TRENDING NOW</h2>
-                </div>
-                <Link to="/shop">
-                  <Button>View All Stickers</Button>
-                </Link>
-              </div>
-              
-              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
-                {trendingProducts.map((product) => (
-                  <ProductCard key={product.id} product={product} />
-                ))}
-              </div>
-            </div>
-          </section>
-
-          {/* Featured Collections */}
-          <section className="py-24 relative overflow-hidden">
-            <div className="container mx-auto px-4">
-              <div className={`text-center mb-20 p-10 max-w-3xl mx-auto rounded-[3rem] ${GLASS_PANEL}`}>
-                <h2 className="text-4xl md:text-6xl font-black text-white uppercase tracking-tighter drop-shadow-md">FEATURED PACKS</h2>
-                <p className="text-white/70 font-medium mt-4 text-xl">Curated sets at discounted prices. More vibes, less price.</p>
-              </div>
-              
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-12 mt-12">
-                {featuredCollections.map((collection, index) => (
-                  <motion.div 
-                    key={collection.id}
-                    className={`rounded-3xl ${GLASS_CARD} overflow-hidden group flex flex-col`}
-                  >
-                    <div className="aspect-[4/3] relative overflow-hidden">
-                      <img 
-                        src={collection.image} 
-                        alt={collection.title} 
-                        className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700 opacity-90 mix-blend-overlay"
-                      />
-                      <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent pointer-events-none" />
-                      <div className="absolute top-4 left-4 bg-white/20 backdrop-blur-md border border-white/30 text-white px-4 py-1 rounded-full font-bold uppercase text-xs shadow-lg">
-                        {collection.isLimited ? 'Limited Drop' : 'New Pack'}
-                      </div>
-                    </div>
-                    <div className="p-8 flex-grow flex flex-col justify-between relative z-10 -mt-10">
-                      <div>
-                        <h3 className="text-2xl font-black text-white mb-4 uppercase leading-tight drop-shadow-lg">{collection.title}</h3>
-                        <p className="text-white/70 font-medium mb-8 line-clamp-3">{collection.description}</p>
-                      </div>
-                      <div className="flex items-center justify-between">
-                        <span className="text-white font-black text-2xl drop-shadow-md">₹{collection.price}</span>
-                        <Link to="/collections">
-                          <Button className="px-6 py-2 text-sm">View Pack</Button>
-                        </Link>
-                      </div>
-                    </div>
-                  </motion.div>
-                ))}
               </div>
             </div>
           </section>
