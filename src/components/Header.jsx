@@ -11,6 +11,7 @@ function Header() {
 
   const navLinks = [
     { to: '/', label: 'Home' },
+    { to: '/old-home', label: 'Old Home' },
     { to: '/shop', label: 'Shop' },
     { to: '/collections', label: 'Collections' },
     { to: '/collabs', label: 'Collabs' },

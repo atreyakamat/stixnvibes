@@ -1,7 +1,7 @@
 // Data utility functions for managing products and collections
 
-import productsData from './products-enhanced.json';
-import collectionsData from './collections-enhanced.json';
+import productsData from './products.json';
+import collectionsData from './collections.json';
 
 // Get all individual products
 export const getAllProducts = () => {

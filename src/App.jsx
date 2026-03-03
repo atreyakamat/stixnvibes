@@ -5,6 +5,7 @@ import './App.css'
 
 // Pages
 import HomePage from './pages/HomePage'
+import LandingPage from './pages/LandingPage'
 import Shop from './pages/Shop'
 import Collections from './pages/Collections'
 import AboutPage from './pages/AboutPage'
@@ -22,7 +23,8 @@ function App() {
     <CartProvider>
       <Router>
         <Routes>
-          <Route path="/" element={<HomePage />} />
+          <Route path="/" element={<LandingPage />} />
+          <Route path="/old-home" element={<HomePage />} />
           <Route path="/shop" element={<Shop />} />
           <Route path="/collections" element={<Collections />} />
           <Route path="/custom" element={<CustomPage />} />

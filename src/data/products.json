@@ -6,7 +6,9 @@
     "price": 49,
     "type": "Vinyl",
     "tags": ["Trending", "Laptop"],
-    "collection": null,
+    "collections": ["trending-pack", "cafe-collab"],
+    "category": "lifestyle",
+    "popularity": 95,
     "description": "Perfect for checking the vibes everywhere you go"
   },
   {
@@ -16,7 +18,9 @@
     "price": 59,
     "type": "Waterproof",
     "tags": ["Popular", "Aesthetic"],
-    "collection": null,
+    "collections": ["aesthetic-pack"],
+    "category": "aesthetic",
+    "popularity": 88,
     "description": "When you need to disappear but make it aesthetic"
   },
   {
@@ -26,7 +30,9 @@
     "price": 45,
     "type": "Normal",
     "tags": ["Cute", "Pastel"],
-    "collection": null,
+    "collections": ["soft-rebellion"],
+    "category": "cute",
+    "popularity": 82,
     "description": "Soft peach vibes for your journal"
   },
   {
@@ -36,7 +42,9 @@
     "price": 65,
     "type": "Vinyl",
     "tags": ["Artist Drop", "Neon"],
-    "collection": null,
+    "collections": ["cosmic-collection"],
+    "category": "futuristic",
+    "popularity": 91,
     "description": "Electric dreams in sticker form"
   },
   {
@@ -46,7 +54,9 @@
     "price": 39,
     "type": "Normal",
     "tags": ["Minimal", "Love"],
-    "collection": null,
+    "collections": ["soft-rebellion", "minimal-pack"],
+    "category": "minimal",
+    "popularity": 85,
     "description": "Simple love, big impact"
   },
   {
@@ -56,7 +66,9 @@
     "price": 55,
     "type": "Waterproof",
     "tags": ["Cafe", "Trending"],
-    "collection": "cafe-collab",
+    "collections": ["cafe-collab"],
+    "category": "lifestyle",
+    "popularity": 94,
     "description": "For the caffeine addicts"
   },
   {
@@ -66,7 +78,9 @@
     "price": 52,
     "type": "Vinyl",
     "tags": ["Aesthetic", "Sunset"],
-    "collection": "soft-rebellion",
+    "collections": ["soft-rebellion"],
+    "category": "nature",
+    "popularity": 89,
     "description": "Chase sunsets, not people"
   },
   {
@@ -76,7 +90,9 @@
     "price": 68,
     "type": "Vinyl",
     "tags": ["Retro", "Popular"],
-    "collection": null,
+    "collections": ["retro-pack"],
+    "category": "retro",
+    "popularity": 87,
     "description": "80s nostalgia reimagined"
   },
   {
@@ -86,7 +102,9 @@
     "price": 75,
     "type": "Polaroid",
     "tags": ["Custom", "Memory"],
-    "collection": null,
+    "collections": ["custom-pack"],
+    "category": "custom",
+    "popularity": 96,
     "description": "Add your photo for instant nostalgia"
   },
   {
@@ -96,7 +114,9 @@
     "price": 58,
     "type": "Vinyl",
     "tags": ["Space", "Cat", "Fun"],
-    "collection": "cosmic-collection",
+    "collections": ["cosmic-collection"],
+    "category": "celestial",
+    "popularity": 93,
     "description": "Meow from outer space"
   },
   {
@@ -106,7 +126,9 @@
     "price": 62,
     "type": "Waterproof",
     "tags": ["Japan", "Neon", "City"],
-    "collection": null,
+    "collections": ["urban-pack"],
+    "category": "urban",
+    "popularity": 90,
     "description": "Neon-lit streets of Tokyo"
   },
   {
@@ -116,7 +138,9 @@
     "price": 48,
     "type": "Normal",
     "tags": ["Vintage", "Photography"],
-    "collection": "cafe-collab",
+    "collections": ["cafe-collab", "retro-pack"],
+    "category": "vintage",
+    "popularity": 84,
     "description": "For the film photography lovers"
   }
 ]

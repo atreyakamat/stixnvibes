@@ -9,7 +9,9 @@
     "stickers": ["sunset-mood", "peach-plush", "minimal-heart"],
     "tags": ["Limited Edition", "Artist Collab", "Goa Event"],
     "releaseDate": "2025-01-15",
-    "isLimited": true
+    "isLimited": true,
+    "category": "limited-edition",
+    "discount": 17
   },
   {
     "id": "cafe-collab",
@@ -21,7 +23,9 @@
     "stickers": ["coffee-vibes", "vintage-camera", "vibe-check"],
     "tags": ["Cafe Vibes", "Study Essentials", "Laptop Pack"],
     "releaseDate": "2025-02-01",
-    "isLimited": false
+    "isLimited": false,
+    "category": "lifestyle",
+    "discount": 10
   },
   {
     "id": "cosmic-collection",
@@ -33,7 +37,9 @@
     "stickers": ["space-cat", "neon-dreams"],
     "tags": ["Space Theme", "Dreamy", "Aesthetic"],
     "releaseDate": "2025-02-10",
-    "isLimited": false
+    "isLimited": false,
+    "category": "space",
+    "discount": 12
   },
   {
     "id": "mystery-pack",
@@ -46,6 +52,8 @@
     "tags": ["Surprise", "Gift Pack", "Random"],
     "releaseDate": "2025-02-05",
     "isLimited": false,
-    "isMystery": true
+    "isMystery": true,
+    "category": "mystery",
+    "discount": 27
   }
 ]
