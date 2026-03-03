@@ -29,7 +29,8 @@ export const STORE_CONFIG = {
   contact: {
     whatsappNumber: '917744020601',  // Change WhatsApp number here
     businessName: 'Stix N Vibes',
-    email: 'hello@stixnvibes.com'
+    email: 'hello@stixnvibes.com',
+    instagram: 'stixnvibes'
   },
 
   // Store Settings

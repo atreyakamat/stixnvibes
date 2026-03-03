@@ -31,6 +31,7 @@ export default {
         marquee: "marquee var(--duration) linear infinite",
         "marquee-vertical": "marquee-vertical var(--duration) linear infinite",
         shimmer: "shimmer 2s linear infinite",
+        "gradient-x": "gradient-x 5s ease infinite",
       },
       keyframes: {
         marquee: {
@@ -44,7 +45,17 @@ export default {
         shimmer: {
           from: { transform: "translateX(-100%)" },
           to: { transform: "translateX(100%)" },
-        }
+        },
+        "gradient-x": {
+          "0%, 100%": {
+            "background-size": "200% 200%",
+            "background-position": "left center",
+          },
+          "50%": {
+            "background-size": "200% 200%",
+            "background-position": "right center",
+          },
+        },
       },
     },
     container: {

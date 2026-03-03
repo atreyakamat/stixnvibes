@@ -1,13 +1,53 @@
-import React from 'react'
+import React, { useRef } from 'react'
 import Header from '../components/Header'
 import Footer from '../components/Footer'
-import { Link } from 'react-router-dom'
-import { motion } from 'framer-motion'
+import { motion, useMotionValue, useSpring, useTransform } from 'framer-motion'
 import { Marquee } from '../components/MarqueeComponent'
+import { BackgroundBeams, Starfield } from '../components/BackgroundEffects'
 
-// Refraction/Glass constants
-const GLASS_PANEL = "bg-white/10 backdrop-blur-2xl border border-white/20 shadow-[0_8px_32px_0_rgba(31,38,135,0.07)]"
-const GLASS_CARD = "bg-white/20 backdrop-blur-xl border border-white/30 shadow-[0_4px_24px_0_rgba(0,0,0,0.1)]"
+// Enhanced Refraction Glass Component
+const GlassContainer = ({ children, className = "", intensity = 1 }) => {
+  const mouseX = useMotionValue(0.5);
+  const mouseY = useMotionValue(0.5);
+
+  const springX = useSpring(mouseX, { stiffness: 100, damping: 20 });
+  const springY = useSpring(mouseY, { stiffness: 100, damping: 20 });
+
+  const handleMouseMove = (e) => {
+    const { left, top, width, height } = e.currentTarget.getBoundingClientRect();
+    const x = (e.clientX - left) / width;
+    const y = (e.clientY - top) / height;
+    mouseX.set(x);
+    mouseY.set(y);
+  };
+
+  const gradientX = useTransform(springX, [0, 1], ["0%", "100%"]);
+  const gradientY = useTransform(springY, [0, 1], ["0%", "100%"]);
+
+  return (
+    <motion.div
+      onMouseMove={handleMouseMove}
+      className={`relative overflow-hidden ${className}`}
+      style={{
+        background: `rgba(255, 255, 255, ${0.03 * intensity})`,
+        backdropFilter: `blur(${32 * intensity}px)`,
+        border: `1px solid rgba(255, 255, 255, ${0.1 * intensity})`,
+      }}
+    >
+      {/* Real-time refraction highlight */}
+      <motion.div
+        className="absolute inset-0 pointer-events-none opacity-40"
+        style={{
+          background: useTransform(
+            [gradientX, gradientY],
+            ([x, y]) => `radial-gradient(600px circle at ${x} ${y}, rgba(255,255,255,0.15), transparent)`
+          ),
+        }}
+      />
+      {children}
+    </motion.div>
+  );
+};
 
 // Star rating component (Glass style)
 const StarRating = ({ rating, size = "20px" }) => {
@@ -16,7 +56,7 @@ const StarRating = ({ rating, size = "20px" }) => {
       {[...Array(5)].map((_, i) => (
         <div 
           key={i} 
-          className={i < rating ? "text-yellow-400 drop-shadow-[0_0_8px_rgba(250,204,21,0.8)]" : "text-white/30"} 
+          className={i < rating ? "text-yellow-400 drop-shadow-[0_0_10px_rgba(250,204,21,0.6)]" : "text-white/10"} 
         >
           <svg 
             xmlns="http://www.w3.org/2000/svg" 
@@ -33,19 +73,6 @@ const StarRating = ({ rating, size = "20px" }) => {
   )
 }
 
-// Custom glass button
-const Button = ({ children, className = "", ...props }) => {
-  return (
-    <button
-      className={`relative overflow-hidden px-8 py-4 rounded-2xl font-bold uppercase tracking-wider text-white bg-white/10 backdrop-blur-md border border-white/20 shadow-[0_8px_32px_0_rgba(255,255,255,0.1)] hover:bg-white/20 hover:shadow-[0_8px_32px_0_rgba(255,255,255,0.2)] hover:-translate-y-1 transition-all duration-300 ${className}`}
-      {...props}
-    >
-      <div className="absolute inset-0 w-full h-full bg-gradient-to-r from-transparent via-white/10 to-transparent -translate-x-full hover:animate-[shimmer_1.5s_infinite]" />
-      {children}
-    </button>
-  )
-}
-
 function LandingPage() {
   const testimonials = [
     { id: 1, name: "Alex J.", text: "These stickers went through rain, coffee spills, and still slayed. Stuck on my laptop like trauma — forever.", rating: 5 },
@@ -57,192 +84,161 @@ function LandingPage() {
   ];
 
   return (
-    <div className="min-h-screen w-full bg-[#0a0a0a] text-white overflow-x-hidden selection:bg-purple-500 selection:text-white relative" style={{ fontFamily: '"Plus Jakarta Sans", "Noto Sans", sans-serif' }}>
+    <div className="min-h-screen w-full bg-[#050505] text-white overflow-x-hidden selection:bg-purple-500 relative" style={{ fontFamily: '"Plus Jakarta Sans", "Noto Sans", sans-serif' }}>
       
-      {/* Abstract Background Refraction Blobs */}
+      {/* Interactive & Reactive Background Layers */}
       <div className="fixed inset-0 z-0 overflow-hidden pointer-events-none">
+        <Starfield />
+        <BackgroundBeams />
+        
+        {/* Colorful Refraction Orbs */}
         <motion.div 
-          animate={{ x: [0, 100, 0], y: [0, -50, 0], rotate: [0, 90, 0] }}
-          transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
-          className="absolute -top-1/4 -left-1/4 w-[800px] h-[800px] bg-purple-600/30 rounded-full blur-[120px]"
+          animate={{ 
+            x: [0, 150, -50, 0], 
+            y: [0, -100, 50, 0],
+            scale: [1, 1.2, 0.9, 1]
+          }}
+          transition={{ duration: 25, repeat: Infinity, ease: "easeInOut" }}
+          className="absolute -top-1/4 -left-1/4 w-[1000px] h-[1000px] bg-purple-600/10 rounded-full blur-[140px]"
         />
         <motion.div 
-          animate={{ x: [0, -100, 0], y: [0, 100, 0], rotate: [0, -90, 0] }}
-          transition={{ duration: 25, repeat: Infinity, ease: "linear" }}
-          className="absolute top-1/4 -right-1/4 w-[600px] h-[600px] bg-blue-500/30 rounded-full blur-[100px]"
+          animate={{ 
+            x: [0, -150, 100, 0], 
+            y: [0, 150, -100, 0],
+            scale: [1, 0.8, 1.1, 1]
+          }}
+          transition={{ duration: 30, repeat: Infinity, ease: "easeInOut" }}
+          className="absolute top-1/4 -right-1/4 w-[800px] h-[800px] bg-blue-500/10 rounded-full blur-[120px]"
         />
         <motion.div 
-          animate={{ x: [0, 50, 0], y: [0, -100, 0] }}
-          transition={{ duration: 15, repeat: Infinity, ease: "linear" }}
-          className="absolute -bottom-1/4 left-1/3 w-[700px] h-[700px] bg-pink-500/20 rounded-full blur-[120px]"
+          animate={{ 
+            x: [0, 100, -150, 0], 
+            y: [0, -150, 100, 0],
+            scale: [1, 1.1, 0.8, 1]
+          }}
+          transition={{ duration: 20, repeat: Infinity, ease: "easeInOut" }}
+          className="absolute -bottom-1/4 left-1/3 w-[900px] h-[900px] bg-pink-500/10 rounded-full blur-[150px]"
         />
       </div>
 
-      <div className="relative z-10">
+      <div className="relative z-10 flex flex-col min-h-screen">
         <Header />
         
-        <main className="mx-auto w-full">
+        <main className="flex-grow w-full">
           {/* Hero Section */}
-          <section className="relative min-h-[90vh] w-full flex items-center justify-center py-20 px-4">
-            
-            <motion.div
-              initial={{ opacity: 0, y: 30 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, type: "spring" }}
-              className={`max-w-5xl mx-auto text-center p-12 md:p-20 rounded-[3rem] ${GLASS_PANEL}`}
+          <section className="relative min-h-[90vh] w-full flex items-center justify-center py-24 px-4">
+            <GlassContainer 
+              className="max-w-6xl mx-auto text-center p-16 md:p-24 rounded-[4rem] shadow-2xl"
+              intensity={1.2}
             >
-              <div className="inline-block bg-white/10 backdrop-blur-md border border-white/20 text-white px-6 py-2 rounded-full mb-8 font-bold text-sm uppercase tracking-widest">
-                Warning: High Vibes Only
-              </div>
-              <h1 className="text-5xl md:text-8xl font-black text-transparent bg-clip-text bg-gradient-to-r from-white via-white to-white/70 mb-8 tracking-tighter leading-tight uppercase drop-shadow-lg">
-                Stickers <br />
-                That <br />
-                <span className="text-transparent bg-clip-text bg-gradient-to-r from-pink-400 via-purple-400 to-blue-400">
-                  Actually Slap
+              <motion.div 
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.3, duration: 0.8 }}
+                className="inline-block bg-white/[0.08] backdrop-blur-xl border border-white/10 text-white/90 px-8 py-2.5 rounded-full mb-10 font-black text-xs uppercase tracking-[0.3em]"
+              >
+                High Vibes & Premium Quality
+              </motion.div>
+              
+              <h1 className="text-6xl md:text-9xl font-black text-white mb-10 tracking-[-0.05em] leading-[0.9] uppercase italic drop-shadow-2xl">
+                STICKERS <br />
+                THAT <br />
+                <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#ff4d4d] via-[#f9a8d4] to-[#42c4ef] animate-gradient-x">
+                  ACTUALLY SLAP
                 </span>
               </h1>
-              <p className="text-lg md:text-2xl text-white/80 font-medium mb-12 max-w-3xl mx-auto leading-relaxed">
-                Premium custom stickers for your laptop, journal, or chaos. Waterproof, non-tearable, and 100% aesthetic.
+              
+              <p className="text-xl md:text-3xl text-white/70 font-bold mb-6 max-w-3xl mx-auto leading-relaxed tracking-tight">
+                Premium stickers for your laptop, journal, or chaos. <br className="hidden md:block" /> 
+                <span className="text-white">Waterproof, non-tearable, and 100% aesthetic.</span>
               </p>
-              <div className="flex flex-wrap justify-center gap-6">
-                <Link to="/custom">
-                  <Button className="h-16 px-10 text-xl bg-gradient-to-r from-pink-500/50 to-purple-500/50">Start Designing</Button>
-                </Link>
-              </div>
-            </motion.div>
-            
-            {/* Scroll Indicator */}
-            <div className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2">
-              <div className="w-8 h-12 border-2 border-white/30 rounded-full flex justify-center p-1 bg-white/5 backdrop-blur-sm">
-                <motion.div 
-                  animate={{ y: [0, 16, 0] }}
-                  transition={{ duration: 1.5, repeat: Infinity }}
-                  className="w-1.5 h-1.5 bg-white rounded-full"
-                />
-              </div>
-            </div>
+            </GlassContainer>
           </section>
 
           {/* USPs Section */}
-          <section className="py-24 relative">
+          <section className="py-32 relative">
             <div className="container mx-auto px-4">
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-                <motion.div 
-                  whileHover={{ y: -10 }}
-                  className={`p-10 rounded-3xl ${GLASS_CARD} text-center space-y-6`}
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-12 max-w-5xl mx-auto">
+                <GlassContainer 
+                  className="p-12 rounded-[3rem] text-center group cursor-default"
+                  intensity={0.8}
                 >
-                  <div className="text-6xl drop-shadow-[0_0_15px_rgba(255,255,255,0.3)]">💧</div>
-                  <h3 className="text-2xl font-bold uppercase tracking-wide">Unbreakable</h3>
-                  <p className="text-white/70 font-medium text-lg leading-relaxed">Waterproof, scratch-resistant, and non-tearable. Built to survive your life.</p>
-                </motion.div>
+                  <div className="text-7xl mb-8 group-hover:scale-110 transition-transform duration-500 drop-shadow-[0_0_20px_rgba(66,196,239,0.4)]">💧</div>
+                  <h3 className="text-3xl font-black uppercase tracking-widest mb-4 italic text-white">Unbreakable</h3>
+                  <p className="text-white/60 font-bold text-xl leading-relaxed">Waterproof, scratch-resistant, and built to survive your life.</p>
+                </GlassContainer>
                 
-                <motion.div 
-                  whileHover={{ y: -10 }}
-                  className={`p-10 rounded-3xl ${GLASS_CARD} text-center space-y-6`}
+                <GlassContainer 
+                  className="p-12 rounded-[3rem] text-center group cursor-default"
+                  intensity={0.8}
                 >
-                  <div className="text-6xl drop-shadow-[0_0_15px_rgba(255,255,255,0.3)]">🎨</div>
-                  <h3 className="text-2xl font-bold uppercase tracking-wide">Custom AF</h3>
-                  <p className="text-white/70 font-medium text-lg leading-relaxed">From Polaroid memories to brand logos. We bring your vision to life.</p>
-                </motion.div>
+                  <div className="text-7xl mb-8 group-hover:scale-110 transition-transform duration-500 drop-shadow-[0_0_20px_rgba(255,77,77,0.4)]">🎨</div>
+                  <h3 className="text-3xl font-black uppercase tracking-widest mb-4 italic text-white">Curated Art</h3>
+                  <p className="text-white/60 font-bold text-xl leading-relaxed">Unique designs from indie artists around the world. Exclusively here.</p>
+                </GlassContainer>
               </div>
             </div>
           </section>
 
-          {/* Custom CTA Section */}
-          <section className="py-24 relative">
-            <div className="container mx-auto px-4">
-              <div className={`p-8 md:p-20 relative overflow-hidden rounded-[3rem] ${GLASS_PANEL}`}>
-                <div className="relative z-10 flex flex-col lg:flex-row items-center gap-16">
-                  <div className="lg:w-1/2 text-center lg:text-left">
-                    <h2 className="text-5xl md:text-7xl font-black text-white mb-8 leading-[1.1] uppercase tracking-tighter drop-shadow-lg">
-                      WANT IT <br />
-                      <span className="text-transparent bg-clip-text bg-gradient-to-r from-pink-400 to-purple-400">UNIQUE?</span>
-                    </h2>
-                    <p className="text-xl text-white/80 font-medium mb-12 max-w-lg leading-relaxed">
-                      Turn your art, your cat, or your brand into high-quality stickers. No minimum orders, maximum quality.
-                    </p>
-                    <Link to="/custom">
-                      <Button className="h-16 px-10 text-xl bg-gradient-to-r from-pink-500/50 to-purple-500/50">Start Designing</Button>
-                    </Link>
-                  </div>
-                  <div className="lg:w-1/2 grid grid-cols-2 gap-6 p-4">
-                    <motion.div 
-                      animate={{ y: [-10, 10, -10] }}
-                      transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
-                      className={`p-4 rounded-3xl ${GLASS_CARD} rotate-[-6deg]`}
-                    >
-                      <div className="aspect-square rounded-2xl overflow-hidden bg-white/5">
-                        <img src="https://images.unsplash.com/photo-1594909122845-11baa439b7bf?q=80&w=400&auto=format&fit=crop" alt="Custom sample" className="w-full h-full object-cover mix-blend-overlay" />
-                      </div>
-                    </motion.div>
-                    <motion.div 
-                      animate={{ y: [10, -10, 10] }}
-                      transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
-                      className={`p-4 rounded-3xl ${GLASS_CARD} rotate-[12deg] mt-12`}
-                    >
-                      <div className="aspect-square rounded-2xl overflow-hidden bg-white/5">
-                        <img src="https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?q=80&w=400&auto=format&fit=crop" alt="Custom sample" className="w-full h-full object-cover mix-blend-overlay" />
-                      </div>
-                    </motion.div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </section>
-
-          {/* Testimonials */}
-          <section className="py-24 relative overflow-hidden">
-            <div className="container mx-auto px-4 text-center mb-20">
-              <div className={`inline-block px-8 py-4 rounded-3xl ${GLASS_PANEL}`}>
-                <h2 className="text-3xl md:text-5xl font-black text-white uppercase tracking-tighter drop-shadow-md">LOVE FROM THE STREETS</h2>
-              </div>
+          {/* Enhanced Testimonials Section */}
+          <section className="py-32 relative overflow-hidden">
+            <div className="container mx-auto px-4 text-center mb-24">
+              <GlassContainer className="inline-block px-12 py-5 rounded-full" intensity={0.5}>
+                <h2 className="text-4xl md:text-6xl font-black text-white uppercase italic tracking-tighter drop-shadow-xl">LOVE FROM THE STREETS</h2>
+              </GlassContainer>
             </div>
             
-            <Marquee pauseOnHover className="[--duration:40s]">
+            <Marquee pauseOnHover className="[--duration:50s]">
               {testimonials.map((testimonial) => (
-                <div
+                <GlassContainer
                   key={testimonial.id}
-                  className={`mx-4 p-8 rounded-3xl ${GLASS_CARD} min-w-[350px] max-w-[450px] flex flex-col justify-between my-4 backdrop-blur-md`}
+                  className="mx-6 p-12 rounded-[3rem] min-w-[400px] max-w-[500px] flex flex-col justify-between my-4 group hover:border-white/30 transition-colors duration-500"
+                  intensity={0.7}
                 >
                   <div>
-                    <div className="flex items-center mb-6">
+                    <div className="flex items-center mb-10">
                       <StarRating rating={testimonial.rating} />
                     </div>
-                    <p className="text-white/90 text-xl font-medium leading-relaxed mb-8">"{testimonial.text}"</p>
+                    <p className="text-white/90 text-2xl font-bold leading-[1.4] mb-10 italic">"{testimonial.text}"</p>
                   </div>
-                  <div className="flex items-center gap-4 pt-6 border-t border-white/10">
-                    <div className="size-12 rounded-full bg-gradient-to-br from-purple-500 to-pink-500 flex items-center justify-center text-white font-bold text-xl shadow-inner">
+                  <div className="flex items-center gap-6 pt-10 border-t border-white/10">
+                    <div className="size-16 rounded-2xl bg-gradient-to-br from-purple-500/40 to-pink-500/40 border border-white/20 flex items-center justify-center text-white font-black text-2xl shadow-inner group-hover:scale-110 transition-transform duration-500">
                       {testimonial.name.charAt(0)}
                     </div>
-                    <p className="font-bold text-lg text-white/80">— {testimonial.name}</p>
+                    <p className="font-black text-xl text-white/70 uppercase tracking-widest">— {testimonial.name}</p>
                   </div>
-                </div>
+                </GlassContainer>
               ))}
             </Marquee>
           </section>
 
           {/* Newsletter */}
-          <section className="py-24 relative">
+          <section className="py-32 relative">
             <div className="container mx-auto px-4">
-              <div className={`max-w-5xl mx-auto flex flex-col lg:flex-row items-center justify-between gap-16 p-12 md:p-20 rounded-[3rem] ${GLASS_PANEL}`}>
+              <GlassContainer 
+                className="max-w-6xl mx-auto flex flex-col lg:flex-row items-center justify-between gap-20 p-16 md:p-24 rounded-[4rem]"
+                intensity={1.1}
+              >
                 <div className="lg:w-1/2 text-center lg:text-left">
-                  <h2 className="text-5xl md:text-7xl font-black mb-6 leading-tight uppercase tracking-tighter text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-purple-400">
+                  <h2 className="text-6xl md:text-8xl font-black mb-8 leading-[1] uppercase italic tracking-tighter text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-purple-400 to-pink-400 animate-gradient-x">
                     DON'T MISS <br />THE DROP
                   </h2>
-                  <p className="text-white/70 text-xl font-medium">New collections, artist collabs, and secret discounts straight to your inbox.</p>
+                  <p className="text-white/60 text-2xl font-bold italic tracking-tight">New collections and secret drops straight to your inbox.</p>
                 </div>
-                <div className="lg:w-1/2 w-full">
-                  <form className="flex flex-col gap-6">
+                <div className="lg:w-1/2 w-full max-w-md">
+                  <form className="flex flex-col gap-8">
                     <input 
                       type="email" 
-                      placeholder="YOUR EMAIL HERE" 
-                      className="w-full px-8 py-5 rounded-2xl bg-white/5 border border-white/20 text-white font-medium text-lg focus:outline-none focus:border-purple-400 focus:bg-white/10 transition-all placeholder:text-white/30 backdrop-blur-sm"
+                      placeholder="YOUR EMAIL" 
+                      className="w-full px-10 py-6 rounded-2xl bg-white/[0.03] border border-white/10 text-white font-black text-xl focus:outline-none focus:border-purple-500 transition-all placeholder:text-white/20"
                     />
-                    <Button className="h-16 text-xl bg-gradient-to-r from-blue-500/50 to-purple-500/50">Join The Squad</Button>
+                    <button className="h-20 text-2xl bg-gradient-to-r from-blue-600/40 to-purple-600/40 border border-white/10 rounded-2xl font-black uppercase italic tracking-widest hover:bg-white/[0.08] hover:-translate-y-1 transition-all duration-500">
+                      Join The Squad
+                    </button>
                   </form>
-                  <p className="text-xs text-white/40 mt-6 uppercase tracking-widest text-center lg:text-left font-bold">No spam. Just vibes. unsubscribe anytime.</p>
+                  <p className="text-xs text-white/30 mt-8 uppercase tracking-[0.4em] text-center lg:text-left font-black">No spam. Just vibes.</p>
                 </div>
-              </div>
+              </GlassContainer>
             </div>
           </section>
         </main>
