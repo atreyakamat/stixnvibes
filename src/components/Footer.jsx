@@ -15,7 +15,7 @@ function Footer() {
               <span className="text-4xl font-black text-white uppercase italic tracking-tighter group-hover:tracking-normal transition-all duration-500">Stix N Vibes</span>
             </Link>
             <p className="text-white/50 font-bold text-xl max-w-sm italic leading-relaxed tracking-tight">
-              Premium custom stickers for creatives, journalers, and stationery enthusiasts.
+              Not just stickers. It's how you show up. Affordable expression for everyone.
             </p>
             <div className="flex gap-6 mt-10">
               {[
@@ -70,7 +70,7 @@ function Footer() {
           </div>
         </div>
         <div className="border-t border-white/10 pt-16 text-center text-white/20 font-black uppercase italic tracking-[0.5em] text-xs">
-          &copy; {new Date().getFullYear()} Stix N Vibes. Built for the streets.
+          &copy; {new Date().getFullYear()} Stix N Vibes. Made for everyone. From Goa, for everywhere.
         </div>
       </div>
     </footer>

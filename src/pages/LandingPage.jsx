@@ -137,44 +137,74 @@ function LandingPage() {
                 transition={{ delay: 0.3, duration: 0.8 }}
                 className="inline-block bg-white/[0.08] backdrop-blur-xl border border-white/10 text-white/90 px-8 py-2.5 rounded-full mb-10 font-black text-xs uppercase tracking-[0.3em]"
               >
-                High Vibes & Premium Quality
+                Expression Made Tangible
               </motion.div>
               
               <h1 className="text-6xl md:text-9xl font-black text-white mb-10 tracking-[-0.05em] leading-[0.9] uppercase italic drop-shadow-2xl">
-                STICKERS <br />
-                THAT <br />
+                STICK <br />
+                WHAT <br />
                 <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#ff4d4d] via-[#f9a8d4] to-[#42c4ef] animate-gradient-x">
-                  ACTUALLY SLAP
+                  YOU FEEL
                 </span>
               </h1>
               
               <p className="text-xl md:text-3xl text-white/70 font-bold mb-6 max-w-3xl mx-auto leading-relaxed tracking-tight">
-                Premium stickers for your laptop, journal, or chaos. <br className="hidden md:block" /> 
-                <span className="text-white">Waterproof, non-tearable, and 100% aesthetic.</span>
+                Not just stickers. Your vibe, your story, your space—made visible. <br className="hidden md:block" /> 
+                <span className="text-white">From laptops to bikes, bottles to bedrooms—turn anything into you.</span>
               </p>
             </GlassContainer>
           </section>
 
-          {/* USPs Section */}
+          {/* Why Stix N Vibes Section */}
           <section className="py-32 relative">
             <div className="container mx-auto px-4">
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-12 max-w-5xl mx-auto">
+              <div className="text-center mb-20">
+                <h2 className="text-5xl md:text-7xl font-black text-white mb-6 uppercase italic tracking-tight">
+                  Feels premium.
+                  <br />
+                  <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#ff4d4d] via-[#f9a8d4] to-[#42c4ef]">
+                    Priced for everyone.
+                  </span>
+                </h2>
+                <p className="text-xl text-white/60 font-bold max-w-2xl mx-auto">
+                  Because good design shouldn't be expensive—it should be everywhere.
+                </p>
+              </div>
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 max-w-7xl mx-auto">
                 <GlassContainer 
                   className="p-12 rounded-[3rem] text-center group cursor-default"
                   intensity={0.8}
                 >
                   <div className="text-7xl mb-8 group-hover:scale-110 transition-transform duration-500 drop-shadow-[0_0_20px_rgba(66,196,239,0.4)]">💧</div>
-                  <h3 className="text-3xl font-black uppercase tracking-widest mb-4 italic text-white">Unbreakable</h3>
-                  <p className="text-white/60 font-bold text-xl leading-relaxed">Waterproof, scratch-resistant, and built to survive your life.</p>
+                  <h3 className="text-2xl font-black uppercase tracking-widest mb-4 italic text-white">Waterproof</h3>
+                  <p className="text-white/60 font-bold text-lg leading-relaxed">Built for real life. Rain, spills, sun—they survive it all.</p>
                 </GlassContainer>
                 
                 <GlassContainer 
                   className="p-12 rounded-[3rem] text-center group cursor-default"
                   intensity={0.8}
                 >
-                  <div className="text-7xl mb-8 group-hover:scale-110 transition-transform duration-500 drop-shadow-[0_0_20px_rgba(255,77,77,0.4)]">🎨</div>
-                  <h3 className="text-3xl font-black uppercase tracking-widest mb-4 italic text-white">Curated Art</h3>
-                  <p className="text-white/60 font-bold text-xl leading-relaxed">Unique designs from indie artists around the world. Exclusively here.</p>
+                  <div className="text-7xl mb-8 group-hover:scale-110 transition-transform duration-500 drop-shadow-[0_0_20px_rgba(255,77,77,0.4)]">✨</div>
+                  <h3 className="text-2xl font-black uppercase tracking-widest mb-4 italic text-white">Sharp Prints</h3>
+                  <p className="text-white/60 font-bold text-lg leading-relaxed">High-quality prints that look crisp and bold, every single time.</p>
+                </GlassContainer>
+
+                <GlassContainer 
+                  className="p-12 rounded-[3rem] text-center group cursor-default"
+                  intensity={0.8}
+                >
+                  <div className="text-7xl mb-8 group-hover:scale-110 transition-transform duration-500 drop-shadow-[0_0_20px_rgba(132,204,22,0.4)]">🎨</div>
+                  <h3 className="text-2xl font-black uppercase tracking-widest mb-4 italic text-white">Designed Right</h3>
+                  <p className="text-white/60 font-bold text-lg leading-relaxed">Crafted with creators, not factories. Art meets quality.</p>
+                </GlassContainer>
+
+                <GlassContainer 
+                  className="p-12 rounded-[3rem] text-center group cursor-default"
+                  intensity={0.8}
+                >
+                  <div className="text-7xl mb-8 group-hover:scale-110 transition-transform duration-500 drop-shadow-[0_0_20px_rgba(168,85,247,0.4)]">💰</div>
+                  <h3 className="text-2xl font-black uppercase tracking-widest mb-4 italic text-white">Affordable</h3>
+                  <p className="text-white/60 font-bold text-lg leading-relaxed">Premium without the premium price tag. Accessible to all.</p>
                 </GlassContainer>
               </div>
             </div>
@@ -184,8 +214,11 @@ function LandingPage() {
           <section className="py-32 relative overflow-hidden">
             <div className="container mx-auto px-4 text-center mb-24">
               <GlassContainer className="inline-block px-12 py-5 rounded-full" intensity={0.5}>
-                <h2 className="text-4xl md:text-6xl font-black text-white uppercase italic tracking-tighter drop-shadow-xl">LOVE FROM THE STREETS</h2>
+                <h2 className="text-4xl md:text-6xl font-black text-white uppercase italic tracking-tighter drop-shadow-xl">Your Vibe. In The Wild.</h2>
               </GlassContainer>
+              <p className="text-xl text-white/60 font-bold max-w-2xl mx-auto mt-8">
+                See how people are using Stix N Vibes to transform their everyday spaces. From messy desks to clean setups—this is what expression looks like.
+              </p>
             </div>
             
             <Marquee pauseOnHover className="[--duration:50s]">
@@ -212,7 +245,7 @@ function LandingPage() {
             </Marquee>
           </section>
 
-          {/* Newsletter */}
+          {/* Final CTA Section */}
           <section className="py-32 relative">
             <div className="container mx-auto px-4">
               <GlassContainer 
@@ -221,22 +254,17 @@ function LandingPage() {
               >
                 <div className="lg:w-1/2 text-center lg:text-left">
                   <h2 className="text-6xl md:text-8xl font-black mb-8 leading-[1] uppercase italic tracking-tighter text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-purple-400 to-pink-400 animate-gradient-x">
-                    DON'T MISS <br />THE DROP
+                    Your vibe <br />deserves to <br />be seen.
                   </h2>
-                  <p className="text-white/60 text-2xl font-bold italic tracking-tight">New collections and secret drops straight to your inbox.</p>
+                  <p className="text-white/60 text-2xl font-bold italic tracking-tight">Don't overthink it. Just stick it.</p>
                 </div>
-                <div className="lg:w-1/2 w-full max-w-md">
-                  <form className="flex flex-col gap-8">
-                    <input 
-                      type="email" 
-                      placeholder="YOUR EMAIL" 
-                      className="w-full px-10 py-6 rounded-2xl bg-white/[0.03] border border-white/10 text-white font-black text-xl focus:outline-none focus:border-purple-500 transition-all placeholder:text-white/20"
-                    />
-                    <button className="h-20 text-2xl bg-gradient-to-r from-blue-600/40 to-purple-600/40 border border-white/10 rounded-2xl font-black uppercase italic tracking-widest hover:bg-white/[0.08] hover:-translate-y-1 transition-all duration-500">
-                      Join The Squad
-                    </button>
-                  </form>
-                  <p className="text-xs text-white/30 mt-8 uppercase tracking-[0.4em] text-center lg:text-left font-black">No spam. Just vibes.</p>
+                <div className="lg:w-1/2 w-full max-w-md flex flex-col gap-6">
+                  <button className="h-20 text-2xl bg-gradient-to-r from-blue-600/40 to-purple-600/40 border border-white/10 rounded-2xl font-black uppercase italic tracking-widest hover:bg-white/[0.08] hover:-translate-y-1 transition-all duration-500">
+                    Shop Now →
+                  </button>
+                  <button className="h-20 text-2xl bg-gradient-to-r from-purple-600/40 to-pink-600/40 border border-white/10 rounded-2xl font-black uppercase italic tracking-widest hover:bg-white/[0.08] hover:-translate-y-1 transition-all duration-500">
+                    Build Your Pack →
+                  </button>
                 </div>
               </GlassContainer>
             </div>
