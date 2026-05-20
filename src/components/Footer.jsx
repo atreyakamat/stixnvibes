@@ -37,18 +37,21 @@ function Footer() {
           </div>
           
           <div>
-            <h3 className="text-2xl font-black text-white mb-10 uppercase italic tracking-widest text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-purple-400">Quick Links</h3>
+            <h3 className="text-2xl font-black text-white mb-10 uppercase italic tracking-widest text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-purple-400">Infrastructure</h3>
             <ul className="space-y-6">
-              {['Contact'].map(item => (
+              {['Home'].map(item => (
                 <li key={item}>
                   <Link 
-                    to={`/${item.toLowerCase()}`} 
+                    to={item === 'Home' ? '/' : `/${item.toLowerCase()}`} 
                     className="text-white/40 font-black uppercase italic tracking-[0.2em] hover:text-white hover:translate-x-3 inline-block transition-all duration-500"
                   >
                     {item}
                   </Link>
                 </li>
               ))}
+              <li>
+                <a href="#" className="text-white/40 font-black uppercase italic tracking-[0.2em] hover:text-white hover:translate-x-3 inline-block transition-all duration-500">Status: All Systems Go</a>
+              </li>
             </ul>
           </div>
           

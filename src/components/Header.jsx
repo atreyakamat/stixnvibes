@@ -8,8 +8,7 @@ function Header() {
   const location = useLocation();
 
   const navLinks = [
-    { to: '/', label: 'Home' },
-    { to: '/contact', label: 'Contact' }
+    { to: '/', label: 'Home' }
   ];
 
   const toggleMobileMenu = () => {
