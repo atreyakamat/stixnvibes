@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import { Link, useLocation } from 'react-router-dom'
 import { motion, AnimatePresence } from 'framer-motion'
 import { Menu, X, Sparkles } from 'lucide-react'
+import Logo from './Logo'
 
 export function Header() {
   const [isOpen, setIsOpen] = useState(false);
@@ -24,9 +25,10 @@ export function Header() {
           {/* Logo Brand Link */}
           <Link 
             to="/" 
-            className="flex items-center gap-1.5 text-[#E1E0CC] hover:text-[#DEDBC8] font-bold text-xs sm:text-sm tracking-tight transition-colors py-1.5 pl-2 select-none"
+            className="flex items-center gap-2 text-[#E1E0CC] hover:text-[#DEDBC8] font-bold text-xs sm:text-sm tracking-tight transition-colors py-1.5 pl-2 select-none group"
           >
-            <span className="font-sans">stix n vibes</span>
+            <Logo className="w-5 h-5 transition-transform duration-500 group-hover:rotate-[360deg] shrink-0" />
+            <span className="font-sans tracking-wide">stix n vibes</span>
             <span className="text-primary text-xs shrink-0 animate-pulse">✦</span>
           </Link>
 

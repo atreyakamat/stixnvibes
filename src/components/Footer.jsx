@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
 import { Sparkles, ArrowUpRight, HelpCircle } from 'lucide-react'
 import { DinoGame3D } from './DinoGame3D'
+import Logo from './Logo'
 
 export function Footer() {
   const [isGameOpen, setIsGameOpen] = useState(false);
@@ -16,7 +17,8 @@ export function Footer() {
         
         {/* Logo block */}
         <div className="flex flex-col items-center md:items-start gap-2">
-          <div className="flex items-center gap-2">
+          <div className="flex items-center gap-2.5">
+            <Logo className="w-5 h-5 shrink-0" />
             <Link 
               to="/" 
               className="text-[#E1E0CC] hover:text-[#DEDBC8] font-bold text-base tracking-normal font-sans transition-colors lowercase"

@@ -7,11 +7,23 @@ import React from 'react';
  */
 export const Logo = ({ className = "w-6 h-6" }) => {
   return (
-    <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" className={className}>
-      <path
-        d="M42.1739 20.1739L27.8261 5.82609C29.1366 7.13663 28.3989 10.1876 26.2002 13.7654C24.8538 15.9564 22.9595 18.3449 20.6522 20.6522C18.3449 22.9595 15.9564 24.8538 13.7654 26.2002C10.1876 28.3989 7.13663 29.1366 5.82609 27.8261L20.1739 42.1739C21.4845 43.4845 24.5355 42.7467 28.1133 40.548C30.3042 39.2016 32.6927 37.3073 35 35C37.3073 32.6927 39.2016 30.3042 40.548 28.1133C42.7467 24.5355 43.4845 21.4845 42.1739 20.1739Z"
-        fill="currentColor"
-      ></path>
+    <svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg" className={className}>
+      {/* Circular sticker backing accent */}
+      <circle cx="50" cy="50" r="46" fill="black" stroke="rgba(222, 219, 200, 0.2)" strokeWidth="3" />
+      {/* Custom styled italic Serif 'S' */}
+      <text
+        x="51%"
+        y="54%"
+        dominantBaseline="middle"
+        textAnchor="middle"
+        fontFamily="'Instrument Serif', serif"
+        fontStyle="italic"
+        fontWeight="bold"
+        fontSize="65"
+        fill="#DEDBC8"
+      >
+        S
+      </text>
     </svg>
   );
 };
