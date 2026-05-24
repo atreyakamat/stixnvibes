@@ -1,139 +1,125 @@
-import React, { useState } from 'react';
-import { Link, useLocation } from 'react-router-dom';
-import { motion, AnimatePresence } from 'framer-motion';
-import Logo from './Logo';
+import React, { useState } from 'react'
+import { Link, useLocation } from 'react-router-dom'
+import { motion, AnimatePresence } from 'framer-motion'
+import { Menu, X, Sparkles } from 'lucide-react'
 
-function Header() {
-  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+export function Header() {
+  const [isOpen, setIsOpen] = useState(false);
   const location = useLocation();
 
   const navLinks = [
-    { to: '/', label: 'Home' }
+    { label: "Our story", path: "/story" },
+    { label: "Sticker Packs", path: "/packs" },
+    { label: "Custom Orders", path: "/custom" },
+    { label: "For Brands", path: "/brands" },
+    { label: "Inquiries", path: "/inquiries" }
   ];
-
-  const toggleMobileMenu = () => {
-    setIsMobileMenuOpen(!isMobileMenuOpen);
-  };
-
-  const closeMobileMenu = () => {
-    setIsMobileMenuOpen(false);
-  };
 
   return (
     <>
-      <header className="flex items-center justify-between whitespace-nowrap border-b border-white/10 px-6 sm:px-12 py-5 bg-white/[0.03] backdrop-blur-xl sticky top-0 z-40 selection:bg-purple-500">
-        <div className="flex items-center gap-4 text-white">
-          <Link to="/" className="flex items-center gap-4 group" onClick={closeMobileMenu}>
-            <div className="size-10 rounded-xl bg-gradient-to-br from-purple-500/20 to-pink-500/20 border border-white/20 flex items-center justify-center shadow-2xl group-hover:scale-110 transition-all duration-500 text-white">
-              <Logo className="w-6 h-6" />
-            </div>
-            <h2 className="text-white text-2xl font-black leading-tight tracking-tighter uppercase italic group-hover:tracking-normal transition-all duration-500">Stix N Vibes</h2>
-          </Link>
-        </div>
-
-        {/* Desktop Navigation */}
-        <div className="hidden lg:flex flex-1 justify-end gap-12 items-center">
-          <div className="flex items-center gap-10">
-            {navLinks.map(link => (
-              <Link
-                key={link.to}
-                to={link.to}
-                className={`text-sm font-black uppercase tracking-[0.2em] transition-all duration-300 ${
-                  location.pathname === link.to 
-                    ? 'text-white' 
-                    : 'text-white/50 hover:text-white'
-                }`}
-              >
-                {link.label}
-              </Link>
-            ))}
-          </div>
-        </div>
-
-        {/* Mobile Menu Button */}
-        <div className="flex lg:hidden items-center gap-4">
-          <button
-            onClick={toggleMobileMenu}
-            className="flex items-center justify-center w-12 h-12 border border-white/10 bg-white/[0.05] text-white rounded-full"
+      {/* Global Floating Pill Header */}
+      <header className="fixed top-0 left-0 right-0 z-50 flex justify-center pointer-events-none p-4">
+        <div className="bg-black/90 backdrop-blur-md rounded-full px-6 py-3 flex items-center justify-between gap-6 md:gap-12 lg:gap-14 pointer-events-auto border border-white/10 shadow-[0_10px_30px_rgba(0,0,0,0.8)] max-w-max mx-auto">
+          
+          {/* Logo Brand Link */}
+          <Link 
+            to="/" 
+            className="flex items-center gap-1.5 text-[#E1E0CC] hover:text-[#DEDBC8] font-bold text-sm sm:text-base transition-colors py-0.5"
           >
-            <div className="flex flex-col justify-center items-center w-6 h-6">
-              <span className={`w-6 h-0.5 bg-white block transition-all duration-300 ${isMobileMenuOpen ? 'rotate-45 translate-y-1' : ''}`} />
-              <span className={`w-6 h-0.5 bg-white block my-1 transition-all duration-300 ${isMobileMenuOpen ? 'opacity-0' : ''}`} />
-              <span className={`w-6 h-0.5 bg-white block transition-all duration-300 ${isMobileMenuOpen ? '-rotate-45 -translate-y-1' : ''}`} />
-            </div>
+            <span className="font-sans tracking-tight">stix n vibes</span>
+            <span className="text-primary text-xs shrink-0 select-none animate-pulse">✦</span>
+          </Link>
+
+          {/* Desktop Navigation Links */}
+          <nav className="hidden md:flex items-center gap-6 lg:gap-8">
+            {navLinks.map((link) => {
+              const isActive = location.pathname === link.path;
+              return (
+                <Link
+                  key={link.path}
+                  to={link.path}
+                  className="text-[10px] sm:text-xs font-bold uppercase tracking-wider transition-colors duration-300 relative py-1"
+                  style={{ 
+                    color: isActive ? '#E1E0CC' : 'rgba(225, 224, 204, 0.6)' 
+                  }}
+                >
+                  {link.label}
+                  {isActive && (
+                    <motion.div 
+                      layoutId="activeGlobalNav"
+                      className="absolute bottom-0 left-0 right-0 h-[1.5px] bg-[#DEDBC8]"
+                      transition={{ type: "spring", stiffness: 380, damping: 30 }}
+                    />
+                  )}
+                </Link>
+              );
+            })}
+          </nav>
+
+          {/* Mobile Menu Button */}
+          <button
+            onClick={() => setIsOpen(!isOpen)}
+            className="md:hidden text-[#E1E0CC] hover:text-white p-1 transition-colors flex items-center justify-center"
+          >
+            {isOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
           </button>
+
         </div>
       </header>
 
-      {/* Mobile Menu Overlay */}
+      {/* Mobile Full Screen Menu Overlay */}
       <AnimatePresence>
-        {isMobileMenuOpen && (
+        {isOpen && (
           <>
+            {/* Dark blur backdrop */}
             <motion.div
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
-              className="fixed inset-0 bg-black/90 backdrop-blur-xl z-40 lg:hidden"
-              onClick={closeMobileMenu}
+              className="fixed inset-0 bg-black/95 backdrop-blur-xl z-40 md:hidden"
+              onClick={() => setIsOpen(false)}
             />
-            
-            <motion.div
-              initial={{ x: "100%" }}
-              animate={{ x: 0 }}
-              exit={{ x: "100%" }}
-              transition={{ type: "spring", damping: 30, stiffness: 300 }}
-              className="fixed top-0 right-0 h-full w-full bg-[#0a0a0a]/50 backdrop-blur-[40px] border-l border-white/10 z-50 lg:hidden overflow-y-auto"
-            >
-              <div className="p-12 h-full flex flex-col">
-                <div className="flex items-center justify-between mb-20">
-                  <h3 className="text-4xl font-black text-white uppercase italic tracking-tighter">Menu</h3>
-                  <button
-                    onClick={closeMobileMenu}
-                    className="p-4 border border-white/10 bg-white/[0.05] text-white rounded-full"
-                  >
-                    <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M6 18L18 6M6 6l12 12" />
-                    </svg>
-                  </button>
-                </div>
 
-                <nav className="space-y-8">
-                  {navLinks.map((link, index) => (
+            {/* Menu Slide down container */}
+            <motion.div
+              initial={{ y: "-100%", opacity: 0 }}
+              animate={{ y: 0, opacity: 1 }}
+              exit={{ y: "-100%", opacity: 0 }}
+              transition={{ type: "spring", damping: 25, stiffness: 200 }}
+              className="fixed top-0 left-0 right-0 bg-[#0c0c0c] border-b border-white/5 z-45 md:hidden pt-28 pb-10 px-8 shadow-2xl flex flex-col items-center justify-center"
+            >
+              <div className="flex flex-col gap-6 items-center text-center w-full max-w-xs">
+                {navLinks.map((link, idx) => {
+                  const isActive = location.pathname === link.path;
+                  return (
                     <motion.div
-                      key={link.to}
-                      initial={{ opacity: 0, x: 20 }}
-                      animate={{ opacity: 1, x: 0 }}
-                      transition={{ delay: index * 0.1 }}
+                      key={link.path}
+                      initial={{ opacity: 0, y: 15 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ delay: idx * 0.05 }}
+                      className="w-full"
                     >
                       <Link
-                        to={link.to}
-                        onClick={closeMobileMenu}
-                        className={`block text-5xl font-black uppercase italic tracking-tighter transition-all ${
-                          location.pathname === link.to 
-                            ? 'text-white underline decoration-[#ff4d4d]' 
-                            : 'text-white/30 hover:text-white'
-                        }`}
+                        to={link.path}
+                        onClick={() => setIsOpen(false)}
+                        className="block py-2 text-lg sm:text-xl font-bold uppercase tracking-widest transition-colors relative"
+                        style={{ 
+                          color: isActive ? '#E1E0CC' : 'rgba(225, 224, 204, 0.5)' 
+                        }}
                       >
                         {link.label}
+                        {isActive && (
+                          <div className="w-8 h-[2px] bg-[#DEDBC8] mx-auto mt-1 rounded" />
+                        )}
                       </Link>
                     </motion.div>
-                  ))}
-                </nav>
-
-                <div className="mt-auto pt-12">
-                  <motion.div
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ delay: 0.6 }}
-                    className="text-center"
-                  >
-                    <p className="text-lg font-black text-white/50 uppercase italic mb-8 tracking-[0.3em]">Made in Goa 🌴</p>
-                    <div className="flex justify-center space-x-8">
-                      <div className="w-8 h-8 rounded-full bg-[#ff4d4d] border border-white/10 shadow-2xl"></div>
-                      <div className="w-8 h-8 rounded-full bg-[#f9a8d4] border border-white/10 shadow-2xl"></div>
-                      <div className="w-8 h-8 rounded-full bg-[#42c4ef] border border-white/10 shadow-2xl"></div>
-                    </div>
-                  </motion.div>
+                  );
+                })}
+                
+                {/* Visual spark decorative */}
+                <div className="mt-8 border-t border-white/5 w-full pt-8 flex flex-col items-center gap-2">
+                  <p className="text-[10px] tracking-[0.3em] uppercase text-gray-600 font-mono">physical manifests</p>
+                  <Sparkles className="text-primary w-4 h-4" />
                 </div>
               </div>
             </motion.div>
@@ -141,7 +127,6 @@ function Header() {
         )}
       </AnimatePresence>
     </>
-  );
+  )
 }
-
 export default Header;
