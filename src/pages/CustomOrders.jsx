@@ -1,12 +1,19 @@
 import React, { useState, useRef } from 'react'
 import { motion } from 'framer-motion'
-import { Upload, HelpCircle, Laptop, Settings, Layers, DollarSign, CheckCircle } from 'lucide-react'
+import { Upload, HelpCircle, Laptop, Settings, Layers, Star, CheckCircle } from 'lucide-react'
 import { WordsPullUp } from '../components/WordsPullUp'
 import { WordsPullUpMultiStyle } from '../components/WordsPullUpMultiStyle'
 
+// Custom Sticker Peel corner component
+const PeelCorner = () => (
+  <div className="absolute top-0 right-0 w-10 h-10 pointer-events-none overflow-hidden z-20">
+    <div className="absolute top-0 right-0 w-14 h-14 bg-[#2f2e2a] rotate-45 translate-x-7 -translate-y-7 shadow-[2px_2px_8px_rgba(0,0,0,0.5)] border-l border-b border-white/10 group-hover:translate-x-5 group-hover:-translate-y-5 transition-transform duration-500 ease-out" />
+  </div>
+);
+
 export default function CustomOrders() {
   const [stickerType, setStickerType] = useState("die-cut"); // die-cut, kiss-cut
-  const [finish, setFinish] = useState("holographic"); // matte, glossy, holographic
+  const [finish, setFinish] = useState("matte"); // matte, glossy, extra-glossy
   const [quantity, setQuantity] = useState(100);
   const [uploadedImage, setUploadedImage] = useState("");
   const [isSuccess, setIsSuccess] = useState(false);
@@ -31,14 +38,14 @@ export default function CustomOrders() {
   // Set default preview image
   const [selectedPreview, setSelectedPreview] = useState(preloadedTemplates[0].url);
 
-  // Math calculations for live price config
+  // Math calculations for live price config (in INR ₹)
   const getUnitPrice = () => {
-    let base = 1.50; // default die-cut cost
-    if (stickerType === "kiss-cut") base = 1.30;
+    let base = 40; // base price in INR for die-cut
+    if (stickerType === "kiss-cut") base = 35;
     
-    // Finish modifiers
-    if (finish === "holographic") base += 0.40;
-    if (finish === "glossy") base += 0.15;
+    // Finish modifiers in INR
+    if (finish === "glossy") base += 10;
+    if (finish === "extra-glossy") base += 15;
     
     // Tiered bulk discount pricing
     if (quantity >= 1000) return base * 0.50; // 50% discount
@@ -96,7 +103,7 @@ export default function CustomOrders() {
         />
 
         <p className="text-primary/70 text-sm sm:text-base max-w-xl mx-auto leading-relaxed">
-          Upload your design, configure dimensions, specify finishes, and preview your custom sticker in a mock layout with instant volume-based pricing.
+          Upload your design, configure dimensions, specify finishes, and preview your custom sticker in a mock layout with instant volume-based pricing in INR (₹).
         </p>
       </section>
 
@@ -121,14 +128,14 @@ export default function CustomOrders() {
               </div>
               <h3 className="text-2xl sm:text-3xl font-bold tracking-tight">Configuration Locked</h3>
               <p className="text-gray-400 text-xs sm:text-sm max-w-md mx-auto leading-relaxed">
-                Your custom sticker order has been uploaded and registered. Our lab directors will perform a visual pre-flight check and ping your inbox.
+                Your custom sticker configuration has been locked and uploaded! Our crew will perform a pre-flight sanity check and reach out on your email or WhatsApp to confirm your manual mock-ups.
               </p>
               <button 
                 type="button"
                 onClick={() => setIsSuccess(false)}
                 className="bg-[#161616] text-[#E1E0CC] hover:bg-[#DEDBC8] hover:text-black border border-white/5 hover:border-black font-semibold text-xs sm:text-sm px-6 py-3 rounded-full uppercase tracking-wider transition-all duration-300"
               >
-                Reset Configuration
+                Configure Another Vibe
               </button>
             </motion.div>
           ) : (
@@ -229,7 +236,7 @@ export default function CustomOrders() {
                 </div>
 
                 <div className="grid grid-cols-3 gap-3">
-                  {["matte", "glossy", "holographic"].map((f) => (
+                  {["matte", "glossy", "extra-glossy"].map((f) => (
                     <button
                       key={f}
                       type="button"
@@ -240,7 +247,7 @@ export default function CustomOrders() {
                           : 'bg-black/20 border-white/5 hover:border-white/10 text-gray-400'
                       }`}
                     >
-                      {f}
+                      {f.replace("-", " ")}
                     </button>
                   ))}
                 </div>
@@ -250,7 +257,7 @@ export default function CustomOrders() {
               <div className="space-y-4 pt-4 border-t border-white/5">
                 <div className="flex justify-between items-center text-xs sm:text-sm uppercase tracking-widest font-mono text-gray-500">
                   <div className="flex items-center gap-2">
-                    <DollarSign className="w-4 h-4 text-primary" />
+                    <span className="text-primary text-xs font-mono">⚡</span>
                     <span>4. Quantity & Volume</span>
                   </div>
                   <span className="text-[#DEDBC8] font-sans font-bold text-base">{quantity} units</span>
@@ -278,15 +285,16 @@ export default function CustomOrders() {
                 <div className="text-center sm:text-left">
                   <span className="text-gray-500 text-[10px] uppercase font-mono tracking-widest block">Subtotal</span>
                   <div className="flex items-baseline justify-center sm:justify-start gap-1">
-                    <span className="text-[#E1E0CC] font-bold text-3xl">${subtotal.toFixed(2)}</span>
-                    <span className="text-gray-500 text-xs font-mono">(${unitPrice.toFixed(2)} / unit)</span>
+                    <span className="text-[#E1E0CC] font-bold text-3xl">₹{subtotal.toLocaleString('en-IN')}</span>
+                    <span className="text-gray-500 text-xs font-mono">(₹{unitPrice.toFixed(0)} / unit)</span>
                   </div>
                 </div>
+                
                 <button 
                   type="submit"
                   className="w-full sm:w-auto bg-[#DEDBC8] text-black font-bold uppercase tracking-wider text-xs sm:text-sm px-8 py-4 rounded-xl hover:bg-white transition-all duration-300"
                 >
-                  Lock Configuration
+                  Place the Vibe
                 </button>
               </div>
             </>
@@ -298,7 +306,7 @@ export default function CustomOrders() {
         <div className="lg:col-span-5 space-y-6">
           <div className="bg-[#101010] border border-white/5 rounded-[2rem] p-6 sm:p-8 flex flex-col items-center justify-center relative overflow-hidden group">
             
-            {/* Holographic Glowing border */}
+            {/* Glossy glowing hover overlays */}
             <div className="absolute inset-0 bg-gradient-to-tr from-purple-500/5 via-pink-500/5 to-transparent pointer-events-none" />
 
             <div className="flex items-center gap-2 mb-6 text-gray-500 text-xs font-mono uppercase tracking-wider">
@@ -321,19 +329,23 @@ export default function CustomOrders() {
                 {/* Visual rendering representing Sticker backing boundary */}
                 <div 
                   className={`w-36 h-36 rounded-full flex items-center justify-center relative ${
-                    finish === "holographic" 
-                      ? 'bg-gradient-to-r from-teal-400 via-pink-500 to-yellow-300 animate-gradient-x p-1 border-2 border-white' 
+                    finish === "extra-glossy" 
+                      ? 'bg-neutral-800 border-4 border-white shadow-[0_0_20px_rgba(255,255,255,0.4)]' 
                       : finish === "glossy" 
                         ? 'bg-neutral-800 border-4 border-white shadow-xl'
-                        : 'bg-neutral-800 border-4 border-white/80 border-dashed'
+                        : 'bg-neutral-800 border-2 border-white/80'
                   }`}
                   style={{
                     boxShadow: '0 20px 40px rgba(0,0,0,0.6)'
                   }}
                 >
-                  {/* Glowing shader overlay for holographic */}
-                  {finish === "holographic" && (
-                    <div className="absolute inset-0 bg-white/20 mix-blend-overlay animate-pulse rounded-full pointer-events-none" />
+                  {/* Glossy reflection bar animation */}
+                  {(finish === "glossy" || finish === "extra-glossy") && (
+                    <motion.div 
+                      animate={{ x: [-150, 150] }}
+                      transition={{ duration: 2.5, repeat: Infinity, ease: "easeInOut" }}
+                      className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent skew-x-12 pointer-events-none z-20"
+                    />
                   )}
 
                   {/* Main graphic */}
@@ -341,12 +353,12 @@ export default function CustomOrders() {
                     src={selectedPreview} 
                     alt="Custom Sticker Preview"
                     className={`w-full h-full object-contain rounded-full bg-neutral-900/60 p-2 ${
-                      finish === "glossy" ? 'brightness-110 contrast-105' : ''
+                      finish !== "matte" ? 'brightness-110 contrast-105' : 'brightness-100 contrast-100'
                     }`} 
                   />
                   
                   {/* Shine reflection bar across lid */}
-                  <div className="absolute inset-0 bg-gradient-to-tr from-transparent via-white/10 to-transparent rotate-45 pointer-events-none" />
+                  <div className="absolute inset-0 bg-gradient-to-tr from-transparent via-white/5 to-transparent rotate-45 pointer-events-none" />
                 </div>
               </motion.div>
 
@@ -365,7 +377,7 @@ export default function CustomOrders() {
               </div>
               <div>
                 <span className="block text-[10px] text-gray-600 uppercase">FINISH</span>
-                <span className="text-[#E1E0CC] font-bold block mt-0.5 capitalize">{finish}</span>
+                <span className="text-[#E1E0CC] font-bold block mt-0.5 capitalize">{finish.replace("-", " ")}</span>
               </div>
               <div>
                 <span className="block text-[10px] text-gray-600 uppercase">DELIVERY</span>
@@ -377,9 +389,7 @@ export default function CustomOrders() {
 
           {/* Visual Contact Coordinates Block */}
           <div className="bg-[#101010] border border-white/5 rounded-[2rem] p-6 sm:p-8 space-y-6 relative overflow-hidden group">
-            <div className="absolute top-0 right-0 w-10 h-10 pointer-events-none overflow-hidden z-20">
-              <div className="absolute top-0 right-0 w-14 h-14 bg-[#212121] rotate-45 translate-x-7 -translate-y-7 shadow-[2px_2px_8px_rgba(0,0,0,0.5)] border-l border-b border-white/10" />
-            </div>
+            <PeelCorner />
             
             <div className="flex items-center gap-2 text-gray-500 text-xs font-mono uppercase tracking-wider">
               <HelpCircle className="w-4 h-4 text-primary" />
