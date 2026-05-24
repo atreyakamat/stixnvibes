@@ -1,9 +1,10 @@
 import React, { useRef, useState } from 'react'
-import { motion, useInView } from 'framer-motion'
+import { motion, useInView, useScroll, useTransform } from 'framer-motion'
 import { ArrowRight, Check, Sparkles, Smile, Star, Layers, Palette } from 'lucide-react'
 import { WordsPullUp } from '../components/WordsPullUp'
 import { WordsPullUpMultiStyle } from '../components/WordsPullUpMultiStyle'
 import { ScrollRevealText } from '../components/AnimatedLetter'
+import { Footer } from '../components/Footer'
 
 // Custom Sticker Peel corner component
 const PeelCorner = () => (
@@ -16,31 +17,64 @@ const PeelCorner = () => (
   </div>
 );
 
+// Floating animated sticker elements for background visual juice
+const FloatingBackgroundSticker = ({ children, className = "", delay = 0, yOffset = 0 }) => {
+  return (
+    <motion.div
+      animate={{
+        y: [0, -15, 0],
+        rotate: [0, 4, -4, 0]
+      }}
+      transition={{
+        duration: 6,
+        repeat: Infinity,
+        delay: delay,
+        ease: "easeInOut"
+      }}
+      style={{ y: yOffset }}
+      className={`absolute pointer-events-none select-none z-0 ${className}`}
+    >
+      {children}
+    </motion.div>
+  );
+};
+
 export default function LandingPage() {
   const featuresRef = useRef(null);
   const isFeaturesInView = useInView(featuresRef, { once: true, margin: "-100px" });
+
+  const containerRef = useRef(null);
+  const { scrollYProgress } = useScroll({
+    target: containerRef,
+    offset: ["start start", "end end"]
+  });
+
+  // Parallax translation scroll offsets for floating background elements
+  const stickerY1 = useTransform(scrollYProgress, [0, 1], [0, -200]);
+  const stickerY2 = useTransform(scrollYProgress, [0, 1], [0, -350]);
+  const stickerY3 = useTransform(scrollYProgress, [0, 1], [0, -150]);
 
   // Custom easing for smooth premium motion
   const customEase = [0.16, 1, 0.3, 1];
 
   // Checklist arrays
   const card2Items = [
-    { title: "Die-cut and kiss-cut sticker options", desc: "Perfect contours for any creative layout." },
+    { title: "Die-cut and kiss-cut options", desc: "Perfect contours for any creative layout." },
     { title: "Custom shapes, sizes, and finishes", desc: "Glossy, matte, holographic, and transparent." },
-    { title: "Perfect for laptops, bottles, and packaging", desc: "Designed for premium everyday hardware." },
-    { title: "Bulk orders for events, colleges, and brands", desc: "High volume production with precision scaling." }
+    { title: "Perfect for laptops and bottles", desc: "Designed for premium everyday hardware." },
+    { title: "Bulk orders for events & brands", desc: "High volume production with precision scaling." }
   ];
 
   const card3Items = [
-    { title: "Stickers for cafés, startups, and creators", desc: "Inject physical brand touchpoints anywhere." },
+    { title: "Stickers for cafés & startups", desc: "Inject physical brand touchpoints anywhere." },
     { title: "Packaging inserts and logo stickers", desc: "Delight customers from the moment they unbox." },
-    { title: "Event and campaign-based sticker drops", desc: "Hype up your release with tangible gear." },
-    { title: "Designed to make your brand memorable", desc: "Long-lasting premium vinyl that never fades." }
+    { title: "Event & campaign-based drops", desc: "Hype up your release with tangible gear." },
+    { title: "Designed to make brands memorable", desc: "Long-lasting premium vinyl that never fades." }
   ];
 
   const card4Items = [
-    { title: "Limited-edition sticker collections", desc: "Curated aesthetic themes dropped monthly." },
-    { title: "Collaboration packs with global artists", desc: "Showcasing bold and underground illustrators." },
+    { title: "Limited-edition collections", desc: "Curated aesthetic themes dropped monthly." },
+    { title: "Collaboration packs with artists", desc: "Showcasing bold and underground illustrators." },
     { title: "Trend-based and aesthetic drops", desc: "Fresh stickers for Gen Z, creators, and lovers." },
     { title: "Built to stick, stand out, and express", desc: "Waterproof, UV-protected heavyweight vinyl." }
   ];
@@ -73,7 +107,7 @@ export default function LandingPage() {
   };
 
   return (
-    <div className="min-h-screen bg-black text-[#E1E0CC] selection:bg-[#DEDBC8] selection:text-black overflow-x-hidden">
+    <div ref={containerRef} className="min-h-screen bg-black text-[#E1E0CC] selection:bg-[#DEDBC8] selection:text-black overflow-x-hidden relative">
       
       {/* SECTION 1: HERO */}
       <section className="h-screen w-full p-4 md:p-6 relative select-none">
@@ -96,8 +130,6 @@ export default function LandingPage() {
           
           {/* Gradient Overlay */}
           <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-transparent to-black/80 pointer-events-none z-10" />
-
-
 
           {/* Hero Content (Bottom aligned) */}
           <div className="mt-auto w-full p-6 sm:p-10 md:p-14 lg:p-16 z-20 relative">
@@ -148,7 +180,25 @@ export default function LandingPage() {
       </section>
 
       {/* SECTION 2: ABOUT */}
-      <section className="bg-black py-24 sm:py-36 md:py-48 px-4 sm:px-6 relative z-20">
+      <section className="bg-black py-24 sm:py-36 md:py-48 px-4 sm:px-6 relative z-20 overflow-visible">
+        
+        {/* Animated Background Stickers (Parallax Scroll) */}
+        <FloatingBackgroundSticker 
+          className="top-10 left-10 md:left-24 text-5xl md:text-7xl opacity-20 filter drop-shadow-[0_10px_20px_rgba(222,219,200,0.15)]"
+          delay={0}
+          yOffset={stickerY1}
+        >
+          💀
+        </FloatingBackgroundSticker>
+
+        <FloatingBackgroundSticker 
+          className="bottom-10 right-10 md:right-24 text-6xl md:text-8xl opacity-15 filter drop-shadow-[0_10px_20px_rgba(222,219,200,0.15)]"
+          delay={2.5}
+          yOffset={stickerY2}
+        >
+          ✦
+        </FloatingBackgroundSticker>
+
         <div className="bg-[#101010] rounded-[2rem] p-8 sm:p-14 md:p-24 text-center max-w-6xl mx-auto border border-white/5 relative overflow-hidden group">
           
           {/* Subtle glow behind card */}
@@ -182,9 +232,27 @@ export default function LandingPage() {
       </section>
 
       {/* SECTION 3: FEATURES */}
-      <section className="relative min-h-screen bg-black py-24 sm:py-36 z-20 flex flex-col justify-center">
+      <section className="relative min-h-screen bg-black py-24 sm:py-36 z-20 flex flex-col justify-center overflow-visible">
+        
         {/* Subtle Noise Background */}
         <div className="absolute inset-0 bg-noise opacity-[0.15] pointer-events-none z-0" />
+
+        {/* Animated Background Stickers (Parallax Scroll) */}
+        <FloatingBackgroundSticker 
+          className="top-20 right-[15%] text-5xl md:text-6xl opacity-15 filter drop-shadow-[0_10px_20px_rgba(222,219,200,0.15)]"
+          delay={1}
+          yOffset={stickerY3}
+        >
+          🚀
+        </FloatingBackgroundSticker>
+
+        <FloatingBackgroundSticker 
+          className="bottom-40 left-[10%] text-6xl md:text-7xl opacity-20 filter drop-shadow-[0_10px_20px_rgba(222,219,200,0.15)]"
+          delay={3.5}
+          yOffset={stickerY1}
+        >
+          💖
+        </FloatingBackgroundSticker>
 
         {/* Section Header */}
         <div className="relative z-10 max-w-4xl mx-auto text-center px-4 mb-16 sm:mb-20">
@@ -203,7 +271,7 @@ export default function LandingPage() {
           />
         </div>
 
-        {/* Responsive 4-Column Card Grid */}
+        {/* Responsive 4-Column Card Grid (CARDS EXPANDED TO lg:min-h-[580px] TO PREVENT TEXT OVERFLOW) */}
         <motion.div 
           ref={featuresRef}
           variants={cardContainerVariants}
@@ -215,7 +283,7 @@ export default function LandingPage() {
           {/* Card 1 - Video Card */}
           <motion.div 
             variants={cardVariants}
-            className="relative lg:h-[480px] h-[350px] rounded-2xl overflow-hidden group border border-white/5 flex flex-col justify-end"
+            className="relative lg:min-h-[580px] min-h-[440px] h-full rounded-2xl overflow-hidden group border border-white/5 flex flex-col justify-end"
           >
             <video 
               src="https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/hf_20260406_133058_0504132a-0cf3-4450-a370-8ea3b05c95d4.mp4"
@@ -236,7 +304,7 @@ export default function LandingPage() {
           {/* Card 2 - Custom Sticker Packs (01) */}
           <motion.div 
             variants={cardVariants}
-            className="lg:h-[480px] min-h-[420px] bg-[#161616] hover:bg-[#1a1a1a] rounded-2xl p-6 sm:p-8 flex flex-col justify-between border border-white/5 relative overflow-hidden group transition-colors duration-500"
+            className="lg:min-h-[580px] min-h-[440px] h-full bg-[#161616] hover:bg-[#1a1a1a] rounded-2xl p-6 sm:p-8 flex flex-col justify-between border border-white/5 relative overflow-hidden group transition-colors duration-500"
           >
             <PeelCorner />
             <div>
@@ -278,7 +346,7 @@ export default function LandingPage() {
           {/* Card 3 - Brand Merch Stickers (02) */}
           <motion.div 
             variants={cardVariants}
-            className="lg:h-[480px] min-h-[420px] bg-[#161616] hover:bg-[#1a1a1a] rounded-2xl p-6 sm:p-8 flex flex-col justify-between border border-white/5 relative overflow-hidden group transition-colors duration-500"
+            className="lg:min-h-[580px] min-h-[440px] h-full bg-[#161616] hover:bg-[#1a1a1a] rounded-2xl p-6 sm:p-8 flex flex-col justify-between border border-white/5 relative overflow-hidden group transition-colors duration-500"
           >
             <PeelCorner />
             <div>
@@ -320,7 +388,7 @@ export default function LandingPage() {
           {/* Card 4 - Artist & Vibe Drops (03) */}
           <motion.div 
             variants={cardVariants}
-            className="lg:h-[480px] min-h-[420px] bg-[#161616] hover:bg-[#1a1a1a] rounded-2xl p-6 sm:p-8 flex flex-col justify-between border border-white/5 relative overflow-hidden group transition-colors duration-500"
+            className="lg:min-h-[580px] min-h-[440px] h-full bg-[#161616] hover:bg-[#1a1a1a] rounded-2xl p-6 sm:p-8 flex flex-col justify-between border border-white/5 relative overflow-hidden group transition-colors duration-500"
           >
             <PeelCorner />
             <div>
@@ -362,20 +430,8 @@ export default function LandingPage() {
         </motion.div>
       </section>
 
-      {/* Sleek Minimalist Footer */}
-      <footer className="bg-black border-t border-white/5 py-12 px-6 sm:px-12 relative z-20 text-center text-xs tracking-widest uppercase text-gray-500">
-        <div className="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-6">
-          <div className="flex items-center gap-2">
-            <span className="text-[#E1E0CC] font-bold text-sm tracking-normal font-sans lowercase">stix n vibes.</span>
-            <span className="text-[10px]">© 2026</span>
-          </div>
-          <div className="flex gap-6 sm:gap-12">
-            <a href="#privacy" className="hover:text-[#E1E0CC] transition-colors">Privacy</a>
-            <a href="#terms" className="hover:text-[#E1E0CC] transition-colors">Terms</a>
-            <a href="#uplink" className="hover:text-[#E1E0CC] transition-colors">Uplink</a>
-          </div>
-        </div>
-      </footer>
+      {/* Global Unified Footer rendering the secret Dino 3D portal */}
+      <Footer />
 
     </div>
   )

@@ -3,6 +3,7 @@ import { motion, useInView } from 'framer-motion'
 import { Sparkles, Terminal, Coffee, Heart, CheckCircle, Smile, HeartHandshake, Box, Flame } from 'lucide-react'
 import { WordsPullUp } from '../components/WordsPullUp'
 import { WordsPullUpMultiStyle } from '../components/WordsPullUpMultiStyle'
+import { Footer } from '../components/Footer'
 
 // Peel Corner styling
 const PeelCorner = () => (
@@ -269,6 +270,9 @@ export default function OurStory() {
           </p>
         </motion.div>
       </section>
+
+      {/* Global Unified Footer rendering the secret Dino 3D portal */}
+      <Footer />
 
     </div>
   );

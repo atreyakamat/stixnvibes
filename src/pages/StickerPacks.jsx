@@ -3,6 +3,7 @@ import { motion, AnimatePresence } from 'framer-motion'
 import { Sparkles, ShoppingBag, Send, Mail, Smile, Heart, Flame, HelpCircle } from 'lucide-react'
 import { WordsPullUp } from '../components/WordsPullUp'
 import { WordsPullUpMultiStyle } from '../components/WordsPullUpMultiStyle'
+import { Footer } from '../components/Footer'
 
 export default function StickerPacks() {
   const [clickCount, setClickCount] = useState(0);
@@ -189,6 +190,9 @@ export default function StickerPacks() {
           </div>
         </div>
       </section>
+
+      {/* Global Unified Footer rendering the secret Dino 3D portal */}
+      <Footer />
 
     </div>
   );

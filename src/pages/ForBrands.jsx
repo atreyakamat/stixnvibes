@@ -3,6 +3,7 @@ import { motion } from 'framer-motion'
 import { Sparkles, Terminal, Coffee, Building, ShieldCheck, Truck, Send, HelpCircle, Briefcase, Award } from 'lucide-react'
 import { WordsPullUp } from '../components/WordsPullUp'
 import { WordsPullUpMultiStyle } from '../components/WordsPullUpMultiStyle'
+import { Footer } from '../components/Footer'
 
 // Custom Sticker Peel corner component
 const PeelCorner = () => (
@@ -229,6 +230,9 @@ export default function ForBrands() {
         </div>
 
       </section>
+
+      {/* Global Unified Footer rendering the secret Dino 3D portal */}
+      <Footer />
 
     </div>
   );
