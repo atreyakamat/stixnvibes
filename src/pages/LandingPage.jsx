@@ -23,10 +23,10 @@ const FloatingBackgroundSticker = ({ children, className = "", delay = 0, yOffse
     <motion.div
       animate={{
         y: [0, -15, 0],
-        rotate: [0, 4, -4, 0]
+        rotate: [0, 6, -6, 0]
       }}
       transition={{
-        duration: 6,
+        duration: 7,
         repeat: Infinity,
         delay: delay,
         ease: "easeInOut"
@@ -36,6 +36,85 @@ const FloatingBackgroundSticker = ({ children, className = "", delay = 0, yOffse
     >
       {children}
     </motion.div>
+  );
+};
+
+// Cinematic Ambient Background component with drifting gradient orbs and stars
+const CinematicAmbientBackground = () => {
+  return (
+    <div className="absolute inset-0 w-full h-full overflow-hidden pointer-events-none z-0">
+      {/* Drifting glowing orbs */}
+      <motion.div
+        className="absolute top-[10%] left-[5%] w-[45vw] h-[45vw] max-w-[550px] rounded-full blur-[140px] opacity-[0.05]"
+        animate={{
+          x: [0, 40, -25, 0],
+          y: [0, -55, 35, 0],
+          scale: [1, 1.12, 0.92, 1],
+        }}
+        transition={{
+          duration: 22,
+          repeat: Infinity,
+          ease: "easeInOut",
+        }}
+        style={{ background: "radial-gradient(circle, #DEDBC8 0%, transparent 70%)" }}
+      />
+      <motion.div
+        className="absolute top-[35%] right-[8%] w-[40vw] h-[40vw] max-w-[500px] rounded-full blur-[150px] opacity-[0.04]"
+        animate={{
+          x: [0, -50, 30, 0],
+          y: [0, 45, -35, 0],
+          scale: [1, 0.88, 1.12, 1],
+        }}
+        transition={{
+          duration: 26,
+          repeat: Infinity,
+          ease: "easeInOut",
+          delay: 2.5,
+        }}
+        style={{ background: "radial-gradient(circle, #FFD700 0%, transparent 70%)" }}
+      />
+      <motion.div
+        className="absolute bottom-[15%] left-[12%] w-[45vw] h-[45vw] max-w-[600px] rounded-full blur-[170px] opacity-[0.035]"
+        animate={{
+          x: [0, 50, -40, 0],
+          y: [0, -40, 50, 0],
+          scale: [1, 1.08, 0.88, 1],
+        }}
+        transition={{
+          duration: 28,
+          repeat: Infinity,
+          ease: "easeInOut",
+          delay: 5,
+        }}
+        style={{ background: "radial-gradient(circle, #E1E0CC 0%, transparent 70%)" }}
+      />
+
+      {/* Tiny floating vector sparkles */}
+      <div className="absolute inset-0 opacity-[0.06]">
+        {[...Array(14)].map((_, i) => (
+          <motion.div
+            key={i}
+            className="absolute text-primary text-xs"
+            style={{
+              top: `${12 + (i * 6.5)}%`,
+              left: `${8 + (Math.sin(i) * 32 + 40)}%`,
+            }}
+            animate={{
+              opacity: [0.15, 0.85, 0.15],
+              scale: [0.75, 1.15, 0.75],
+            }}
+            transition={{
+              duration: 4.5 + (i % 3.5),
+              repeat: Infinity,
+              ease: "easeInOut",
+              delay: i * 0.45,
+            }}
+          >
+            ✦
+          </motion.div>
+        ))}
+      </div>
+    </div>
   );
 };
 
@@ -59,24 +138,24 @@ export default function LandingPage() {
 
   // Checklist arrays
   const card2Items = [
-    { title: "Die-cut and kiss-cut options", desc: "Perfect contours for any creative layout." },
+    { title: "Die-cut and kiss-cut sticker options", desc: "Perfect contours for any creative layout." },
     { title: "Custom shapes, sizes, and finishes", desc: "Glossy, matte, holographic, and transparent." },
-    { title: "Perfect for laptops and bottles", desc: "Designed for premium everyday hardware." },
-    { title: "Bulk orders for events & brands", desc: "High volume production with precision scaling." }
+    { title: "Perfect for laptops, bottles, and packaging", desc: "Designed for premium everyday hardware." },
+    { title: "Bulk orders for events, colleges, and brands", desc: "High volume production with precision scaling." }
   ];
 
   const card3Items = [
-    { title: "Stickers for cafés & startups", desc: "Inject physical brand touchpoints anywhere." },
+    { title: "Stickers for cafés, startups, and creators", desc: "Inject physical brand touchpoints anywhere." },
     { title: "Packaging inserts and logo stickers", desc: "Delight customers from the moment they unbox." },
-    { title: "Event & campaign-based drops", desc: "Hype up your release with tangible gear." },
-    { title: "Designed to make brands memorable", desc: "Long-lasting premium vinyl that never fades." }
+    { title: "Event and campaign-based sticker drops", desc: "Hype up your release with tangible gear." },
+    { title: "Designed to make your brand memorable", desc: "Long-lasting premium vinyl that never fades." }
   ];
 
   const card4Items = [
-    { title: "Limited-edition collections", desc: "Curated aesthetic themes dropped monthly." },
-    { title: "Collaboration packs with artists", desc: "Showcasing bold and underground illustrators." },
+    { title: "Limited-edition sticker collections", desc: "Curated aesthetic themes dropped monthly." },
+    { title: "Collaboration packs with global artists", desc: "Showcasing bold and underground illustrators." },
     { title: "Trend-based and aesthetic drops", desc: "Fresh stickers for Gen Z, creators, and lovers." },
-    { title: "Built to stick, stand out, and express", desc: "Waterproof, UV-protected heavyweight vinyl." }
+    { title: "Built to stick, stand out, and express", desc: "Waterproof, UV-protected heavyweight" }
   ];
 
   // Features staggered card container animation
@@ -182,6 +261,9 @@ export default function LandingPage() {
       {/* SECTION 2: ABOUT */}
       <section className="bg-black py-24 sm:py-36 md:py-48 px-4 sm:px-6 relative z-20 overflow-visible">
         
+        {/* Cinematic ambient background animations */}
+        <CinematicAmbientBackground />
+        
         {/* Animated Background Stickers (Parallax Scroll) */}
         <FloatingBackgroundSticker 
           className="top-10 left-10 md:left-24 text-5xl md:text-7xl opacity-20 filter drop-shadow-[0_10px_20px_rgba(222,219,200,0.15)]"
@@ -199,7 +281,15 @@ export default function LandingPage() {
           ✦
         </FloatingBackgroundSticker>
 
-        <div className="bg-[#101010] rounded-[2rem] p-8 sm:p-14 md:p-24 text-center max-w-6xl mx-auto border border-white/5 relative overflow-hidden group">
+        <FloatingBackgroundSticker 
+          className="top-1/2 right-[10%] text-5xl md:text-6xl opacity-10 filter drop-shadow-[0_10px_20px_rgba(222,219,200,0.1)]"
+          delay={1.2}
+          yOffset={stickerY3}
+        >
+          🛸
+        </FloatingBackgroundSticker>
+
+        <div className="bg-[#101010] rounded-[2rem] p-8 sm:p-14 md:p-24 text-center max-w-6xl mx-auto border border-white/5 relative overflow-hidden group z-10">
           
           {/* Subtle glow behind card */}
           <div className="absolute -top-40 -left-40 w-96 h-96 bg-[#DEDBC8]/5 rounded-full blur-[100px] pointer-events-none" />
@@ -234,6 +324,9 @@ export default function LandingPage() {
       {/* SECTION 3: FEATURES */}
       <section className="relative min-h-screen bg-black py-24 sm:py-36 z-20 flex flex-col justify-center overflow-visible">
         
+        {/* Cinematic ambient background animations */}
+        <CinematicAmbientBackground />
+        
         {/* Subtle Noise Background */}
         <div className="absolute inset-0 bg-noise opacity-[0.15] pointer-events-none z-0" />
 
@@ -254,6 +347,22 @@ export default function LandingPage() {
           💖
         </FloatingBackgroundSticker>
 
+        <FloatingBackgroundSticker 
+          className="top-1/3 left-[4%] text-5xl md:text-6xl opacity-10 filter drop-shadow-[0_10px_20px_rgba(222,219,200,0.1)]"
+          delay={1.8}
+          yOffset={stickerY2}
+        >
+          🛹
+        </FloatingBackgroundSticker>
+
+        <FloatingBackgroundSticker 
+          className="bottom-20 right-[6%] text-5xl md:text-6xl opacity-15 filter drop-shadow-[0_10px_20px_rgba(222,219,200,0.1)] animate-pulse"
+          delay={4.2}
+          yOffset={stickerY3}
+        >
+          ⚡
+        </FloatingBackgroundSticker>
+
         {/* Section Header */}
         <div className="relative z-10 max-w-4xl mx-auto text-center px-4 mb-16 sm:mb-20">
           <WordsPullUpMultiStyle
@@ -271,19 +380,19 @@ export default function LandingPage() {
           />
         </div>
 
-        {/* Responsive 4-Column Card Grid (CARDS EXPANDED TO lg:min-h-[580px] TO PREVENT TEXT OVERFLOW) */}
+        {/* Responsive 4-Column Card Grid (CARDS EXPANDED AND REDESIGNED TO PREVENT TEXT OVERFLOW) */}
         <motion.div 
           ref={featuresRef}
           variants={cardContainerVariants}
           initial="hidden"
           animate={isFeaturesInView ? "visible" : "hidden"}
-          className="relative z-10 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-3 md:gap-2 lg:gap-1 max-w-[92vw] lg:max-w-7xl mx-auto px-4"
+          className="relative z-10 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 xl:gap-5 max-w-[92vw] lg:max-w-7xl mx-auto px-4"
         >
           
           {/* Card 1 - Video Card */}
           <motion.div 
             variants={cardVariants}
-            className="relative lg:min-h-[580px] min-h-[440px] h-full rounded-2xl overflow-hidden group border border-white/5 flex flex-col justify-end"
+            className="relative lg:min-h-[640px] xl:min-h-[600px] min-h-[440px] h-full rounded-2xl overflow-hidden group border border-white/5 flex flex-col justify-end"
           >
             <video 
               src="https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/hf_20260406_133058_0504132a-0cf3-4450-a370-8ea3b05c95d4.mp4"
@@ -293,7 +402,7 @@ export default function LandingPage() {
               playsInline 
               className="absolute inset-0 w-full h-full object-cover filter brightness-[0.75]"
             />
-            <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/30 to-transparent pointer-events-none z-10" />
+            <div className="absolute inset-0 bg-gradient-to-t from-black/95 via-black/40 to-transparent pointer-events-none z-10" />
             <div className="relative z-20 p-6 sm:p-8">
               <h3 className="text-[#E1E0CC] font-bold text-lg sm:text-xl md:text-2xl tracking-wide group-hover:translate-x-1 transition-transform duration-300">
                 Your ideas, made stickable.
@@ -304,127 +413,151 @@ export default function LandingPage() {
           {/* Card 2 - Custom Sticker Packs (01) */}
           <motion.div 
             variants={cardVariants}
-            className="lg:min-h-[580px] min-h-[440px] h-full bg-[#161616] hover:bg-[#1a1a1a] rounded-2xl p-6 sm:p-8 flex flex-col justify-between border border-white/5 relative overflow-hidden group transition-colors duration-500"
+            className="lg:min-h-[640px] xl:min-h-[600px] min-h-[440px] h-full bg-[#161616] hover:bg-[#1c1c1c] rounded-2xl p-5 sm:p-7 xl:p-8 flex flex-col justify-between border border-white/5 relative overflow-hidden group transition-all duration-500 hover:shadow-2xl hover:shadow-[#DEDBC8]/5"
           >
             <PeelCorner />
-            <div>
-              {/* Graphic Icon Header */}
-              <img 
-                src="https://images.higgs.ai/?default=1&output=webp&url=https%3A%2F%2Fd8j0ntlcm91z4.cloudfront.net%2Fuser_38xzZboKViGWJOttwIXH07lWA1P%2Fhf_20260405_171918_4a5edc79-d78f-4637-ac8b-53c43c220606.png&w=1280&q=85" 
-                alt="Custom Pack Icon" 
-                className="w-10 h-10 sm:w-12 sm:h-12 rounded object-cover mb-6 border border-white/10"
-              />
-              
-              <div className="flex justify-between items-center mb-6">
-                <h3 className="text-[#E1E0CC] font-bold text-base sm:text-lg tracking-wide">Custom Sticker Packs.</h3>
-                <span className="text-gray-600 font-mono text-xs sm:text-sm">01</span>
+            
+            <div className="flex flex-col h-full justify-between">
+              <div>
+                {/* Header section with compact Image & Title aligned horizontally */}
+                <div className="flex items-center gap-3.5 mb-6">
+                  <img 
+                    src="https://images.higgs.ai/?default=1&output=webp&url=https%3A%2F%2Fd8j0ntlcm91z4.cloudfront.net%2Fuser_38xzZboKViGWJOtt%2Fhf_20260405_171918_4a5edc79-d78f-4637-ac8b-53c43c220606.png&w=1280&q=85" 
+                    alt="Custom Pack Icon" 
+                    className="w-10 h-10 rounded-xl object-cover border border-white/10 shrink-0"
+                  />
+                  <div className="flex-grow">
+                    <h3 className="text-[#E1E0CC] font-bold text-sm sm:text-base tracking-wide leading-tight group-hover:text-[#DEDBC8] transition-colors duration-300">
+                      Custom Sticker Packs.
+                    </h3>
+                    <span className="text-[9px] text-gray-500 font-mono uppercase tracking-widest block mt-0.5">
+                      01 / Packs
+                    </span>
+                  </div>
+                </div>
+
+                {/* Checklist */}
+                <ul className="space-y-4 xl:space-y-4.5">
+                  {card2Items.map((item, idx) => (
+                    <li key={idx} className="flex items-start gap-2.5">
+                      <div className="mt-0.5 bg-[#252525] rounded p-0.5 border border-white/5 flex items-center justify-center shrink-0">
+                        <Check className="text-primary w-3 h-3 sm:w-3.5 sm:h-3.5" />
+                      </div>
+                      <div>
+                        <h4 className="text-gray-300 text-xs sm:text-[13px] font-semibold leading-tight tracking-wide">{item.title}</h4>
+                        <p className="text-gray-500 text-[10px] sm:text-xs mt-0.5 leading-snug">{item.desc}</p>
+                      </div>
+                    </li>
+                  ))}
+                </ul>
               </div>
 
-              {/* Checklist */}
-              <ul className="space-y-4">
-                {card2Items.map((item, idx) => (
-                  <li key={idx} className="flex items-start gap-2.5">
-                    <div className="mt-0.5 bg-[#252525] rounded p-0.5 border border-white/5 flex items-center justify-center shrink-0">
-                      <Check className="text-primary w-3 h-3 sm:w-3.5 sm:h-3.5" />
-                    </div>
-                    <div>
-                      <h4 className="text-gray-300 text-xs sm:text-sm font-semibold leading-tight">{item.title}</h4>
-                      <p className="text-gray-500 text-[10px] sm:text-xs mt-0.5 leading-tight">{item.desc}</p>
-                    </div>
-                  </li>
-                ))}
-              </ul>
+              {/* Learn More Action */}
+              <button className="text-[#E1E0CC] flex items-center gap-2 mt-8 text-xs sm:text-sm font-semibold tracking-wider uppercase group/btn self-start pt-4 border-t border-white/5 w-full">
+                <span>Learn more</span>
+                <ArrowRight className="w-4 h-4 rotate-[-45deg] group-hover/btn:translate-x-1 group-hover/btn:-translate-y-1 transition-transform duration-300" />
+              </button>
             </div>
-
-            {/* Learn More Action */}
-            <button className="text-[#E1E0CC] flex items-center gap-2 mt-8 text-xs sm:text-sm font-semibold tracking-wider uppercase group/btn self-start">
-              <span>Learn more</span>
-              <ArrowRight className="w-4 h-4 rotate-[-45deg] group-hover/btn:translate-x-1 group-hover/btn:-translate-y-1 transition-transform duration-300" />
-            </button>
           </motion.div>
 
           {/* Card 3 - Brand Merch Stickers (02) */}
           <motion.div 
             variants={cardVariants}
-            className="lg:min-h-[580px] min-h-[440px] h-full bg-[#161616] hover:bg-[#1a1a1a] rounded-2xl p-6 sm:p-8 flex flex-col justify-between border border-white/5 relative overflow-hidden group transition-colors duration-500"
+            className="lg:min-h-[640px] xl:min-h-[600px] min-h-[440px] h-full bg-[#161616] hover:bg-[#1c1c1c] rounded-2xl p-5 sm:p-7 xl:p-8 flex flex-col justify-between border border-white/5 relative overflow-hidden group transition-all duration-500 hover:shadow-2xl hover:shadow-[#DEDBC8]/5"
           >
             <PeelCorner />
-            <div>
-              {/* Graphic Icon Header */}
-              <img 
-                src="https://images.higgs.ai/?default=1&output=webp&url=https%3A%2F%2Fd8j0ntlcm91z4.cloudfront.net%2Fuser_38xzZboKViGWJOttwIXH07lWA1P%2Fhf_20260405_171741_ed9845ab-f5b2-4018-8ce7-07cc01823522.png&w=1280&q=85" 
-                alt="Brand Merch Icon" 
-                className="w-10 h-10 sm:w-12 sm:h-12 rounded object-cover mb-6 border border-white/10"
-              />
+            
+            <div className="flex flex-col h-full justify-between">
+              <div>
+                {/* Header section with compact Image & Title aligned horizontally */}
+                <div className="flex items-center gap-3.5 mb-6">
+                  <img 
+                    src="https://images.higgs.ai/?default=1&output=webp&url=https%3A%2F%2Fd8j0ntlcm91z4.cloudfront.net%2Fuser_38xzZboKViGWJOtt%2Fhf_20260405_171741_ed9845ab-f5b2-4018-8ce7-07cc01823522.png&w=1280&q=85" 
+                    alt="Brand Merch Icon" 
+                    className="w-10 h-10 rounded-xl object-cover border border-white/10 shrink-0"
+                  />
+                  <div className="flex-grow">
+                    <h3 className="text-[#E1E0CC] font-bold text-sm sm:text-base tracking-wide leading-tight group-hover:text-[#DEDBC8] transition-colors duration-300">
+                      Brand Merch Stickers.
+                    </h3>
+                    <span className="text-[9px] text-gray-500 font-mono uppercase tracking-widest block mt-0.5">
+                      02 / Brand
+                    </span>
+                  </div>
+                </div>
 
-              <div className="flex justify-between items-center mb-6">
-                <h3 className="text-[#E1E0CC] font-bold text-base sm:text-lg tracking-wide">Brand Merch Stickers.</h3>
-                <span className="text-gray-600 font-mono text-xs sm:text-sm">02</span>
+                {/* Checklist */}
+                <ul className="space-y-4 xl:space-y-4.5">
+                  {card3Items.map((item, idx) => (
+                    <li key={idx} className="flex items-start gap-2.5">
+                      <div className="mt-0.5 bg-[#252525] rounded p-0.5 border border-white/5 flex items-center justify-center shrink-0">
+                        <Check className="text-primary w-3 h-3 sm:w-3.5 sm:h-3.5" />
+                      </div>
+                      <div>
+                        <h4 className="text-gray-300 text-xs sm:text-[13px] font-semibold leading-tight tracking-wide">{item.title}</h4>
+                        <p className="text-gray-500 text-[10px] sm:text-xs mt-0.5 leading-snug">{item.desc}</p>
+                      </div>
+                    </li>
+                  ))}
+                </ul>
               </div>
 
-              {/* Checklist */}
-              <ul className="space-y-4">
-                {card3Items.map((item, idx) => (
-                  <li key={idx} className="flex items-start gap-2.5">
-                    <div className="mt-0.5 bg-[#252525] rounded p-0.5 border border-white/5 flex items-center justify-center shrink-0">
-                      <Check className="text-primary w-3 h-3 sm:w-3.5 sm:h-3.5" />
-                    </div>
-                    <div>
-                      <h4 className="text-gray-300 text-xs sm:text-sm font-semibold leading-tight">{item.title}</h4>
-                      <p className="text-gray-500 text-[10px] sm:text-xs mt-0.5 leading-tight">{item.desc}</p>
-                    </div>
-                  </li>
-                ))}
-              </ul>
+              {/* Learn More Action */}
+              <button className="text-[#E1E0CC] flex items-center gap-2 mt-8 text-xs sm:text-sm font-semibold tracking-wider uppercase group/btn self-start pt-4 border-t border-white/5 w-full">
+                <span>Learn more</span>
+                <ArrowRight className="w-4 h-4 rotate-[-45deg] group-hover/btn:translate-x-1 group-hover/btn:-translate-y-1 transition-transform duration-300" />
+              </button>
             </div>
-
-            {/* Learn More Action */}
-            <button className="text-[#E1E0CC] flex items-center gap-2 mt-8 text-xs sm:text-sm font-semibold tracking-wider uppercase group/btn self-start">
-              <span>Learn more</span>
-              <ArrowRight className="w-4 h-4 rotate-[-45deg] group-hover/btn:translate-x-1 group-hover/btn:-translate-y-1 transition-transform duration-300" />
-            </button>
           </motion.div>
 
           {/* Card 4 - Artist & Vibe Drops (03) */}
           <motion.div 
             variants={cardVariants}
-            className="lg:min-h-[580px] min-h-[440px] h-full bg-[#161616] hover:bg-[#1a1a1a] rounded-2xl p-6 sm:p-8 flex flex-col justify-between border border-white/5 relative overflow-hidden group transition-colors duration-500"
+            className="lg:min-h-[640px] xl:min-h-[600px] min-h-[440px] h-full bg-[#161616] hover:bg-[#1c1c1c] rounded-2xl p-5 sm:p-7 xl:p-8 flex flex-col justify-between border border-white/5 relative overflow-hidden group transition-all duration-500 hover:shadow-2xl hover:shadow-[#DEDBC8]/5"
           >
             <PeelCorner />
-            <div>
-              {/* Graphic Icon Header */}
-              <img 
-                src="https://images.higgs.ai/?default=1&output=webp&url=https%3A%2F%2Fd8j0ntlcm91z4.cloudfront.net%2Fuser_38xzZboKViGWJOttwIXH07lWA1P%2Fhf_20260405_171809_f56666dc-c099-4778-ad82-9ad4f209567b.png&w=1280&q=85" 
-                alt="Artist Drop Icon" 
-                className="w-10 h-10 sm:w-12 sm:h-12 rounded object-cover mb-6 border border-white/10"
-              />
+            
+            <div className="flex flex-col h-full justify-between">
+              <div>
+                {/* Header section with compact Image & Title aligned horizontally */}
+                <div className="flex items-center gap-3.5 mb-6">
+                  <img 
+                    src="https://images.higgs.ai/?default=1&output=webp&url=https%3A%2F%2Fd8j0ntlcm91z4.cloudfront.net%2Fuser_38xzZboKViGWJOtt%2Fhf_20260405_171809_f56666dc-c099-4778-ad82-9ad4f209567b.png&w=1280&q=85" 
+                    alt="Artist Drop Icon" 
+                    className="w-10 h-10 rounded-xl object-cover border border-white/10 shrink-0"
+                  />
+                  <div className="flex-grow">
+                    <h3 className="text-[#E1E0CC] font-bold text-sm sm:text-base tracking-wide leading-tight group-hover:text-[#DEDBC8] transition-colors duration-300">
+                      Artist & Vibe Drops.
+                    </h3>
+                    <span className="text-[9px] text-gray-500 font-mono uppercase tracking-widest block mt-0.5">
+                      03 / Artist
+                    </span>
+                  </div>
+                </div>
 
-              <div className="flex justify-between items-center mb-6">
-                <h3 className="text-[#E1E0CC] font-bold text-base sm:text-lg tracking-wide">Artist & Vibe Drops.</h3>
-                <span className="text-gray-600 font-mono text-xs sm:text-sm">03</span>
+                {/* Checklist */}
+                <ul className="space-y-4 xl:space-y-4.5">
+                  {card4Items.map((item, idx) => (
+                    <li key={idx} className="flex items-start gap-2.5">
+                      <div className="mt-0.5 bg-[#252525] rounded p-0.5 border border-white/5 flex items-center justify-center shrink-0">
+                        <Check className="text-primary w-3 h-3 sm:w-3.5 sm:h-3.5" />
+                      </div>
+                      <div>
+                        <h4 className="text-gray-300 text-xs sm:text-[13px] font-semibold leading-tight tracking-wide">{item.title}</h4>
+                        <p className="text-gray-500 text-[10px] sm:text-xs mt-0.5 leading-snug">{item.desc}</p>
+                      </div>
+                    </li>
+                  ))}
+                </ul>
               </div>
 
-              {/* Checklist */}
-              <ul className="space-y-4">
-                {card4Items.map((item, idx) => (
-                  <li key={idx} className="flex items-start gap-2.5">
-                    <div className="mt-0.5 bg-[#252525] rounded p-0.5 border border-white/5 flex items-center justify-center shrink-0">
-                      <Check className="text-primary w-3 h-3 sm:w-3.5 sm:h-3.5" />
-                    </div>
-                    <div>
-                      <h4 className="text-gray-300 text-xs sm:text-sm font-semibold leading-tight">{item.title}</h4>
-                      <p className="text-gray-500 text-[10px] sm:text-xs mt-0.5 leading-tight">{item.desc}</p>
-                    </div>
-                  </li>
-                ))}
-              </ul>
+              {/* Learn More Action */}
+              <button className="text-[#E1E0CC] flex items-center gap-2 mt-8 text-xs sm:text-sm font-semibold tracking-wider uppercase group/btn self-start pt-4 border-t border-white/5 w-full">
+                <span>Learn more</span>
+                <ArrowRight className="w-4 h-4 rotate-[-45deg] group-hover/btn:translate-x-1 group-hover/btn:-translate-y-1 transition-transform duration-300" />
+              </button>
             </div>
-
-            {/* Learn More Action */}
-            <button className="text-[#E1E0CC] flex items-center gap-2 mt-8 text-xs sm:text-sm font-semibold tracking-wider uppercase group/btn self-start">
-              <span>Learn more</span>
-              <ArrowRight className="w-4 h-4 rotate-[-45deg] group-hover/btn:translate-x-1 group-hover/btn:-translate-y-1 transition-transform duration-300" />
-            </button>
           </motion.div>
 
         </motion.div>
