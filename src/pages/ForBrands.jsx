@@ -4,6 +4,7 @@ import { Sparkles, Terminal, Coffee, Building, ShieldCheck, Truck, Send, HelpCir
 import { WordsPullUp } from '../components/WordsPullUp'
 import { WordsPullUpMultiStyle } from '../components/WordsPullUpMultiStyle'
 import { Footer } from '../components/Footer'
+import { CinematicAmbientBackground } from '../components/CinematicAmbientBackground'
 
 // Custom Sticker Peel corner component
 const PeelCorner = () => (
@@ -42,6 +43,8 @@ export default function ForBrands() {
 
   return (
     <div className="bg-black text-[#E1E0CC] min-h-screen pt-28 pb-20 select-none relative overflow-hidden">
+      {/* Cinematic ambient moving background animations */}
+      <CinematicAmbientBackground />
       
       {/* Background utilities with colorful glowing blur edges */}
       <div className="absolute inset-0 bg-noise opacity-[0.1] pointer-events-none z-0" />

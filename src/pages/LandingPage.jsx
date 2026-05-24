@@ -5,6 +5,7 @@ import { WordsPullUp } from '../components/WordsPullUp'
 import { WordsPullUpMultiStyle } from '../components/WordsPullUpMultiStyle'
 import { ScrollRevealText } from '../components/AnimatedLetter'
 import { Footer } from '../components/Footer'
+import { CinematicAmbientBackground } from '../components/CinematicAmbientBackground'
 
 // Custom Sticker Peel corner component
 const PeelCorner = () => (
@@ -36,85 +37,6 @@ const FloatingBackgroundSticker = ({ children, className = "", delay = 0, yOffse
     >
       {children}
     </motion.div>
-  );
-};
-
-// Cinematic Ambient Background component with drifting gradient orbs and stars
-const CinematicAmbientBackground = () => {
-  return (
-    <div className="absolute inset-0 w-full h-full overflow-hidden pointer-events-none z-0">
-      {/* Drifting glowing orbs */}
-      <motion.div
-        className="absolute top-[10%] left-[5%] w-[45vw] h-[45vw] max-w-[550px] rounded-full blur-[140px] opacity-[0.05]"
-        animate={{
-          x: [0, 40, -25, 0],
-          y: [0, -55, 35, 0],
-          scale: [1, 1.12, 0.92, 1],
-        }}
-        transition={{
-          duration: 22,
-          repeat: Infinity,
-          ease: "easeInOut",
-        }}
-        style={{ background: "radial-gradient(circle, #DEDBC8 0%, transparent 70%)" }}
-      />
-      <motion.div
-        className="absolute top-[35%] right-[8%] w-[40vw] h-[40vw] max-w-[500px] rounded-full blur-[150px] opacity-[0.04]"
-        animate={{
-          x: [0, -50, 30, 0],
-          y: [0, 45, -35, 0],
-          scale: [1, 0.88, 1.12, 1],
-        }}
-        transition={{
-          duration: 26,
-          repeat: Infinity,
-          ease: "easeInOut",
-          delay: 2.5,
-        }}
-        style={{ background: "radial-gradient(circle, #FFD700 0%, transparent 70%)" }}
-      />
-      <motion.div
-        className="absolute bottom-[15%] left-[12%] w-[45vw] h-[45vw] max-w-[600px] rounded-full blur-[170px] opacity-[0.035]"
-        animate={{
-          x: [0, 50, -40, 0],
-          y: [0, -40, 50, 0],
-          scale: [1, 1.08, 0.88, 1],
-        }}
-        transition={{
-          duration: 28,
-          repeat: Infinity,
-          ease: "easeInOut",
-          delay: 5,
-        }}
-        style={{ background: "radial-gradient(circle, #E1E0CC 0%, transparent 70%)" }}
-      />
-
-      {/* Tiny floating vector sparkles */}
-      <div className="absolute inset-0 opacity-[0.06]">
-        {[...Array(14)].map((_, i) => (
-          <motion.div
-            key={i}
-            className="absolute text-primary text-xs"
-            style={{
-              top: `${12 + (i * 6.5)}%`,
-              left: `${8 + (Math.sin(i) * 32 + 40)}%`,
-            }}
-            animate={{
-              opacity: [0.15, 0.85, 0.15],
-              scale: [0.75, 1.15, 0.75],
-            }}
-            transition={{
-              duration: 4.5 + (i % 3.5),
-              repeat: Infinity,
-              ease: "easeInOut",
-              delay: i * 0.45,
-            }}
-          >
-            ✦
-          </motion.div>
-        ))}
-      </div>
-    </div>
   );
 };
 
@@ -189,8 +111,8 @@ export default function LandingPage() {
     <div ref={containerRef} className="min-h-screen bg-black text-[#E1E0CC] selection:bg-[#DEDBC8] selection:text-black overflow-x-hidden relative">
       
       {/* SECTION 1: HERO */}
-      <section className="h-screen w-full p-4 md:p-6 relative select-none">
-        <div className="relative w-full h-full rounded-2xl md:rounded-[2rem] overflow-hidden flex flex-col justify-between">
+      <section className="h-screen w-full relative select-none overflow-hidden">
+        <div className="relative w-full h-full flex flex-col justify-between">
           
           {/* Background Video */}
           <div className="absolute inset-0 z-0">

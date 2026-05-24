@@ -4,6 +4,7 @@ import { Sparkles, Terminal, Coffee, Heart, CheckCircle, Smile, HeartHandshake, 
 import { WordsPullUp } from '../components/WordsPullUp'
 import { WordsPullUpMultiStyle } from '../components/WordsPullUpMultiStyle'
 import { Footer } from '../components/Footer'
+import { CinematicAmbientBackground } from '../components/CinematicAmbientBackground'
 
 // Peel Corner styling
 const PeelCorner = () => (
@@ -60,6 +61,8 @@ export default function OurStory() {
 
   return (
     <div className="bg-black text-[#E1E0CC] min-h-screen pt-28 pb-20 select-none relative">
+      {/* Cinematic ambient moving background animations */}
+      <CinematicAmbientBackground />
       {/* Background Noise & Blur */}
       <div className="absolute inset-0 bg-noise opacity-[0.1] pointer-events-none z-0" />
       <div className="absolute top-20 right-10 w-96 h-96 bg-[#DEDBC8]/5 rounded-full blur-[100px] pointer-events-none" />
@@ -132,9 +135,11 @@ export default function OurStory() {
             
             {/* Header */}
             <div className="text-center relative z-10">
-              <div className="w-16 h-16 bg-neutral-900 border border-white/10 rounded-full flex items-center justify-center text-2xl shadow-lg mx-auto mb-4 group-hover:scale-110 transition-transform duration-300">
-                🔮
-              </div>
+              <img 
+                src="https://images.higgs.ai/?default=1&output=webp&url=https%3A%2F%2Fd8j0ntlcm91z4.cloudfront.net%2Fuser_38xzZboKViGWJOtt%2Fhf_20260405_171809_f56666dc-c099-4778-ad82-9ad4f209567b.png&w=1280&q=85" 
+                alt="Atreya Kamat Portrait" 
+                className="w-16 h-16 rounded-full object-cover border border-white/10 shadow-lg mx-auto mb-4 group-hover:scale-110 group-hover:rotate-6 transition-all duration-300"
+              />
               <h3 className="text-xl font-bold text-white mb-1">Atreya Kamat</h3>
               <span className="text-primary text-[10px] font-bold uppercase tracking-wider block mb-1">
                 The Chaos Wizard
@@ -177,9 +182,11 @@ export default function OurStory() {
 
             {/* Header */}
             <div className="text-center relative z-10">
-              <div className="w-16 h-16 bg-neutral-900 border border-white/10 rounded-full flex items-center justify-center text-2xl shadow-lg mx-auto mb-4 group-hover:scale-110 transition-transform duration-300">
-                🩺
-              </div>
+              <img 
+                src="https://images.higgs.ai/?default=1&output=webp&url=https%3A%2F%2Fd8j0ntlcm91z4.cloudfront.net%2Fuser_38xzZboKViGWJOtt%2Fhf_20260405_171741_ed9845ab-f5b2-4018-8ce7-07cc01823522.png&w=1280&q=85" 
+                alt="Kritik Sawant Portrait" 
+                className="w-16 h-16 rounded-full object-cover border border-white/10 shadow-lg mx-auto mb-4 group-hover:scale-110 group-hover:-rotate-6 transition-all duration-300"
+              />
               <h3 className="text-xl font-bold text-white mb-1">Kritik Sawant</h3>
               <span className="text-primary text-[10px] font-bold uppercase tracking-wider block mb-1">
                 The Vibe Doctor

@@ -4,6 +4,7 @@ import { Upload, HelpCircle, Laptop, Settings, Layers, Star, CheckCircle } from 
 import { WordsPullUp } from '../components/WordsPullUp'
 import { WordsPullUpMultiStyle } from '../components/WordsPullUpMultiStyle'
 import { Footer } from '../components/Footer'
+import { CinematicAmbientBackground } from '../components/CinematicAmbientBackground'
 
 // Custom Sticker Peel corner component
 const PeelCorner = () => (
@@ -84,6 +85,9 @@ export default function CustomOrders() {
 
   return (
     <div className="bg-black text-[#E1E0CC] min-h-screen pt-28 pb-20 select-none relative">
+      {/* Cinematic ambient moving background animations */}
+      <CinematicAmbientBackground />
+      
       {/* Background utilities */}
       <div className="absolute inset-0 bg-noise opacity-[0.1] pointer-events-none z-0" />
       <div className="absolute bottom-20 right-10 w-[30rem] h-[30rem] bg-neutral-900/40 rounded-full blur-[120px] pointer-events-none" />

@@ -4,6 +4,7 @@ import { Sparkles, ShoppingBag, Send, Mail, Smile, Heart, Flame, HelpCircle } fr
 import { WordsPullUp } from '../components/WordsPullUp'
 import { WordsPullUpMultiStyle } from '../components/WordsPullUpMultiStyle'
 import { Footer } from '../components/Footer'
+import { CinematicAmbientBackground } from '../components/CinematicAmbientBackground'
 
 export default function StickerPacks() {
   const [clickCount, setClickCount] = useState(0);
@@ -65,6 +66,8 @@ export default function StickerPacks() {
 
   return (
     <div className="bg-black text-[#E1E0CC] min-h-screen pt-28 pb-20 select-none relative overflow-hidden flex flex-col justify-center">
+      {/* Cinematic ambient moving background animations */}
+      <CinematicAmbientBackground />
       
       {/* Background utilities */}
       <div className="absolute inset-0 bg-noise opacity-[0.1] pointer-events-none z-0" />
