@@ -31,6 +31,16 @@ export default function Inquiries() {
   const handleFormSubmit = (e) => {
     e.preventDefault();
     setIsSent(true);
+    
+    // Auto-clipboard specs pre-compiler wizard
+    const text = `Hey Stix and Vibes! ⚡ I want to send an inquiry:\n\n` +
+      `- Name/Alias: ${name}\n` +
+      `- Contact Coordinates: ${email}\n` +
+      `- Signal Type: ${inquiryType}\n` +
+      `- Message: ${message}\n\n` +
+      `Let's catch a vibe! 🌴`;
+      
+    navigator.clipboard.writeText(text).catch(() => {});
   };
 
   // Step wizard calculations
@@ -74,15 +84,45 @@ export default function Inquiries() {
               <motion.div 
                 initial={{ opacity: 0, scale: 0.95 }}
                 animate={{ opacity: 1, scale: 1 }}
-                className="text-center py-12 space-y-6"
+                className="text-center py-8 space-y-6"
               >
                 <div className="size-20 bg-emerald-500/10 border border-emerald-500/20 text-[#DEDBC8] rounded-full flex items-center justify-center mx-auto text-4xl shadow-xl">
                   <CheckCircle2 className="w-10 h-10 text-emerald-400" />
                 </div>
-                <h3 className="text-2xl font-bold tracking-tight">Signal Locked & Loaded</h3>
-                <p className="text-gray-400 text-xs sm:text-sm leading-relaxed max-w-xs mx-auto">
-                  Thank you, <span className="text-[#E1E0CC] font-bold">{name}</span>. Your request has been written onto our primary physical database. Stand by for a transmission check.
+                <h3 className="text-xl sm:text-2xl font-bold tracking-tight">Signal Locked & Loaded</h3>
+                <p className="text-gray-400 text-xs sm:text-sm leading-relaxed max-w-sm mx-auto">
+                  Thank you, <span className="text-[#E1E0CC] font-bold">{name}</span>. Your specs have been pre-copied to your clipboard automatically!
+                  <br />
+                  <span className="block mt-2 text-[10px] text-primary/70 uppercase tracking-widest font-bold">
+                    Paste on any gateway below for an instant response:
+                  </span>
                 </p>
+
+                <div className="grid grid-cols-3 gap-2 text-[10px] font-mono mt-4">
+                  <a 
+                    href="https://wa.me/917744020601" 
+                    target="_blank" 
+                    rel="noopener noreferrer" 
+                    className="bg-[#161616] border border-emerald-500/20 p-2.5 rounded-lg text-center hover:bg-[#202020] text-emerald-400 transition-all block"
+                  >
+                    💬 WhatsApp
+                  </a>
+                  <a 
+                    href="https://instagram.com/stixnvibes" 
+                    target="_blank" 
+                    rel="noopener noreferrer" 
+                    className="bg-[#161616] border border-pink-500/20 p-2.5 rounded-lg text-center hover:bg-[#202020] text-pink-400 transition-all block"
+                  >
+                    📸 Instagram
+                  </a>
+                  <a 
+                    href="mailto:hello@stixnvibes.com" 
+                    className="bg-[#161616] border border-[#DEDBC8]/20 p-2.5 rounded-lg text-center hover:bg-[#202020] text-amber-100 transition-all block"
+                  >
+                    ✉️ Email
+                  </a>
+                </div>
+
                 <button 
                   onClick={() => {
                     setIsSent(false);
@@ -91,7 +131,7 @@ export default function Inquiries() {
                     setEmail("");
                     setMessage("");
                   }}
-                  className="bg-[#161616] text-[#E1E0CC] hover:bg-[#DEDBC8] hover:text-black border border-white/5 hover:border-black font-semibold text-xs px-6 py-3 rounded-full uppercase tracking-wider transition-all duration-300"
+                  className="bg-[#161616] text-[#E1E0CC] hover:bg-[#DEDBC8] hover:text-black border border-white/5 hover:border-black font-semibold text-xs px-6 py-3 rounded-full uppercase tracking-wider transition-all duration-300 w-full mt-4 cursor-pointer select-none"
                 >
                   Send Another Signal
                 </button>

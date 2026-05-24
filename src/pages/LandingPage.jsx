@@ -1,6 +1,7 @@
 import React, { useRef, useState } from 'react'
+import { Link } from 'react-router-dom'
 import { motion, useInView, useScroll, useTransform } from 'framer-motion'
-import { ArrowRight, Check, Sparkles, Smile, Star, Layers, Palette } from 'lucide-react'
+import { ArrowRight, Check, Sparkles, Smile, Star, Layers, Palette, Laptop, Sparkle } from 'lucide-react'
 import { WordsPullUp } from '../components/WordsPullUp'
 import { WordsPullUpMultiStyle } from '../components/WordsPullUpMultiStyle'
 import { ScrollRevealText } from '../components/AnimatedLetter'
@@ -156,27 +157,79 @@ export default function LandingPage() {
                 >
                   Stix and Vibes creates custom stickers that turn ideas, brands, moods, and moments into bold little pieces of personality. From laptops and bottles to packaging, events, and businesses — we make stickers that stick with people.
                 </motion.p>
-
                 <motion.div
                   initial={{ y: 20, opacity: 0 }}
                   animate={{ y: 0, opacity: 1 }}
                   transition={{ delay: 0.7, duration: 0.8, ease: customEase }}
-                  className="w-full sm:w-auto"
+                  className="w-full sm:w-auto animate-pulse"
                 >
-                  <button 
-                    className="w-full sm:w-auto bg-[#DEDBC8] text-black font-semibold text-sm sm:text-base px-6 py-2.5 sm:py-3 rounded-full flex items-center justify-between sm:justify-start gap-4 hover:gap-6 group transition-all duration-500 shadow-xl hover:shadow-[#DEDBC8]/10"
+                  <Link 
+                    to="/custom" 
+                    className="w-full sm:w-auto bg-[#DEDBC8] text-black font-semibold text-sm sm:text-base px-6 py-2.5 sm:py-3 rounded-full flex items-center justify-between sm:justify-start gap-4 hover:gap-6 group transition-all duration-500 shadow-xl hover:shadow-[#DEDBC8]/10 select-none cursor-pointer"
                   >
                     <span>Create your sticker</span>
                     <div className="bg-black rounded-full w-9 h-9 sm:w-10 sm:h-10 flex items-center justify-center group-hover:scale-110 transition-transform duration-500">
                       <ArrowRight className="text-[#E1E0CC] w-4 h-4 sm:w-5 sm:h-5" />
                     </div>
-                  </button>
+                  </Link>
                 </motion.div>
               </div>
 
             </div>
           </div>
 
+        </div>
+      </section>
+
+      {/* BRAND VALUES TRUST TICKER / MARQUEE */}
+      <section className="relative w-full py-5 bg-black border-y border-white/5 overflow-hidden z-20 select-none">
+        <div className="absolute inset-0 bg-noise opacity-[0.05] pointer-events-none" />
+        <div className="flex w-full overflow-hidden">
+          <motion.div 
+            animate={{ x: [0, -1030] }}
+            transition={{
+              x: {
+                repeat: Infinity,
+                repeatType: "loop",
+                duration: 25,
+                ease: "linear"
+              }
+            }}
+            className="flex gap-10 whitespace-nowrap text-[10px] sm:text-xs font-mono uppercase tracking-[0.25em] text-[#DEDBC8]/60"
+          >
+            <div className="flex items-center gap-10 shrink-0 pr-10">
+              <span className="flex items-center gap-2">✦ Perfect for laptops, bottles, cafés, colleges, events</span>
+              <span className="text-[#DEDBC8]/25">|</span>
+              <span className="flex items-center gap-2">★ Custom sizes & premium finishes</span>
+              <span className="text-[#DEDBC8]/25">|</span>
+              <span className="flex items-center gap-2">✦ Bulk orders & wholesale scaling</span>
+              <span className="text-[#DEDBC8]/25">|</span>
+              <span className="flex items-center gap-2">★ Made in Goa / India-focused 🌴</span>
+              <span className="text-[#DEDBC8]/25">|</span>
+            </div>
+            
+            <div className="flex items-center gap-10 shrink-0 pr-10">
+              <span className="flex items-center gap-2">✦ Perfect for laptops, bottles, cafés, colleges, events</span>
+              <span className="text-[#DEDBC8]/25">|</span>
+              <span className="flex items-center gap-2">★ Custom sizes & premium finishes</span>
+              <span className="text-[#DEDBC8]/25">|</span>
+              <span className="flex items-center gap-2">✦ Bulk orders & wholesale scaling</span>
+              <span className="text-[#DEDBC8]/25">|</span>
+              <span className="flex items-center gap-2">★ Made in Goa / India-focused 🌴</span>
+              <span className="text-[#DEDBC8]/25">|</span>
+            </div>
+
+            <div className="flex items-center gap-10 shrink-0 pr-10">
+              <span className="flex items-center gap-2">✦ Perfect for laptops, bottles, cafés, colleges, events</span>
+              <span className="text-[#DEDBC8]/25">|</span>
+              <span className="flex items-center gap-2">★ Custom sizes & premium finishes</span>
+              <span className="text-[#DEDBC8]/25">|</span>
+              <span className="flex items-center gap-2">✦ Bulk orders & wholesale scaling</span>
+              <span className="text-[#DEDBC8]/25">|</span>
+              <span className="flex items-center gap-2">★ Made in Goa / India-focused 🌴</span>
+              <span className="text-[#DEDBC8]/25">|</span>
+            </div>
+          </motion.div>
         </div>
       </section>
 
@@ -335,7 +388,7 @@ export default function LandingPage() {
           {/* Card 2 - Custom Sticker Packs (01) */}
           <motion.div 
             variants={cardVariants}
-            className="lg:min-h-[640px] xl:min-h-[600px] min-h-[440px] h-full bg-[#161616] hover:bg-[#1c1c1c] rounded-2xl p-5 sm:p-7 xl:p-8 flex flex-col justify-between border border-white/5 relative overflow-hidden group transition-all duration-500 hover:shadow-2xl hover:shadow-[#DEDBC8]/5"
+            className="lg:min-h-[640px] xl:min-h-[600px] min-h-[440px] h-full bg-[#161616] hover:bg-[#1c1c1c] rounded-2xl p-5 sm:p-7 xl:p-8 flex flex-col justify-between border border-white/5 relative overflow-hidden group transition-all duration-500 hover:shadow-2xl hover:shadow-[#DEDBC8]/5 sticker-dashed-cut vinyl-sheen-shine"
           >
             <PeelCorner />
             
@@ -374,18 +427,21 @@ export default function LandingPage() {
                 </ul>
               </div>
 
-              {/* Learn More Action */}
-              <button className="text-[#E1E0CC] flex items-center gap-2 mt-8 text-xs sm:text-sm font-semibold tracking-wider uppercase group/btn self-start pt-4 border-t border-white/5 w-full">
-                <span>Learn more</span>
+              {/* Link to Shop/Notify */}
+              <Link 
+                to="/packs" 
+                className="text-[#E1E0CC] flex items-center gap-2 mt-8 text-xs sm:text-sm font-semibold tracking-wider uppercase group/btn self-start pt-4 border-t border-white/5 w-full cursor-pointer select-none"
+              >
+                <span>Notify me</span>
                 <ArrowRight className="w-4 h-4 rotate-[-45deg] group-hover/btn:translate-x-1 group-hover/btn:-translate-y-1 transition-transform duration-300" />
-              </button>
+              </Link>
             </div>
           </motion.div>
 
           {/* Card 3 - Brand Merch Stickers (02) */}
           <motion.div 
             variants={cardVariants}
-            className="lg:min-h-[640px] xl:min-h-[600px] min-h-[440px] h-full bg-[#161616] hover:bg-[#1c1c1c] rounded-2xl p-5 sm:p-7 xl:p-8 flex flex-col justify-between border border-white/5 relative overflow-hidden group transition-all duration-500 hover:shadow-2xl hover:shadow-[#DEDBC8]/5"
+            className="lg:min-h-[640px] xl:min-h-[600px] min-h-[440px] h-full bg-[#161616] hover:bg-[#1c1c1c] rounded-2xl p-5 sm:p-7 xl:p-8 flex flex-col justify-between border border-white/5 relative overflow-hidden group transition-all duration-500 hover:shadow-2xl hover:shadow-[#DEDBC8]/5 sticker-dashed-cut vinyl-sheen-shine"
           >
             <PeelCorner />
             
@@ -424,18 +480,21 @@ export default function LandingPage() {
                 </ul>
               </div>
 
-              {/* Learn More Action */}
-              <button className="text-[#E1E0CC] flex items-center gap-2 mt-8 text-xs sm:text-sm font-semibold tracking-wider uppercase group/btn self-start pt-4 border-t border-white/5 w-full">
-                <span>Learn more</span>
+              {/* Link to B2B Inquiry */}
+              <Link 
+                to="/brands" 
+                className="text-[#E1E0CC] flex items-center gap-2 mt-8 text-xs sm:text-sm font-semibold tracking-wider uppercase group/btn self-start pt-4 border-t border-white/5 w-full cursor-pointer select-none"
+              >
+                <span>B2B inquiry</span>
                 <ArrowRight className="w-4 h-4 rotate-[-45deg] group-hover/btn:translate-x-1 group-hover/btn:-translate-y-1 transition-transform duration-300" />
-              </button>
+              </Link>
             </div>
           </motion.div>
 
           {/* Card 4 - Artist & Vibe Drops (03) */}
           <motion.div 
             variants={cardVariants}
-            className="lg:min-h-[640px] xl:min-h-[600px] min-h-[440px] h-full bg-[#161616] hover:bg-[#1c1c1c] rounded-2xl p-5 sm:p-7 xl:p-8 flex flex-col justify-between border border-white/5 relative overflow-hidden group transition-all duration-500 hover:shadow-2xl hover:shadow-[#DEDBC8]/5"
+            className="lg:min-h-[640px] xl:min-h-[600px] min-h-[440px] h-full bg-[#161616] hover:bg-[#1c1c1c] rounded-2xl p-5 sm:p-7 xl:p-8 flex flex-col justify-between border border-white/5 relative overflow-hidden group transition-all duration-500 hover:shadow-2xl hover:shadow-[#DEDBC8]/5 sticker-dashed-cut vinyl-sheen-shine"
           >
             <PeelCorner />
             
@@ -474,15 +533,197 @@ export default function LandingPage() {
                 </ul>
               </div>
 
-              {/* Learn More Action */}
-              <button className="text-[#E1E0CC] flex items-center gap-2 mt-8 text-xs sm:text-sm font-semibold tracking-wider uppercase group/btn self-start pt-4 border-t border-white/5 w-full">
-                <span>Learn more</span>
+              {/* Link to Notify Drops */}
+              <Link 
+                to="/packs" 
+                className="text-[#E1E0CC] flex items-center gap-2 mt-8 text-xs sm:text-sm font-semibold tracking-wider uppercase group/btn self-start pt-4 border-t border-white/5 w-full cursor-pointer select-none"
+              >
+                <span>Notify me</span>
                 <ArrowRight className="w-4 h-4 rotate-[-45deg] group-hover/btn:translate-x-1 group-hover/btn:-translate-y-1 transition-transform duration-300" />
-              </button>
+              </Link>
             </div>
           </motion.div>
 
         </motion.div>
+      </section>
+
+      {/* NEW SECTION: PHYSICAL MOCKUPS */}
+      <section className="relative bg-black py-24 sm:py-36 px-4 sm:px-6 z-20 overflow-visible border-t border-white/5">
+        <CinematicAmbientBackground />
+        <div className="absolute inset-0 bg-noise opacity-[0.15] pointer-events-none z-0" />
+        
+        {/* Section Header */}
+        <div className="relative z-10 max-w-4xl mx-auto text-center mb-16 sm:mb-24">
+          <span className="text-primary text-[10px] sm:text-xs tracking-[0.3em] uppercase font-bold block mb-4">
+            Tactile Manifests
+          </span>
+          <h2 className="text-3xl sm:text-4xl md:text-5xl font-normal tracking-tight text-white mb-4">
+            Stickers in the wild.
+          </h2>
+          <p className="text-gray-500 text-xs sm:text-sm max-w-md mx-auto leading-relaxed">
+            From Goan cafés to developer workstations — here is how our premium vinyl stickers look on real, everyday hardware.
+          </p>
+        </div>
+
+        {/* Mockup Grid */}
+        <div className="relative z-10 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 max-w-[92vw] lg:max-w-7xl mx-auto px-4">
+          
+          {/* Mockup 1: Laptop */}
+          <div className="group relative bg-[#101010] border border-white/5 rounded-3xl p-4 overflow-hidden transition-all duration-500 hover:border-primary/20 hover:shadow-2xl sticker-dashed-cut">
+            <PeelCorner />
+            <div className="relative aspect-[4/3] rounded-2xl overflow-hidden mb-4 bg-neutral-900 border border-white/5">
+              <img 
+                src="https://images.unsplash.com/photo-1517694712202-14dd9538aa97?auto=format&fit=crop&q=80&w=600" 
+                alt="Developer Laptop Stickers" 
+                className="w-full h-full object-cover filter brightness-[0.8] contrast-105 group-hover:scale-105 transition-transform duration-700"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent pointer-events-none" />
+              {/* Overlapping Floating sticker graphic decal */}
+              <div className="absolute -bottom-2 -right-2 bg-[#DEDBC8] text-black font-mono text-[9px] uppercase font-bold px-3 py-1 rounded-tl-xl border-l border-t border-black select-none tracking-widest shadow-lg">
+                DEV HARDWARE
+              </div>
+            </div>
+            <h4 className="text-[#E1E0CC] font-bold text-sm sm:text-base tracking-wide mb-1">Laptop Decals</h4>
+            <p className="text-gray-500 text-[10px] sm:text-xs leading-normal">
+              Indestructible zero-residue shields designed to declare your stack in premium style.
+            </p>
+          </div>
+
+          {/* Mockup 2: Water Bottles */}
+          <div className="group relative bg-[#101010] border border-white/5 rounded-3xl p-4 overflow-hidden transition-all duration-500 hover:border-primary/20 hover:shadow-2xl sticker-dashed-cut">
+            <PeelCorner />
+            <div className="relative aspect-[4/3] rounded-2xl overflow-hidden mb-4 bg-neutral-900 border border-white/5">
+              <img 
+                src="https://images.unsplash.com/photo-1523362628745-0c100150b504?auto=format&fit=crop&q=80&w=600" 
+                alt="Sticker Flask" 
+                className="w-full h-full object-cover filter brightness-[0.8] contrast-105 group-hover:scale-105 transition-transform duration-700"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent pointer-events-none" />
+              <div className="absolute -bottom-2 -right-2 bg-[#DEDBC8] text-black font-mono text-[9px] uppercase font-bold px-3 py-1 rounded-tl-xl border-l border-t border-black select-none tracking-widest shadow-lg">
+                100% WASHABLE
+              </div>
+            </div>
+            <h4 className="text-[#E1E0CC] font-bold text-sm sm:text-base tracking-wide mb-1">Flask & Bottle Decals</h4>
+            <p className="text-gray-500 text-[10px] sm:text-xs leading-normal">
+              Waterproof heavy-duty vinyl that stands up to rugged travel and daily washes.
+            </p>
+          </div>
+
+          {/* Mockup 3: Café takeaway bags */}
+          <div className="group relative bg-[#101010] border border-white/5 rounded-3xl p-4 overflow-hidden transition-all duration-500 hover:border-primary/20 hover:shadow-2xl sticker-dashed-cut">
+            <PeelCorner />
+            <div className="relative aspect-[4/3] rounded-2xl overflow-hidden mb-4 bg-neutral-900 border border-white/5">
+              <img 
+                src="https://images.unsplash.com/photo-1530587191325-3db32d826c18?auto=format&fit=crop&q=80&w=600" 
+                alt="Café Takeaway Bags" 
+                className="w-full h-full object-cover filter brightness-[0.8] contrast-105 group-hover:scale-105 transition-transform duration-700"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent pointer-events-none" />
+              <div className="absolute -bottom-2 -right-2 bg-[#DEDBC8] text-black font-mono text-[9px] uppercase font-bold px-3 py-1 rounded-tl-xl border-l border-t border-black select-none tracking-widest shadow-lg">
+                BRAND MERGE
+              </div>
+            </div>
+            <h4 className="text-[#E1E0CC] font-bold text-sm sm:text-base tracking-wide mb-1">Café Takeaway Labels</h4>
+            <p className="text-gray-500 text-[10px] sm:text-xs leading-normal">
+              Durable kraft paper inserts and bag sealers that make unboxing look 10x cooler.
+            </p>
+          </div>
+
+          {/* Mockup 4: Helmets & Bikes */}
+          <div className="group relative bg-[#101010] border border-white/5 rounded-3xl p-4 overflow-hidden transition-all duration-500 hover:border-primary/20 hover:shadow-2xl sticker-dashed-cut">
+            <PeelCorner />
+            <div className="relative aspect-[4/3] rounded-2xl overflow-hidden mb-4 bg-neutral-900 border border-white/5">
+              <img 
+                src="https://images.unsplash.com/photo-1531346878377-a5be20888e57?auto=format&fit=crop&q=80&w=600" 
+                alt="Sticker Notebook Helmet" 
+                className="w-full h-full object-cover filter brightness-[0.8] contrast-105 group-hover:scale-105 transition-transform duration-700"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent pointer-events-none" />
+              <div className="absolute -bottom-2 -right-2 bg-[#DEDBC8] text-black font-mono text-[9px] uppercase font-bold px-3 py-1 rounded-tl-xl border-l border-t border-black select-none tracking-widest shadow-lg">
+                UV PROTECTED
+              </div>
+            </div>
+            <h4 className="text-[#E1E0CC] font-bold text-sm sm:text-base tracking-wide mb-1">Helmets & Ride Decals</h4>
+            <p className="text-gray-500 text-[10px] sm:text-xs leading-normal">
+              UV-shielded color vinyl that survives heavy weather and intense Goan sun.
+            </p>
+          </div>
+
+        </div>
+      </section>
+
+      {/* NEW SECTION: TESTIMONIAL VIBE BOARD */}
+      <section className="relative bg-black py-24 sm:py-36 px-4 sm:px-6 z-20 overflow-visible border-t border-white/5">
+        <div className="absolute inset-0 bg-noise opacity-[0.1] pointer-events-none z-0" />
+        
+        {/* Section Header */}
+        <div className="relative z-10 max-w-4xl mx-auto text-center mb-16 sm:mb-24">
+          <span className="text-primary text-[10px] sm:text-xs tracking-[0.3em] uppercase font-bold block mb-4">
+            Vibe Checks & Fables
+          </span>
+          <h2 className="text-3xl sm:text-4xl md:text-5xl font-normal tracking-tight text-white mb-4">
+            Our stickers stick around.
+          </h2>
+          <p className="text-gray-500 text-xs sm:text-sm max-w-md mx-auto leading-relaxed">
+            Honest feedback from founders, creators, and daily peel-and-stick warriors.
+          </p>
+        </div>
+
+        {/* Review Cards Grid */}
+        <div className="relative z-10 grid grid-cols-1 md:grid-cols-3 gap-6 max-w-[92vw] lg:max-w-6xl mx-auto px-4">
+          
+          {/* Review 1 */}
+          <div className="relative bg-[#101010] border border-white/5 rounded-3xl p-6 sm:p-8 flex flex-col justify-between overflow-hidden group sticker-dashed-cut">
+            <PeelCorner />
+            <div className="space-y-4">
+              <div className="flex gap-1 text-primary text-xs">
+                <span>★</span><span>★</span><span>★</span><span>★</span><span>★</span>
+              </div>
+              <p className="text-[#E1E0CC]/80 text-xs sm:text-sm leading-relaxed italic font-serif">
+                "We ordered 500 die-cut custom logo stickers for our coworking café. Regular coffee spills and hot mugs haven't made them budge or lose color. Incredible Goan craftsmanship."
+              </p>
+            </div>
+            <div className="mt-8 border-t border-white/5 pt-4">
+              <h5 className="text-[#E1E0CC] font-bold text-xs">Atreya K.</h5>
+              <span className="text-[10px] text-gray-500 font-mono uppercase tracking-widest block mt-0.5">Co-working Cafe Owner</span>
+            </div>
+          </div>
+
+          {/* Review 2 */}
+          <div className="relative bg-[#101010] border border-white/5 rounded-3xl p-6 sm:p-8 flex flex-col justify-between overflow-hidden group sticker-dashed-cut">
+            <PeelCorner />
+            <div className="space-y-4">
+              <div className="flex gap-1 text-primary text-xs">
+                <span>★</span><span>★</span><span>★</span><span>★</span><span>★</span>
+              </div>
+              <p className="text-[#E1E0CC]/80 text-xs sm:text-sm leading-relaxed italic font-serif">
+                "Our takeaway paper bags and coffee cups went from boring to a street-art canvas. Customers actually collect our stickers now. The packaging upgrade paid for itself in week one."
+              </p>
+            </div>
+            <div className="mt-8 border-t border-white/5 pt-4">
+              <h5 className="text-[#E1E0CC] font-bold text-xs">Siddharth M.</h5>
+              <span className="text-[10px] text-gray-500 font-mono uppercase tracking-widest block mt-0.5">Café Director</span>
+            </div>
+          </div>
+
+          {/* Review 3 */}
+          <div className="relative bg-[#101010] border border-white/5 rounded-3xl p-6 sm:p-8 flex flex-col justify-between overflow-hidden group sticker-dashed-cut">
+            <PeelCorner />
+            <div className="space-y-4">
+              <div className="flex gap-1 text-primary text-xs">
+                <span>★</span><span>★</span><span>★</span><span>★</span><span>★</span>
+              </div>
+              <p className="text-[#E1E0CC]/80 text-xs sm:text-sm leading-relaxed italic font-serif">
+                "Heavyweight premium grade. The matte finish is so buttery and smooth, and the ink contrasts are incredibly deep. Finally, a brand that cares about sticker density in India."
+              </p>
+            </div>
+            <div className="mt-8 border-t border-white/5 pt-4">
+              <h5 className="text-[#E1E0CC] font-bold text-xs">Kritika S.</h5>
+              <span className="text-[10px] text-gray-500 font-mono uppercase tracking-widest block mt-0.5">Vector Illustrator</span>
+            </div>
+          </div>
+
+        </div>
       </section>
 
       {/* Global Unified Footer rendering the secret Dino 3D portal */}

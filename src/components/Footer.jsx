@@ -1,8 +1,10 @@
 import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
 import { Sparkles, ArrowUpRight, HelpCircle } from 'lucide-react'
-import { DinoGame3D } from './DinoGame3D'
 import Logo from './Logo'
+
+// Lazy load the heavy R3F game component to optimize bundle size
+const DinoGame3D = React.lazy(() => import('./DinoGame3D'));
 
 export function Footer() {
   const [isGameOpen, setIsGameOpen] = useState(false);
@@ -64,7 +66,11 @@ export function Footer() {
       </div>
 
       {/* R3F Hidden Game portal overlay container */}
-      <DinoGame3D isOpen={isGameOpen} onClose={() => setIsGameOpen(false)} />
+      {isGameOpen && (
+        <React.Suspense fallback={null}>
+          <DinoGame3D isOpen={isGameOpen} onClose={() => setIsGameOpen(false)} />
+        </React.Suspense>
+      )}
 
     </footer>
   );

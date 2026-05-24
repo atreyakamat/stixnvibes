@@ -52,8 +52,8 @@ export function Header() {
                       className="absolute inset-0 bg-[#DEDBC8]/10 rounded-full border border-white/5"
                       transition={{ 
                         type: "spring", 
-                        stiffness: 280, 
-                        damping: 26 
+                        stiffness: 380, 
+                        damping: 32
                       }}
                       style={{ originY: '0px' }}
                     />

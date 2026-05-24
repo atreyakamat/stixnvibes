@@ -15,6 +15,7 @@ const PeelCorner = () => (
 
 export default function CustomOrders() {
   const [stickerType, setStickerType] = useState("die-cut"); // die-cut, kiss-cut
+  const [size, setSize] = useState("3x3"); // 2x2, 3x3, 4x4, custom
   const [finish, setFinish] = useState("matte"); // matte, glossy, extra-glossy
   const [quantity, setQuantity] = useState(100);
   const [uploadedImage, setUploadedImage] = useState("");
@@ -40,22 +41,32 @@ export default function CustomOrders() {
   // Set default preview image
   const [selectedPreview, setSelectedPreview] = useState(preloadedTemplates[0].url);
 
-  // Math calculations for live price config (in INR ₹)
+  // Math calculations for live price config (in INR ₹) taking Size and Finish multipliers
   const getUnitPrice = () => {
-    let base = 40; // base price in INR for die-cut
-    if (stickerType === "kiss-cut") base = 35;
+    let base = 30; // base price in INR for die-cut
+    if (stickerType === "kiss-cut") base = 25;
+    
+    // Size multiplier
+    let sizeMult = 1.0;
+    if (size === "2x2") sizeMult = 0.8;
+    if (size === "3x3") sizeMult = 1.0;
+    if (size === "4x4") sizeMult = 1.4;
+    if (size === "custom") sizeMult = 1.8;
+    
+    let baseWithSize = base * sizeMult;
     
     // Finish modifiers in INR
-    if (finish === "glossy") base += 10;
-    if (finish === "extra-glossy") base += 15;
+    if (finish === "glossy") baseWithSize += 6;
+    if (finish === "extra-glossy") baseWithSize += 10;
     
     // Tiered bulk discount pricing
-    if (quantity >= 1000) return base * 0.50; // 50% discount
-    if (quantity >= 500) return base * 0.65; // 35% discount
-    if (quantity >= 250) return base * 0.80; // 20% discount
-    if (quantity >= 100) return base * 0.90; // 10% discount
+    let discount = 1.0;
+    if (quantity >= 1000) discount = 0.50; // 50% discount
+    else if (quantity >= 500) discount = 0.65; // 35% discount
+    else if (quantity >= 250) discount = 0.80; // 20% discount
+    else if (quantity >= 100) discount = 0.90; // 10% discount
     
-    return base;
+    return baseWithSize * discount;
   };
 
   const unitPrice = getUnitPrice();
@@ -81,6 +92,21 @@ export default function CustomOrders() {
   const handleOrderSubmit = (e) => {
     e.preventDefault();
     setIsSuccess(true);
+    
+    // Compile and pre-populate WhatsApp text details
+    const text = `Hey Stix and Vibes! ⚡ I want to Place the Vibe! Here is my Custom Sticker Configuration:\n\n` +
+      `- Cut Type: ${stickerType === "die-cut" ? "Die-Cut Sticker" : "Kiss-Cut Sticker"}\n` +
+      `- Dimensions: ${size === "2x2" ? '2" x 2"' : size === "3x3" ? '3" x 3"' : size === "4x4" ? '4" x 4"' : 'Custom Sizing'}\n` +
+      `- Surface Finish: ${finish.replace("-", " ").toUpperCase()}\n` +
+      `- Order Quantity: ${quantity} units\n` +
+      `- Unit Rate: ₹${unitPrice.toFixed(2)}\n` +
+      `- Total Estimated Subtotal: ₹${subtotal.toLocaleString('en-IN')}\n\n` +
+      `Let's get this rolling! 🌴`;
+      
+    const encodedText = encodeURIComponent(text);
+    const whatsappUrl = `https://wa.me/917744020601?text=${encodedText}`;
+    
+    window.open(whatsappUrl, '_blank');
   };
 
   return (
@@ -196,12 +222,43 @@ export default function CustomOrders() {
                 </div>
               </div>
 
-              {/* Step 2: Cut Type Selection */}
+              {/* Step 2: Dimensions Choice */}
+              <div className="space-y-4 pt-4 border-t border-white/5">
+                <div className="flex items-center gap-2 text-xs sm:text-sm uppercase tracking-widest font-mono text-gray-500">
+                  <Settings className="w-4 h-4 text-primary" />
+                  <span>2. Select Dimensions</span>
+                </div>
+
+                <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
+                  {[
+                    { id: "2x2", label: '2" x 2"', desc: "Pocket Size" },
+                    { id: "3x3", label: '3" x 3"', desc: "Standard Vibe" },
+                    { id: "4x4", label: '4" x 4"', desc: "Heavy Statement" },
+                    { id: "custom", label: "Custom", desc: "Bespoke Scale" }
+                  ].map((sz) => (
+                    <button
+                      key={sz.id}
+                      type="button"
+                      onClick={() => setSize(sz.id)}
+                      className={`rounded-xl p-3 text-left border transition-all duration-300 ${
+                        size === sz.id 
+                          ? 'bg-[#161616] border-[#DEDBC8]' 
+                          : 'bg-black/20 border-white/5 hover:border-white/10'
+                      }`}
+                    >
+                      <h4 className="font-bold text-xs sm:text-sm text-[#E1E0CC]">{sz.label}</h4>
+                      <p className="text-gray-500 text-[9px] mt-0.5 leading-none">{sz.desc}</p>
+                    </button>
+                  ))}
+                </div>
+              </div>
+
+              {/* Step 3: Cut Type Selection */}
               <div className="space-y-4 pt-4 border-t border-white/5">
                 <div className="flex items-center justify-between">
                   <div className="flex items-center gap-2 text-xs sm:text-sm uppercase tracking-widest font-mono text-gray-500">
-                    <Settings className="w-4 h-4 text-primary" />
-                    <span>2. Select Cut Geometry</span>
+                    <Layers className="w-4 h-4 text-primary" />
+                    <span>3. Select Cut Geometry</span>
                   </div>
                 </div>
 
@@ -233,11 +290,11 @@ export default function CustomOrders() {
                 </div>
               </div>
 
-              {/* Step 3: Finish options */}
+              {/* Step 4: Finish options */}
               <div className="space-y-4 pt-4 border-t border-white/5">
                 <div className="flex items-center gap-2 text-xs sm:text-sm uppercase tracking-widest font-mono text-gray-500">
                   <Layers className="w-4 h-4 text-primary" />
-                  <span>3. Choose Premium Finish</span>
+                  <span>4. Choose Premium Finish</span>
                 </div>
 
                 <div className="grid grid-cols-3 gap-3">
@@ -258,12 +315,12 @@ export default function CustomOrders() {
                 </div>
               </div>
 
-              {/* Step 4: Quantities Slider */}
+              {/* Step 5: Quantities Slider */}
               <div className="space-y-4 pt-4 border-t border-white/5">
                 <div className="flex justify-between items-center text-xs sm:text-sm uppercase tracking-widest font-mono text-gray-500">
                   <div className="flex items-center gap-2">
                     <span className="text-primary text-xs font-mono">⚡</span>
-                    <span>4. Quantity & Volume</span>
+                    <span>5. Quantity & Volume</span>
                   </div>
                   <span className="text-[#DEDBC8] font-sans font-bold text-base">{quantity} units</span>
                 </div>
@@ -285,21 +342,51 @@ export default function CustomOrders() {
                 </div>
               </div>
 
+              {/* ESTIMATED VIBE SUMMARY CARD */}
+              <div className="pt-6 border-t border-white/5 space-y-3">
+                <span className="text-gray-500 text-[10px] uppercase font-mono tracking-widest block">Order Configuration Summary</span>
+                <div className="bg-black/60 rounded-xl p-4 border border-white/5 text-xs font-mono space-y-2 text-gray-400">
+                  <div className="flex justify-between">
+                    <span>CUT GEOMETRY:</span>
+                    <span className="text-[#E1E0CC] font-bold">{stickerType === "die-cut" ? "DIE-CUT" : "KISS-CUT"}</span>
+                  </div>
+                  <div className="flex justify-between">
+                    <span>DIMENSIONS:</span>
+                    <span className="text-[#E1E0CC] font-bold">{size === "2x2" ? '2" x 2"' : size === "3x3" ? '3" x 3"' : size === "4x4" ? '4" x 4"' : 'Custom'}</span>
+                  </div>
+                  <div className="flex justify-between">
+                    <span>SURFACE FINISH:</span>
+                    <span className="text-[#E1E0CC] font-bold uppercase">{finish.replace("-", " ")}</span>
+                  </div>
+                  <div className="flex justify-between">
+                    <span>ORDER VOLUME:</span>
+                    <span className="text-[#E1E0CC] font-bold">{quantity} UNITS</span>
+                  </div>
+                  <div className="flex justify-between pt-2 border-t border-white/5 text-[10px]">
+                    <span>BULK DISCOUNT CATEGORY:</span>
+                    <span className="text-primary font-bold">
+                      {quantity >= 1000 ? "50% OFF (CORPORATE)" : quantity >= 500 ? "35% OFF (FESTIVAL)" : quantity >= 250 ? "20% OFF (COLLECTIVE)" : quantity >= 100 ? "10% OFF (CREATOR)" : "BASE LEVEL"}
+                    </span>
+                  </div>
+                </div>
+              </div>
+
               {/* Subtotal & Call-To-Action submission */}
               <div className="pt-6 border-t border-white/5 flex flex-col sm:flex-row justify-between items-center gap-4">
                 <div className="text-center sm:text-left">
-                  <span className="text-gray-500 text-[10px] uppercase font-mono tracking-widest block">Subtotal</span>
+                  <span className="text-gray-500 text-[10px] uppercase font-mono tracking-widest block">Estimated Total</span>
                   <div className="flex items-baseline justify-center sm:justify-start gap-1">
                     <span className="text-[#E1E0CC] font-bold text-3xl">₹{subtotal.toLocaleString('en-IN')}</span>
-                    <span className="text-gray-500 text-xs font-mono">(₹{unitPrice.toFixed(0)} / unit)</span>
+                    <span className="text-gray-500 text-xs font-mono">(₹{unitPrice.toFixed(2)} / unit)</span>
                   </div>
                 </div>
                 
                 <button 
                   type="submit"
-                  className="w-full sm:w-auto bg-[#DEDBC8] text-black font-bold uppercase tracking-wider text-xs sm:text-sm px-8 py-4 rounded-xl hover:bg-white transition-all duration-300"
+                  className="w-full sm:w-auto bg-[#DEDBC8] text-black font-bold uppercase tracking-wider text-xs sm:text-sm px-8 py-4 rounded-xl hover:bg-white transition-all duration-300 flex items-center justify-center gap-2 cursor-pointer select-none"
                 >
-                  Place the Vibe
+                  <span>Place the Vibe</span>
+                  <span>⚡</span>
                 </button>
               </div>
             </>
@@ -333,7 +420,9 @@ export default function CustomOrders() {
               >
                 {/* Visual rendering representing Sticker backing boundary */}
                 <div 
-                  className={`w-36 h-36 rounded-full flex items-center justify-center relative ${
+                  className={`flex items-center justify-center relative rounded-full transition-all duration-500 ${
+                    size === "2x2" ? 'w-24 h-24' : size === "3x3" ? 'w-36 h-36' : size === "4x4" ? 'w-44 h-44' : 'w-40 h-40'
+                  } ${
                     finish === "extra-glossy" 
                       ? 'bg-neutral-800 border-4 border-white shadow-[0_0_20px_rgba(255,255,255,0.4)]' 
                       : finish === "glossy" 
@@ -381,12 +470,12 @@ export default function CustomOrders() {
                 <span className="text-[#E1E0CC] font-bold block mt-0.5">{stickerType === "die-cut" ? "Die-Cut" : "Kiss-Cut"}</span>
               </div>
               <div>
-                <span className="block text-[10px] text-gray-600 uppercase">FINISH</span>
-                <span className="text-[#E1E0CC] font-bold block mt-0.5 capitalize">{finish.replace("-", " ")}</span>
+                <span className="block text-[10px] text-gray-600 uppercase">SIZE</span>
+                <span className="text-[#E1E0CC] font-bold block mt-0.5">{size === "2x2" ? '2" x 2"' : size === "3x3" ? '3" x 3"' : size === "4x4" ? '4" x 4"' : 'Custom'}</span>
               </div>
               <div>
-                <span className="block text-[10px] text-gray-600 uppercase">DELIVERY</span>
-                <span className="text-[#E1E0CC] font-bold block mt-0.5">Express</span>
+                <span className="block text-[10px] text-gray-600 uppercase">FINISH</span>
+                <span className="text-[#E1E0CC] font-bold block mt-0.5 capitalize">{finish.replace("-", " ")}</span>
               </div>
             </div>
 

@@ -9,9 +9,14 @@ import { CinematicAmbientBackground } from '../components/CinematicAmbientBackgr
 export default function StickerPacks() {
   const [clickCount, setClickCount] = useState(0);
   const [particles, setParticles] = useState([]);
+  const [contactInfo, setContactInfo] = useState("");
+  const [notified, setNotified] = useState(false);
   
   // Custom click explosion effect on cursor
   const handleCardClick = (e) => {
+    // Avoid double explosion if clicking form elements
+    if (e.target.tagName === 'INPUT' || e.target.tagName === 'BUTTON') return;
+    
     setClickCount(prev => prev + 1);
     
     // Get mouse position inside the window/element
@@ -35,6 +40,37 @@ export default function StickerPacks() {
         dy: Math.sin(angleRad) * speed,
         emoji: emojiPool[Math.floor(Math.random() * emojiPool.length)],
         scale: 0.5 + Math.random() * 0.8,
+        rotate: Math.random() * 360
+      };
+    });
+    
+    setParticles((prev) => [...prev, ...newParticles]);
+  };
+
+  const handleNotifySubmit = (e) => {
+    e.preventDefault();
+    if (!contactInfo) return;
+    setNotified(true);
+    
+    // Trigger giant particle explosion from form area
+    const emojiPool = ["✨", "✦", "💖", "📦", "🚀", "🎉", "🌈", "🔥", "⚡"];
+    const rect = e.currentTarget.getBoundingClientRect();
+    const x = rect.width / 2;
+    const y = rect.height / 2;
+    
+    const newParticles = Array.from({ length: 24 }).map((_, idx) => {
+      const angle = Math.random() * 360;
+      const speed = 80 + Math.random() * 90;
+      const angleRad = (angle * Math.PI) / 180;
+      
+      return {
+        id: "notify-" + Date.now() + "-" + idx + "-" + Math.random(),
+        x,
+        y,
+        dx: Math.cos(angleRad) * speed,
+        dy: Math.sin(angleRad) * speed,
+        emoji: emojiPool[Math.floor(Math.random() * emojiPool.length)],
+        scale: 0.8 + Math.random() * 1.0,
         rotate: Math.random() * 360
       };
     });
@@ -140,23 +176,41 @@ export default function StickerPacks() {
             Store is coming soon
           </h3>
           
-          <p className="text-gray-400 text-xs sm:text-sm leading-relaxed max-w-md mx-auto mb-8">
+          <p className="text-gray-400 text-xs sm:text-sm leading-relaxed max-w-md mx-auto mb-6">
             The Stix and Vibes vault is getting stocked. The official shop will launch shortly. 
             <span className="block mt-2 font-mono text-[10px] text-primary/70 uppercase tracking-widest font-bold">
               Tap anywhere on this card to release the vibe! ✨ (Taps: {clickCount})
             </span>
           </p>
 
-          {/* Interactive Button */}
-          <div className="relative">
-            <button 
-              type="button"
-              className="bg-[#DEDBC8] text-black font-bold uppercase tracking-wider text-xs sm:text-sm px-8 py-4 rounded-full flex items-center gap-2 group-hover:bg-white transition-all duration-300 shadow-lg shadow-[#DEDBC8]/10"
+          {/* Lead Capture form/success display */}
+          {notified ? (
+            <motion.div 
+              initial={{ opacity: 0, scale: 0.95 }}
+              animate={{ opacity: 1, scale: 1 }}
+              className="w-full max-w-sm bg-black/60 p-4 border border-emerald-500/20 rounded-2xl text-center space-y-2 mt-2 relative z-40"
             >
-              <span>Tap to Release Vibe</span>
-              <Sparkles className="w-4 h-4 text-primary animate-pulse" />
-            </button>
-          </div>
+              <div className="text-emerald-400 text-xs sm:text-sm font-bold uppercase tracking-wider">⚡ Vibe Secured</div>
+              <p className="text-gray-400 text-[11px] leading-normal">We'll alert you first when the vault drops. Stand by!</p>
+            </motion.div>
+          ) : (
+            <form onSubmit={handleNotifySubmit} className="w-full max-w-sm flex flex-col sm:flex-row gap-2 mt-2 relative z-40">
+              <input 
+                type="text" 
+                required
+                value={contactInfo}
+                onChange={(e) => setContactInfo(e.target.value)}
+                placeholder="EMAIL OR WHATSAPP NUMBER"
+                className="w-full bg-[#161616] border border-white/10 px-4 py-3 rounded-xl text-xs font-mono placeholder:text-gray-700 text-[#E1E0CC] focus:outline-none focus:border-[#DEDBC8]"
+              />
+              <button 
+                type="submit"
+                className="bg-[#DEDBC8] text-black font-bold uppercase tracking-wider text-xs px-6 py-3 rounded-xl hover:bg-white transition-all duration-300 shrink-0 cursor-pointer select-none"
+              >
+                Notify me
+              </button>
+            </form>
+          )}
 
         </motion.div>
       </section>

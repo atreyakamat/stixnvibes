@@ -16,28 +16,50 @@ const PeelCorner = () => (
 export default function ForBrands() {
   const [bulkQty, setBulkQty] = useState(1000);
   const [formSubmitted, setFormSubmitted] = useState(false);
+  const [brandName, setBrandName] = useState("");
+  const [contactInfo, setContactInfo] = useState("");
+  const [vibeCategory, setVibeCategory] = useState("Café Takeaways");
+  const [volumeBracket, setVolumeBracket] = useState("1,000 - 5,000 assets");
 
   const leadTime = bulkQty >= 5000 ? "5-7 business days" : "3-5 business days";
 
-  // Preloaded Brand Use Cases
+  // Preloaded Brand Use Cases - Expanded to cover all requested value areas
   const collabs = [
     {
-      title: "Tech Cafés & Restaurants",
-      desc: "Brand your counter tables, take-away cups, and packaging. Our custom vinyl is scratchproof, thermal-resistant, and handles heavy coffee spills with absolute ease.",
+      title: "Café Takeaway Stickers",
+      desc: "Brand your counter tables, take-away cups, and packaging boxes. Our custom vinyl is scratchproof, thermal-resistant, and handles heavy coffee spills with absolute ease.",
       icon: <Coffee className="w-6 h-6 text-primary" />,
-      tag: "Offline Merges"
+      tag: "Takeaway Branding"
     },
     {
-      title: "Corporate Stickers",
+      title: "Corporate Developer Sheets",
       desc: "Bespoke developer laptop sticker sheets, startup retreat bundles, and corporate giveaways. Engineered with zero-residue backings to protect high-end hardware.",
       icon: <Briefcase className="w-6 h-6 text-primary" />,
-      tag: "Business Gear"
+      tag: "Corporate Gifting"
     },
     {
-      title: "Festivals & Music Drops",
-      desc: "Curate limited-edition sticker drops, street art promotions, and branding collabs. Scratch-shielded and weather-shielded to withstand Goan sun and rain.",
+      title: "College Fest Bundles",
+      desc: "Equip your university events, clubs, and college fests with high-volume, premium custom shapes. Perfect for bags, laptops, and student gear swaps.",
+      icon: <Award className="w-6 h-6 text-primary" />,
+      tag: "Fest Bundles"
+    },
+    {
+      title: "Brand Merch Stickers",
+      desc: "Turn your vector art and brand logos into collectable retail gear. Buttery matte inks, rich dense black layers, and precision-cut shapes designed to sell.",
       icon: <Sparkles className="w-6 h-6 text-primary" />,
-      tag: "Culture & Events"
+      tag: "Brand Merch"
+    },
+    {
+      title: "Packaging Inserts",
+      desc: "Custom logo sealers and thank-you card inserts that build delight from the very second your client unboxes. Water-shielded and dust-proof.",
+      icon: <ShieldCheck className="w-6 h-6 text-primary" />,
+      tag: "Packaging Seals"
+    },
+    {
+      title: "Campaign Drops",
+      desc: "Curate limited-edition sticker drops, guerilla street art promotions, and branding collaborations. Built heavyweight to survive Goan monsoons and UV sun.",
+      icon: <Truck className="w-6 h-6 text-primary" />,
+      tag: "Campaign Drops"
     }
   ];
 
@@ -72,11 +94,11 @@ export default function ForBrands() {
       </section>
 
       {/* Brand Collabs grid with custom visual card details */}
-      <section className="relative z-10 max-w-6xl mx-auto px-6 grid grid-cols-1 md:grid-cols-3 gap-6 mt-6">
+      <section className="relative z-10 max-w-6xl mx-auto px-6 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mt-6">
         {collabs.map((col, idx) => (
           <div 
             key={idx} 
-            className="bg-[#101010] border-2 border-white/5 hover:border-primary/20 rounded-[2.5rem] p-8 flex flex-col justify-between relative overflow-hidden group transition-all duration-500"
+            className="bg-[#101010] border-2 border-white/5 hover:border-primary/20 rounded-[2.5rem] p-8 flex flex-col justify-between relative overflow-hidden group transition-all duration-500 sticker-dashed-cut vinyl-sheen-shine"
           >
             {/* Corner peel */}
             <PeelCorner />
@@ -176,59 +198,115 @@ export default function ForBrands() {
             <motion.div 
               initial={{ opacity: 0, scale: 0.95 }}
               animate={{ opacity: 1, scale: 1 }}
-              className="text-emerald-400 text-xs sm:text-sm font-semibold p-4 border border-emerald-500/20 bg-black/20 rounded-xl"
+              className="text-center py-6 space-y-4"
             >
-              Uplink locked. Check your coordinates (inbox) shortly!
-            </motion.div>
-          ) : (
-            <div className="space-y-4 pt-4 border-t border-white/5 text-left">
-              <div className="text-[9px] text-gray-500 uppercase font-mono tracking-widest text-center mb-2">Manual B2B Uplinks</div>
+              <div className="size-14 bg-emerald-500/10 border border-emerald-500/20 text-[#DEDBC8] rounded-full flex items-center justify-center mx-auto text-2xl shadow-xl">
+                ✔
+              </div>
+              <h4 className="text-[#E1E0CC] font-bold text-sm sm:text-base uppercase tracking-wider">Inquiry pre-copied to clipboard!</h4>
+              <p className="text-gray-400 text-[11px] leading-relaxed max-w-xs mx-auto">
+                We've preloaded your B2B specs into your clipboard. Select any manual channel below to paste it and get an instant wholesale quote:
+              </p>
               
-              <div className="grid grid-cols-2 gap-2 text-[11px] font-mono mb-4">
+              <div className="grid grid-cols-2 gap-2 text-[10px] font-mono mt-4">
                 <a 
                   href="https://wa.me/917744020601" 
                   target="_blank" 
                   rel="noopener noreferrer" 
-                  className="bg-black/50 border border-white/5 p-2.5 rounded-lg text-center hover:border-emerald-400/30 hover:bg-[#161616] transition-all block"
+                  className="bg-[#161616] border border-[#DEDBC8]/20 p-2.5 rounded-lg text-center hover:bg-[#202020] text-emerald-400 transition-all block"
                 >
-                  💬 WhatsApp
-                </a>
-                <a 
-                  href="https://instagram.com/stixnvibes" 
-                  target="_blank" 
-                  rel="noopener noreferrer" 
-                  className="bg-black/50 border border-white/5 p-2.5 rounded-lg text-center hover:border-pink-400/30 hover:bg-[#161616] transition-all block"
-                >
-                  📸 Instagram
-                </a>
-                <a 
-                  href="tel:+918668859020" 
-                  className="bg-black/50 border border-white/5 p-2.5 rounded-lg text-center hover:border-blue-400/30 hover:bg-[#161616] transition-all block"
-                >
-                  📞 Phone
+                  💬 Paste on WhatsApp
                 </a>
                 <a 
                   href="mailto:hello@stixnvibes.com" 
-                  className="bg-black/50 border border-white/5 p-2.5 rounded-lg text-center hover:border-[#DEDBC8]/30 hover:bg-[#161616] transition-all block"
+                  className="bg-[#161616] border border-[#DEDBC8]/20 p-2.5 rounded-lg text-center hover:bg-[#202020] text-amber-100 transition-all block"
                 >
-                  ✉️ Email
+                  ✉️ Paste in Email
                 </a>
               </div>
-
-              <div className="border-t border-white/5 pt-4">
+              
+              <button 
+                onClick={() => {
+                  setFormSubmitted(false);
+                  setBrandName("");
+                  setContactInfo("");
+                }}
+                className="w-full mt-4 bg-neutral-900 border border-white/5 text-gray-500 text-[10px] font-mono py-2 rounded-lg hover:text-white transition-all uppercase"
+              >
+                Create New Collaboration Inquiry
+              </button>
+            </motion.div>
+          ) : (
+            <form 
+              onSubmit={(e) => {
+                e.preventDefault();
+                if (!brandName || !contactInfo) return;
+                setFormSubmitted(true);
+                const text = `Hey Stix and Vibes! ⚡ We want to partner for B2B sticker branding:\n\n` +
+                  `- Brand Name: ${brandName}\n` +
+                  `- Collab Area: ${vibeCategory}\n` +
+                  `- Target Quantity: ${bulkQty} assets\n` +
+                  `- Contact Coordinates: ${contactInfo}\n\n` +
+                  `Let's build a physical brand merge! 🌴`;
+                navigator.clipboard.writeText(text).catch(() => {});
+              }} 
+              className="space-y-4 pt-4 border-t border-white/5 text-left relative z-40"
+            >
+              <div className="space-y-1">
+                <label className="text-[9px] uppercase font-mono text-gray-500 block">Brand / Company Name</label>
                 <input 
-                  type="email" 
-                  placeholder="YOUR_UPLINK@EMAIL.COM" 
-                  className="w-full bg-[#161616] border border-white/10 p-3 rounded-lg text-xs font-mono placeholder:text-gray-700 text-[#E1E0CC] focus:outline-none focus:border-[#DEDBC8]"
+                  type="text" 
+                  required
+                  value={brandName}
+                  onChange={(e) => setBrandName(e.target.value)}
+                  placeholder="E.G. GOA COFFEE ROASTERS" 
+                  className="w-full bg-[#161616] border border-white/10 p-3 rounded-lg text-xs font-mono placeholder:text-gray-800 text-[#E1E0CC] focus:outline-none focus:border-[#DEDBC8]"
                 />
-                <button 
-                  onClick={() => setFormSubmitted(true)}
-                  className="w-full mt-2 bg-[#DEDBC8] text-black font-bold uppercase tracking-wider text-xs py-3 rounded-lg flex items-center justify-center gap-2 hover:bg-white transition-all duration-300"
-                >
-                  Place B2B Vibe
-                </button>
               </div>
-            </div>
+
+              <div className="grid grid-cols-2 gap-2">
+                <div className="space-y-1">
+                  <label className="text-[9px] uppercase font-mono text-gray-500 block">Collab Category</label>
+                  <select 
+                    value={vibeCategory}
+                    onChange={(e) => setVibeCategory(e.target.value)}
+                    className="w-full bg-[#161616] border border-white/10 p-3 rounded-lg text-xs font-mono text-[#E1E0CC] focus:outline-none focus:border-[#DEDBC8] appearance-none"
+                  >
+                    <option value="Café Takeaways">Café Takeaways</option>
+                    <option value="Developer Laptop Sheets">Developer Sheets</option>
+                    <option value="College Fest Bundles">Fest Bundles</option>
+                    <option value="Brand Resell Merch">Brand Merch</option>
+                    <option value="Packaging Inserts">Packaging Seals</option>
+                    <option value="Campaign drops">Campaign Drops</option>
+                  </select>
+                </div>
+                <div className="space-y-1">
+                  <label className="text-[9px] uppercase font-mono text-gray-500 block">Volume Goal</label>
+                  <div className="w-full bg-[#161616]/40 border border-white/10 p-3 rounded-lg text-xs font-mono text-primary font-bold text-center">
+                    {bulkQty} Assets
+                  </div>
+                </div>
+              </div>
+
+              <div className="space-y-1">
+                <label className="text-[9px] uppercase font-mono text-gray-500 block">Contact Email or Phone</label>
+                <input 
+                  type="text" 
+                  required
+                  value={contactInfo}
+                  onChange={(e) => setContactInfo(e.target.value)}
+                  placeholder="COORDINATES@DOMAIN.COM" 
+                  className="w-full bg-[#161616] border border-white/10 p-3 rounded-lg text-xs font-mono placeholder:text-gray-800 text-[#E1E0CC] focus:outline-none focus:border-[#DEDBC8]"
+                />
+              </div>
+
+              <button 
+                type="submit"
+                className="w-full mt-2 bg-[#DEDBC8] text-black font-bold uppercase tracking-wider text-xs py-3 rounded-lg flex items-center justify-center gap-2 hover:bg-white transition-all duration-300 cursor-pointer select-none"
+              >
+                Place B2B Vibe ⚡
+              </button>
+            </form>
           )}
         </div>
 
