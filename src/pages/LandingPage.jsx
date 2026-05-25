@@ -574,18 +574,18 @@ export default function LandingPage() {
             <div className="relative aspect-[4/3] rounded-2xl overflow-hidden mb-4 bg-neutral-900 border border-white/5">
               <img 
                 src="https://images.unsplash.com/photo-1517694712202-14dd9538aa97?auto=format&fit=crop&q=80&w=600" 
-                alt="Developer Laptop Stickers" 
+                alt="Laptops and Workstations Stickers" 
                 className="w-full h-full object-cover filter brightness-[0.8] contrast-105 group-hover:scale-105 transition-transform duration-700"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent pointer-events-none" />
               {/* Overlapping Floating sticker graphic decal */}
               <div className="absolute -bottom-2 -right-2 bg-[#DEDBC8] text-black font-mono text-[9px] uppercase font-bold px-3 py-1 rounded-tl-xl border-l border-t border-black select-none tracking-widest shadow-lg">
-                DEV HARDWARE
+                WORKSTATIONS
               </div>
             </div>
-            <h4 className="text-[#E1E0CC] font-bold text-sm sm:text-base tracking-wide mb-1">Laptop Decals</h4>
+            <h4 className="text-[#E1E0CC] font-bold text-sm sm:text-base tracking-wide mb-1">Laptops & Workstations</h4>
             <p className="text-gray-500 text-[10px] sm:text-xs leading-normal">
-              Indestructible zero-residue shields designed to declare your stack in premium style.
+              Indestructible zero-residue shields designed to declare your style in premium fashion.
             </p>
           </div>
 
@@ -652,20 +652,20 @@ export default function LandingPage() {
         </div>
       </section>
 
-      {/* NEW SECTION: TESTIMONIAL VIBE BOARD */}
+      {/* NEW SECTION: SAMPLE TESTIMONIAL VIBE BOARD */}
       <section className="relative bg-black py-24 sm:py-36 px-4 sm:px-6 z-20 overflow-visible border-t border-white/5">
         <div className="absolute inset-0 bg-noise opacity-[0.1] pointer-events-none z-0" />
         
         {/* Section Header */}
         <div className="relative z-10 max-w-4xl mx-auto text-center mb-16 sm:mb-24">
           <span className="text-primary text-[10px] sm:text-xs tracking-[0.3em] uppercase font-bold block mb-4">
-            Vibe Checks & Fables
+            Vibe Community Stories
           </span>
           <h2 className="text-3xl sm:text-4xl md:text-5xl font-normal tracking-tight text-white mb-4">
-            Our stickers stick around.
+            Sample Testimonials
           </h2>
           <p className="text-gray-500 text-xs sm:text-sm max-w-md mx-auto leading-relaxed">
-            Honest feedback from founders, creators, and daily peel-and-stick warriors.
+            A collection of sample reviews from founders, creators, and sticker enthusiasts showing why Goan vinyl stands out.
           </p>
         </div>
 

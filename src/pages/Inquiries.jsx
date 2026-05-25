@@ -12,6 +12,7 @@ export default function Inquiries() {
   const [inquiryType, setInquiryType] = useState("Vibe Check"); // Vibe Check, Custom, Bulk, Other
   const [message, setMessage] = useState("");
   const [isSent, setIsSent] = useState(false);
+  const [copied, setCopied] = useState(false);
 
   const totalSteps = 3;
 
@@ -31,16 +32,7 @@ export default function Inquiries() {
   const handleFormSubmit = (e) => {
     e.preventDefault();
     setIsSent(true);
-    
-    // Auto-clipboard specs pre-compiler wizard
-    const text = `Hey Stix and Vibes! ⚡ I want to send an inquiry:\n\n` +
-      `- Name/Alias: ${name}\n` +
-      `- Contact Coordinates: ${email}\n` +
-      `- Signal Type: ${inquiryType}\n` +
-      `- Message: ${message}\n\n` +
-      `Let's catch a vibe! 🌴`;
-      
-    navigator.clipboard.writeText(text).catch(() => {});
+    setCopied(false);
   };
 
   // Step wizard calculations
@@ -91,11 +83,34 @@ export default function Inquiries() {
                 </div>
                 <h3 className="text-xl sm:text-2xl font-bold tracking-tight">Signal Locked & Loaded</h3>
                 <p className="text-gray-400 text-xs sm:text-sm leading-relaxed max-w-sm mx-auto">
-                  Thank you, <span className="text-[#E1E0CC] font-bold">{name}</span>. Your specs have been pre-copied to your clipboard automatically!
-                  <br />
-                  <span className="block mt-2 text-[10px] text-primary/70 uppercase tracking-widest font-bold">
-                    Paste on any gateway below for an instant response:
-                  </span>
+                  Thank you, <span className="text-[#E1E0CC] font-bold">{name}</span>. Your inquiry details have been pre-compiled. Click below to copy them to your clipboard, then choose a manual paste channel:
+                </p>
+
+                {/* Explicit Copy Button */}
+                <button
+                  type="button"
+                  onClick={() => {
+                    const text = `Hey Stix and Vibes! ⚡ I want to send an inquiry:\n\n` +
+                      `- Name/Alias: ${name}\n` +
+                      `- Contact Coordinates: ${email}\n` +
+                      `- Signal Type: ${inquiryType}\n` +
+                      `- Message: ${message}\n\n` +
+                      `Let's catch a vibe! 🌴`;
+                    navigator.clipboard.writeText(text)
+                      .then(() => setCopied(true))
+                      .catch(() => {});
+                  }}
+                  className={`w-full py-3 rounded-lg text-xs font-mono font-bold uppercase tracking-wider transition-all duration-300 flex items-center justify-center gap-2 cursor-pointer ${
+                    copied 
+                      ? 'bg-emerald-500 text-black border border-emerald-500' 
+                      : 'bg-[#DEDBC8] text-black hover:bg-white border border-[#DEDBC8]'
+                  }`}
+                >
+                  <span>{copied ? "📋 Signal Copied!" : "Copy Inquiry Specs"}</span>
+                </button>
+
+                <p className="text-gray-400 text-[10px] leading-relaxed max-w-xs mx-auto">
+                  Select any manual paste channel below to paste your inquiry message:
                 </p>
 
                 <div className="grid grid-cols-3 gap-2 text-[10px] font-mono mt-4">

@@ -40,10 +40,9 @@ export function Footer() {
           {/* Secret 3D Dino Game shortcut */}
           <button
             onClick={() => setIsGameOpen(true)}
-            className="flex items-center gap-2 px-4 py-2 bg-neutral-950 hover:bg-[#101010] border-2 border-primary/20 hover:border-[#DEDBC8] rounded-xl text-[#E1E0CC] font-bold transition-all hover:scale-105 active:scale-95 text-xs tracking-wider"
+            className="hover:text-[#E1E0CC] transition-colors flex items-center gap-1 cursor-pointer"
           >
-            <Sparkles className="w-3.5 h-3.5 text-primary animate-pulse" />
-            <span>🕹️ Play Vibe Dino 3D</span>
+            <span>🕹️ Dino Game</span>
           </button>
 
           <Link to="/story" className="hover:text-[#E1E0CC] transition-colors flex items-center gap-0.5">

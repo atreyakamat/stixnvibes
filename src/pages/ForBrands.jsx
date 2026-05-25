@@ -16,6 +16,7 @@ const PeelCorner = () => (
 export default function ForBrands() {
   const [bulkQty, setBulkQty] = useState(1000);
   const [formSubmitted, setFormSubmitted] = useState(false);
+  const [copied, setCopied] = useState(false);
   const [brandName, setBrandName] = useState("");
   const [contactInfo, setContactInfo] = useState("");
   const [vibeCategory, setVibeCategory] = useState("Café Takeaways");
@@ -32,8 +33,8 @@ export default function ForBrands() {
       tag: "Takeaway Branding"
     },
     {
-      title: "Corporate Developer Sheets",
-      desc: "Bespoke developer laptop sticker sheets, startup retreat bundles, and corporate giveaways. Engineered with zero-residue backings to protect high-end hardware.",
+      title: "Laptops & Workstations Sheets",
+      desc: "Bespoke laptop and workstation sticker sheets, startup retreat bundles, and corporate giveaways. Engineered with zero-residue backings to protect high-end hardware.",
       icon: <Briefcase className="w-6 h-6 text-primary" />,
       tag: "Corporate Gifting"
     },
@@ -203,23 +204,46 @@ export default function ForBrands() {
               <div className="size-14 bg-emerald-500/10 border border-emerald-500/20 text-[#DEDBC8] rounded-full flex items-center justify-center mx-auto text-2xl shadow-xl">
                 ✔
               </div>
-              <h4 className="text-[#E1E0CC] font-bold text-sm sm:text-base uppercase tracking-wider">Inquiry pre-copied to clipboard!</h4>
+              <h4 className="text-[#E1E0CC] font-bold text-sm sm:text-base uppercase tracking-wider">Inquiry Received!</h4>
               <p className="text-gray-400 text-[11px] leading-relaxed max-w-xs mx-auto">
-                We've preloaded your B2B specs into your clipboard. Select any manual channel below to paste it and get an instant wholesale quote:
+                Your B2B specifications have been compiled. Click below to copy them to your clipboard, then choose a manual paste channel:
               </p>
+
+              {/* Explicit Copy Button */}
+              <button
+                type="button"
+                onClick={() => {
+                  const text = `Hey Stix and Vibes! ⚡ We want to partner for B2B sticker branding:\n\n` +
+                    `- Brand Name: ${brandName}\n` +
+                    `- Collab Area: ${vibeCategory}\n` +
+                    `- Target Quantity: ${bulkQty} assets\n` +
+                    `- Contact Coordinates: ${contactInfo}\n\n` +
+                    `Let's build a physical brand merge! 🌴`;
+                  navigator.clipboard.writeText(text)
+                    .then(() => setCopied(true))
+                    .catch(() => {});
+                }}
+                className={`w-full py-3 rounded-lg text-xs font-mono font-bold uppercase tracking-wider transition-all duration-300 flex items-center justify-center gap-2 cursor-pointer ${
+                  copied 
+                    ? 'bg-emerald-500 text-black border border-emerald-500' 
+                    : 'bg-[#DEDBC8] text-black hover:bg-white border border-[#DEDBC8]'
+                }`}
+              >
+                <span>{copied ? "📋 Specs Copied!" : "Copy Inquiry Specs"}</span>
+              </button>
               
               <div className="grid grid-cols-2 gap-2 text-[10px] font-mono mt-4">
                 <a 
                   href="https://wa.me/917744020601" 
                   target="_blank" 
                   rel="noopener noreferrer" 
-                  className="bg-[#161616] border border-[#DEDBC8]/20 p-2.5 rounded-lg text-center hover:bg-[#202020] text-emerald-400 transition-all block"
+                  className="bg-[#161616] border border-[#DEDBC8]/20 p-2.5 rounded-lg text-center hover:bg-[#202020] text-emerald-400 transition-all block cursor-pointer select-none"
                 >
                   💬 Paste on WhatsApp
                 </a>
                 <a 
                   href="mailto:hello@stixnvibes.com" 
-                  className="bg-[#161616] border border-[#DEDBC8]/20 p-2.5 rounded-lg text-center hover:bg-[#202020] text-amber-100 transition-all block"
+                  className="bg-[#161616] border border-[#DEDBC8]/20 p-2.5 rounded-lg text-center hover:bg-[#202020] text-amber-100 transition-all block cursor-pointer select-none"
                 >
                   ✉️ Paste in Email
                 </a>
@@ -230,8 +254,9 @@ export default function ForBrands() {
                   setFormSubmitted(false);
                   setBrandName("");
                   setContactInfo("");
+                  setCopied(false);
                 }}
-                className="w-full mt-4 bg-neutral-900 border border-white/5 text-gray-500 text-[10px] font-mono py-2 rounded-lg hover:text-white transition-all uppercase"
+                className="w-full mt-4 bg-neutral-900 border border-white/5 text-gray-500 text-[10px] font-mono py-2 rounded-lg hover:text-white transition-all uppercase cursor-pointer"
               >
                 Create New Collaboration Inquiry
               </button>
@@ -242,13 +267,7 @@ export default function ForBrands() {
                 e.preventDefault();
                 if (!brandName || !contactInfo) return;
                 setFormSubmitted(true);
-                const text = `Hey Stix and Vibes! ⚡ We want to partner for B2B sticker branding:\n\n` +
-                  `- Brand Name: ${brandName}\n` +
-                  `- Collab Area: ${vibeCategory}\n` +
-                  `- Target Quantity: ${bulkQty} assets\n` +
-                  `- Contact Coordinates: ${contactInfo}\n\n` +
-                  `Let's build a physical brand merge! 🌴`;
-                navigator.clipboard.writeText(text).catch(() => {});
+                setCopied(false);
               }} 
               className="space-y-4 pt-4 border-t border-white/5 text-left relative z-40"
             >
@@ -273,7 +292,7 @@ export default function ForBrands() {
                     className="w-full bg-[#161616] border border-white/10 p-3 rounded-lg text-xs font-mono text-[#E1E0CC] focus:outline-none focus:border-[#DEDBC8] appearance-none"
                   >
                     <option value="Café Takeaways">Café Takeaways</option>
-                    <option value="Developer Laptop Sheets">Developer Sheets</option>
+                    <option value="Laptop & Workstation Sheets">Workstation Sheets</option>
                     <option value="College Fest Bundles">Fest Bundles</option>
                     <option value="Brand Resell Merch">Brand Merch</option>
                     <option value="Packaging Inserts">Packaging Seals</option>
