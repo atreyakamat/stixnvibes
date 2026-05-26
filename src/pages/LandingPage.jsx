@@ -118,13 +118,16 @@ export default function LandingPage() {
           {/* Background Video */}
           <div className="absolute inset-0 z-0">
             <video 
-              src="https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/hf_20260405_170732_8a9ccda6-5cff-4628-b164-059c500a2b41.mp4"
               autoPlay 
               loop 
               muted 
               playsInline 
+              preload="auto"
               className="w-full h-full object-cover filter brightness-[0.7]"
-            />
+            >
+              <source src="/assets/hero-video-optimized.webm" type="video/webm" />
+              <source src="/assets/hero-video-optimized.mp4" type="video/mp4" />
+            </video>
           </div>
 
           {/* Noise Overlay */}
@@ -370,13 +373,16 @@ export default function LandingPage() {
             className="relative lg:min-h-[640px] xl:min-h-[600px] min-h-[440px] h-full rounded-2xl overflow-hidden group border border-white/5 flex flex-col justify-end"
           >
             <video 
-              src="https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/hf_20260406_133058_0504132a-0cf3-4450-a370-8ea3b05c95d4.mp4"
               autoPlay 
               loop 
               muted 
               playsInline 
+              preload="auto"
               className="absolute inset-0 w-full h-full object-cover filter brightness-[0.75]"
-            />
+            >
+              <source src="/assets/card-video-optimized.webm" type="video/webm" />
+              <source src="/assets/card-video-optimized.mp4" type="video/mp4" />
+            </video>
             <div className="absolute inset-0 bg-gradient-to-t from-black/95 via-black/40 to-transparent pointer-events-none z-10" />
             <div className="relative z-20 p-6 sm:p-8">
               <h3 className="text-[#E1E0CC] font-bold text-lg sm:text-xl md:text-2xl tracking-wide group-hover:translate-x-1 transition-transform duration-300">
