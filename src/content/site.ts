@@ -1,0 +1,176 @@
+// Single source for site copy and facts. Anything marked `confirm` came from
+// the previous site and still needs a final check before launch.
+
+export const site = {
+  name: "Stix N Vibes",
+  url: "https://stixnvibes.com",
+  tagline: "Your stickers. Your vibe.",
+  campaign: "Make it stick. Literally.",
+  description:
+    "Stix N Vibes is a student-led sticker and print brand from Goa. Sticker packs, custom stickers and branded prints that say something.",
+  origin: "From Goa, for everywhere.",
+  // confirm: carried over from the previous site
+  contact: {
+    email: "hello@stixnvibes.com",
+    instagram: "https://instagram.com/stixnvibes",
+    instagramHandle: "@stixnvibes",
+    whatsapp: "https://wa.me/917744020601",
+  },
+} as const;
+
+export const nav = [
+  { href: "/#products", label: "Products" },
+  { href: "/custom/", label: "Custom" },
+  { href: "/brands/", label: "For Brands" },
+  { href: "/about/", label: "About" },
+] as const;
+
+export type ProductStatus = "available" | "coming-soon";
+
+export type Product = {
+  id: string;
+  name: string;
+  line: string;
+  status: ProductStatus;
+  // Real sticker art for live products. Coming-soon items use a drawn outline,
+  // never invented product art.
+  stickers?: string[];
+  shape: "pack" | "large" | "poster" | "frame" | "cards" | "music";
+};
+
+export const products: Product[] = [
+  {
+    id: "packs",
+    name: "Sticker packs",
+    line: "Curated sets built around one mood. Pick a pack. Set your vibe.",
+    status: "available",
+    stickers: ["sticker-26", "sticker-12", "sticker-24"],
+    shape: "pack",
+  },
+  {
+    id: "custom",
+    name: "Custom stickers",
+    line: "Your artwork, your logo or your inside joke, cut into a sticker.",
+    status: "available",
+    stickers: ["sticker-19", "sticker-21"],
+    shape: "large",
+  },
+  {
+    id: "posters",
+    name: "Sticker posters",
+    line: "A4 and A3 sheets that sit between a poster and a sticker collection.",
+    status: "coming-soon",
+    shape: "poster",
+  },
+  {
+    id: "framez",
+    name: "Framez",
+    line: "A4 and A3 wall decor. Build a wall that feels like you.",
+    status: "coming-soon",
+    shape: "frame",
+  },
+  {
+    id: "cards",
+    name: "Cards",
+    line: "Art cards to collect, gift or pin above your desk.",
+    status: "coming-soon",
+    shape: "cards",
+  },
+  {
+    id: "music",
+    name: "Music cards",
+    line: "A card for the song that means something.",
+    status: "coming-soon",
+    shape: "music",
+  },
+];
+
+// Collection concepts from the brand brief. Not live collections yet.
+export const vibes = [
+  "Late Night",
+  "Street Mode",
+  "Soft Aesthetic",
+  "Chaos Club",
+  "Goa Chill",
+] as const;
+
+export const customServices = [
+  {
+    title: "Stickers from your artwork",
+    body: "Send a drawing, a design file or a photo. We turn it into die-cut stickers.",
+  },
+  {
+    title: "Custom sticker packs",
+    body: "A set built around a theme, a friend group, a club or an event.",
+  },
+  {
+    title: "Logo and brand stickers",
+    body: "Stickers for packaging, merch tables, laptops and giveaways.",
+  },
+  {
+    title: "Event and pop-up stickers",
+    body: "Limited runs for fests, college events, launches and gigs.",
+  },
+] as const;
+
+export const process = [
+  {
+    title: "Send your idea",
+    body: "Tell us what you want. Add artwork if you have it, or describe the vibe.",
+  },
+  {
+    title: "We shape it",
+    body: "We prepare the design for print and send it back for your approval.",
+  },
+  {
+    title: "We print it",
+    body: "Once you approve the design, we print and cut it.",
+  },
+  {
+    title: "You stick it",
+    body: "Collect it or get it delivered. Then put it somewhere that matters.",
+  },
+] as const;
+
+export const brandUseCases = [
+  { title: "Packaging", body: "Seal boxes, label bags and add a thank-you sticker to every order." },
+  { title: "Events and fests", body: "Give people something they keep after the event ends." },
+  { title: "Cafés and shops", body: "Put your logo on cups, counters and takeaway bags." },
+  { title: "Creators and bands", body: "Merch that fans can afford and actually use." },
+  { title: "Colleges and clubs", body: "Stickers for societies, teams, fests and freshers." },
+  { title: "Launches and campaigns", body: "A small physical object that carries your message." },
+] as const;
+
+export const brandBrief = [
+  "Your name and brand",
+  "What the stickers are for",
+  "Your logo or artwork, if you have it",
+  "Rough quantity and size",
+  "When you need them",
+] as const;
+
+export const faqs = [
+  {
+    q: "Where can I buy Stix N Vibes stickers?",
+    a: "Find us at pop-up stalls and events around Goa. You can also message us on Instagram or WhatsApp. An online shop is on the way.",
+  },
+  {
+    q: "Can you make stickers from my own design?",
+    a: "Yes. Send us your artwork or your idea through the contact form. Only send artwork that you own or have permission to use.",
+  },
+  {
+    q: "Do you take bulk and brand orders?",
+    a: "Yes. Tell us what you need on the For Brands page. We reply with options and a quote for your project.",
+  },
+  {
+    q: "When do posters, Framez and cards launch?",
+    a: "Soon. Follow us on Instagram to see them first.",
+  },
+] as const;
+
+export const stickerCount = 32;
+export const stickerSrc = (id: string) => `/stickers/${id}.webp`;
+export const allStickers = Array.from(
+  { length: stickerCount },
+  (_, i) => `sticker-${String(i + 1).padStart(2, "0")}`,
+);

@@ -1,42 +1,48 @@
-# StixNVibes
+# Stix N Vibes — v2.1 landing site
 
-A high-end, modern sticker store landing page built with React and Vite, featuring immersive interactive effects.
+Landing site for Stix N Vibes, a student-led sticker and print brand from Goa.
+Brand rules, palette and copy standards live in [`CONTEXT.md`](./CONTEXT.md).
 
-## 🧊 Interactive Glass UI & Reactive Backgrounds
+## Stack
 
-The project features a cutting-edge **Glass UI with Real-time Refraction**. Panels and cards track your mouse movement to create a dynamic light refraction effect, following you across the screen.
+- Next.js 16 (App Router, static export) + TypeScript
+- Tailwind CSS v4 (tokens in `src/app/globals.css`)
+- Motion (`motion/react`) for hero parallax, matter-js for the sticker pile
+- Netlify (static `out/` folder, Netlify Forms)
 
-### 🌟 Credits & Inspiration
-This project's aesthetic and interactive components are deeply inspired by the following amazing UI libraries:
-- **[Aceternity UI](https://ui.aceternity.com/)**: For the premium glassmorphism and background beam concepts.
-- **[Reactbits.dev](https://reactbits.dev/)**: For high-performance animated background patterns.
-- **[FancyComponents UI](https://fancycomponents.dev/)**: For sophisticated layout and interaction patterns.
+## Run it
 
-## 🎨 Key Features
-- **Real-time Refraction:** Custom `GlassContainer` with mouse-tracking highlights.
-- **Deep Space Background:** A combination of interactive `BackgroundBeams`, `Starfield`, and animated refraction orbs.
-- **Premium Typography:** High-contrast, glowing gradient text with smooth animations.
-- **Ultra-Transparent Aesthetic:** Polished components with deep backdrop blurs (`backdrop-blur-xl/2xl`).
-- **Responsive & Optimized:** Built for a seamless experience across all devices.
+```bash
+npm install
+npm run dev     # http://localhost:3000
+npm run build   # writes the static site to out/
+npm run lint
+```
 
-## 🚀 Getting Started
+## Where things live
 
-### Installation
-1. Clone the repository
-2. Install dependencies:
-   ```bash
-   npm install
-   ```
-3. Start the development server:
-   ```bash
-   npm run dev
-   ```
+| Path | What |
+| --- | --- |
+| `src/content/site.ts` | All copy, contacts, products, FAQ. Edit here, not in components. |
+| `src/content/stickers.ts` | Sizes of the processed sticker files. |
+| `src/app/*/page.tsx` | Pages: home, `/custom`, `/brands`, `/about`, `/contact`. |
+| `src/components/` | Header, footer, hero, effects and shared UI. |
+| `public/stickers/` | 32 stickers as trimmed 480px WebP (from the original PNGs on `old-v2`). |
+| `public/media/` | Hero video (WebM + MP4) and posters. |
+| `public/__forms.html` | Registers the `enquiry` form with Netlify Forms. Keep field names in sync with `enquiry-form.tsx`. |
 
-### Logo Configuration
-Update the site-wide logo in a single place: `src/components/Logo.jsx`.
+## Effects and their fallbacks
 
-## 🛠️ Built With
-- **React 18**
-- **Vite**
-- **Framer Motion**
-- **Tailwind CSS**
+- **Sticker trail** (hero, desktop mouse only) — after fancycomponents.dev Image Trail.
+- **Sticker pile** — matter-js, loads when the section scrolls into view; drag on desktop, tap to flick on touch, static pile with reduced motion.
+- **Vibes on a path** — SVG `textPath` marquee; static with reduced motion.
+- **Hero video** — the poster image is the LCP and carries the scene; video is skipped for reduced motion and data saver.
+- Content stays visible without JavaScript (reveal styles only apply once the `js` class is set).
+
+## Launch checklist
+
+- [ ] Confirm WhatsApp number, Instagram handle and email in `src/content/site.ts`.
+- [ ] Confirm which products are live vs coming soon.
+- [ ] Netlify: confirm build command `npm run build` and publish dir `out` (set in `netlify.toml`).
+- [ ] Netlify: turn on form notifications for the `enquiry` form.
+- [ ] Add privacy / terms pages if needed.

@@ -1,0 +1,21 @@
+<!doctype html>
+<html lang="en">
+  <head><meta charset="utf-8" /><meta name="robots" content="noindex" /><title>Forms</title></head>
+  <body>
+    <!-- Netlify Forms reads this file at deploy time to register the form.
+         Keep the field names in sync with src/components/enquiry-form.tsx. -->
+    <form name="enquiry" data-netlify="true" netlify-honeypot="bot-field" hidden>
+      <input type="hidden" name="form-name" value="enquiry" />
+      <input name="bot-field" />
+      <input name="type" />
+      <input name="name" />
+      <input name="email" />
+      <input name="phone" />
+      <input name="company" />
+      <input name="quantity" />
+      <input name="timeline" />
+      <textarea name="message"></textarea>
+      <input name="page" />
+    </form>
+  </body>
+</html>
