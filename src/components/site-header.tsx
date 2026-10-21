@@ -59,13 +59,26 @@ export function SiteHeader() {
           <ul className="flex items-center gap-8 text-sm">
             {nav.map((item) => (
               <li key={item.href}>
-                <Link
-                  href={item.href}
-                  className="text-paper/75 transition-colors hover:text-lemon"
-                  aria-current={pathname === item.href ? "page" : undefined}
-                >
-                  {item.label}
-                </Link>
+                {item.external ? (
+                  <a
+                    href={item.href}
+                    target="_blank"
+                    rel="noopener"
+                    className="text-paper/75 transition-colors hover:text-lemon"
+                  >
+                    {item.label}
+                    <span className="sr-only"> (opens in a new tab)</span>
+                    <span aria-hidden="true"> ↗</span>
+                  </a>
+                ) : (
+                  <Link
+                    href={item.href}
+                    className="text-paper/75 transition-colors hover:text-lemon"
+                    aria-current={pathname === item.href ? "page" : undefined}
+                  >
+                    {item.label}
+                  </Link>
+                )}
               </li>
             ))}
           </ul>
@@ -107,16 +120,31 @@ export function SiteHeader() {
       >
         <nav aria-label="Mobile" className="container-x flex h-full flex-col justify-between pb-10 pt-8">
           <ul className="space-y-1">
-            {[...nav, { href: "/contact/", label: "Contact" }].map((item, i) => (
+            {[...nav, { href: "/contact/", label: "Contact" } as (typeof nav)[number]].map((item, i) => (
               <li key={item.href}>
-                <Link
-                  href={item.href}
-                  onClick={() => setOpen(false)}
-                  className="display flex items-baseline gap-4 py-2 text-5xl hover:text-lemon"
-                >
-                  <span className="label text-mute">0{i + 1}</span>
-                  {item.label}
-                </Link>
+                {item.external ? (
+                  <a
+                    href={item.href}
+                    target="_blank"
+                    rel="noopener"
+                    onClick={() => setOpen(false)}
+                    className="display flex items-baseline gap-4 py-2 text-5xl hover:text-lemon"
+                  >
+                    <span className="label text-mute">0{i + 1}</span>
+                    {item.label}
+                    <span className="sr-only"> (opens in a new tab)</span>
+                    <span aria-hidden="true">↗</span>
+                  </a>
+                ) : (
+                  <Link
+                    href={item.href}
+                    onClick={() => setOpen(false)}
+                    className="display flex items-baseline gap-4 py-2 text-5xl hover:text-lemon"
+                  >
+                    <span className="label text-mute">0{i + 1}</span>
+                    {item.label}
+                  </Link>
+                )}
               </li>
             ))}
           </ul>

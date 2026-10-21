@@ -59,8 +59,8 @@ export default function Home() {
               </Reveal>
             </div>
             <Reveal className="max-w-sm text-paper/70">
-              Stickers are where we started. Posters, frames and cards are next. Here is what you can
-              get now and what is coming.
+              Stickers are where we started. Now there are peel-to-paste posters and Framez too.
+              Cards are coming next.
             </Reveal>
           </div>
           <div className="mt-12">
@@ -194,8 +194,9 @@ export default function Home() {
             </Reveal>
             <Reveal className="mt-6 max-w-lg space-y-4 text-lg text-paper/75">
               <p>
-                Stix N Vibes is a student-led startup. We design stickers, print them and sell them
-                face to face at pop-ups and events around Goa.
+                Stix N Vibes is a student-led startup started by Atreya Kamat and Kritik Sawant. We
+                wanted stickers, so we built a business out of it. We sell face to face at pop-ups
+                around Goa and cut stickers live at the stall.
               </p>
               <p>We think the things you carry every day should look like you.</p>
             </Reveal>

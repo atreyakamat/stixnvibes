@@ -52,8 +52,8 @@ export function Hero() {
 
           <div className="fade-up lg:col-span-4 lg:pb-4" style={{ ["--d" as string]: "450ms" }}>
             <p className="max-w-md text-lg leading-relaxed text-paper/80">
-              Sticker packs, custom stickers and prints for people who want their stuff to look like
-              them. Made by a small crew in Goa.
+              Waterproof stickers, peel-to-paste posters and Framez for people who want their stuff to
+              look like them. Made in Goa, dispatched in 2 days.
             </p>
             <div className="mt-8 flex flex-wrap gap-3">
               <Link href="/#products" className="btn btn-primary">
@@ -63,6 +63,11 @@ export function Hero() {
               <Link href="/custom/" className="btn btn-ghost">
                 Make it custom
               </Link>
+              <a href="https://shop.stixnvibes.com" target="_blank" rel="noopener" className="btn btn-ghost">
+                Shop
+                <span aria-hidden="true">↗</span>
+                <span className="sr-only">(opens in a new tab)</span>
+              </a>
             </div>
           </div>
         </div>

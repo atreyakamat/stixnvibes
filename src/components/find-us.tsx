@@ -12,7 +12,7 @@ export function FindUs() {
       <div className="lg:col-span-5">
         <p className="max-w-md text-lg text-paper/75">
           We set up at college events, markets and pop-ups around Goa, mostly on Sundays. Dates go on
-          Instagram first.
+          Instagram first. We cut stickers live at the stall, so come watch. Cash and UPI both work.
         </p>
         <div className="mt-8 flex flex-wrap gap-3">
           <a href={site.contact.instagramDm} target="_blank" rel="noopener" className="btn btn-primary">

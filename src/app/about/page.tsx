@@ -20,8 +20,8 @@ export default function AboutPage() {
     <>
       <PageIntro label="Our story" title={<>From Goa, <span className="text-lemon">for everywhere.</span></>}>
         <p>
-          {site.name} is a student-led startup. We design stickers, print them and sell them face to
-          face at pop-ups and events around Goa.
+          {site.name} is a student-led startup started by Atreya Kamat and Kritik Sawant. We design
+          stickers, print them and sell them face to face at pop-ups and events around Goa.
         </p>
       </PageIntro>
 
@@ -34,12 +34,12 @@ export default function AboutPage() {
             </h2>
             <Reveal className="mt-6 space-y-4 text-lg text-paper/75">
               <p>
-                We started with a simple idea. The things you carry every day can show what you love,
-                what makes you laugh and who your people are.
+                We wanted stickers, so we made some. Then it turned into a business. The things you
+                carry every day can show what you love, what makes you laugh and who your people are.
               </p>
               <p>
-                Today we make sticker packs and custom stickers. Posters, Framez wall decor and cards
-                are next.
+                Today we make waterproof sticker packs and custom stickers, plus A4 and A3
+                peel-to-paste posters and Framez. We dispatch in 2 days. Cards are next.
               </p>
             </Reveal>
           </div>

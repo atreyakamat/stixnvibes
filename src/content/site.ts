@@ -7,9 +7,10 @@ export const site = {
   tagline: "Your stickers. Your vibe.",
   campaign: "Make it stick. Literally.",
   description:
-    "Stix N Vibes is a student-led sticker and print brand from Goa. Sticker packs, custom stickers and branded prints that say something.",
+    "Stix N Vibes is a student-led sticker and print brand from Goa. Waterproof stickers, custom stickers, peel-to-paste posters and Framez, dispatched in 2 days.",
   origin: "From Goa, for everywhere.",
   // confirm: carried over from the previous site
+  shop: "https://shop.stixnvibes.com",
   contact: {
     email: "hello@stixnvibes.com",
     instagram: "https://instagram.com/stixnvibes",
@@ -19,12 +20,13 @@ export const site = {
   },
 } as const;
 
-export const nav = [
+export const nav: readonly { href: string; label: string; external?: boolean }[] = [
   { href: "/#products", label: "Products" },
   { href: "/custom/", label: "Custom" },
   { href: "/brands/", label: "For Brands" },
   { href: "/about/", label: "About" },
-] as const;
+  { href: site.shop, label: "Shop", external: true },
+];
 
 export type ProductStatus = "available" | "coming-soon";
 
@@ -58,16 +60,16 @@ export const products: Product[] = [
   },
   {
     id: "posters",
-    name: "Sticker posters",
-    line: "A4 and A3 sheets that sit between a poster and a sticker collection.",
-    status: "coming-soon",
+    name: "Peel-to-paste posters",
+    line: "A4 and A3 posters that peel and paste onto your wall. No frame, no nails.",
+    status: "available",
     shape: "poster",
   },
   {
     id: "framez",
     name: "Framez",
-    line: "A4 and A3 wall decor. Build a wall that feels like you.",
-    status: "coming-soon",
+    line: "Wall decor for a wall that feels like you.",
+    status: "available",
     shape: "frame",
   },
   {
@@ -153,7 +155,19 @@ export const brandBrief = [
 export const faqs = [
   {
     q: "Where can I buy Stix N Vibes stickers?",
-    a: "Find us at pop-up stalls and events around Goa. You can also message us on Instagram or WhatsApp. An online shop is on the way.",
+    a: "Order from our shop at shop.stixnvibes.com, or find us at pop-up stalls around Goa where you can pay by cash or UPI. For custom orders, message us on Instagram.",
+  },
+  {
+    q: "Are the stickers waterproof?",
+    a: "Yes. We print on waterproof paper vinyl, so they handle splashes, bottles and bags. Our splash-proof paper is made for everyday use.",
+  },
+  {
+    q: "How fast do you dispatch?",
+    a: "We dispatch in 2 days.",
+  },
+  {
+    q: "What is live sticker cutting?",
+    a: "At our stalls we cut stickers live, right in front of you. Come watch and take one home.",
   },
   {
     q: "Can you make stickers from my own design?",
@@ -164,7 +178,7 @@ export const faqs = [
     a: "Yes. Tell us what you need on the For Brands page. We reply with options and a quote for your project.",
   },
   {
-    q: "When do posters, Framez and cards launch?",
+    q: "When do cards launch?",
     a: "Soon. Follow us on Instagram to see them first.",
   },
 ] as const;
