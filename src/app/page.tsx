@@ -3,6 +3,7 @@ import { Hero } from "@/components/hero";
 import { FindUs } from "@/components/find-us";
 import { LaptopScroll } from "@/components/laptop-scroll";
 import { Reveal } from "@/components/reveal";
+import { StickerMarquee } from "@/components/sticker-marquee";
 import { StickerGravity } from "@/components/sticker-gravity";
 import { VibePicker } from "@/components/vibe-picker";
 import { CtaBand, FaqList, ProductGrid, SectionLabel, Sticker } from "@/components/ui";
@@ -12,6 +13,9 @@ export default function Home() {
   return (
     <>
       <Hero />
+      <div className="mt-20 md:mt-28">
+        <StickerMarquee />
+      </div>
 
       {/* 01 Statement + physics pile */}
       <section aria-labelledby="statement" className="pt-28 md:pt-44">

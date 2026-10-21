@@ -1,3 +1,4 @@
+import { GlassSheen } from "@/components/glass-sheen";
 import type { Metadata, Viewport } from "next";
 import { Bricolage_Grotesque, Geist, Geist_Mono } from "next/font/google";
 import { SiteHeader } from "@/components/site-header";
@@ -57,6 +58,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
         </a>
         <SiteHeader />
         <main id="main" className="flex-1">
+          <GlassSheen />
           {children}
         </main>
         <SiteFooter />

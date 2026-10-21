@@ -78,7 +78,7 @@ export function LaptopScroll() {
     <section
       ref={ref}
       aria-labelledby="cover-title"
-      className={reduce ? "py-24" : "relative h-[300vh]"}
+      className={reduce ? "py-24" : "relative h-[300vh] overflow-x-clip"}
     >
       <div
         className={
