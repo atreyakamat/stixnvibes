@@ -7,7 +7,7 @@ export const site = {
   tagline: "Your stickers. Your vibe.",
   campaign: "Make it stick. Literally.",
   description:
-    "Stix N Vibes is a student-led sticker and print brand from Goa. Waterproof stickers, custom stickers, peel-to-paste posters and Framez, dispatched in 2 days.",
+    "Stix N Vibes is a student-led sticker and print brand from Goa. Waterproof stickers, custom stickers, peel-to-paste posters and Framez, dispatched the next day.",
   origin: "From Goa, for everywhere.",
   // confirm: carried over from the previous site
   shop: "https://shop.stixnvibes.com",
@@ -76,14 +76,14 @@ export const products: Product[] = [
     id: "cards",
     name: "Cards",
     line: "Art cards to collect, gift or pin above your desk.",
-    status: "coming-soon",
+    status: "available",
     shape: "cards",
   },
   {
     id: "music",
     name: "Music cards",
     line: "A card for the song that means something.",
-    status: "coming-soon",
+    status: "available",
     shape: "music",
   },
 ];
@@ -163,7 +163,7 @@ export const faqs = [
   },
   {
     q: "How fast do you dispatch?",
-    a: "We dispatch in 2 days.",
+    a: "We dispatch the next day.",
   },
   {
     q: "What is live sticker cutting?",
@@ -174,12 +174,16 @@ export const faqs = [
     a: "Yes. Send us your artwork or your idea through the contact form. Only send artwork that you own or have permission to use.",
   },
   {
-    q: "Do you take bulk and brand orders?",
-    a: "Yes. Tell us what you need on the For Brands page. We reply with options and a quote for your project.",
+    q: "What shapes and cuts can you do?",
+    a: "Any. We cut on a Cricut, so die cut, kiss cut and custom shapes are all fine. Tell us what you have in mind.",
   },
   {
-    q: "When do cards launch?",
-    a: "Soon. Follow us on Instagram to see them first.",
+    q: "Do you take sponsorships or stall invites?",
+    a: "Yes. If you run an event, a market or a college fest and want us there, or want to sponsor us, send an enquiry or DM us on Instagram.",
+  },
+  {
+    q: "Do you take bulk and brand orders?",
+    a: "Yes. Tell us what you need on the For Brands page. We reply with options and a quote for your project.",
   },
 ] as const;
 

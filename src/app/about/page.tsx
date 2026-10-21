@@ -39,7 +39,7 @@ export default function AboutPage() {
               </p>
               <p>
                 Today we make waterproof sticker packs and custom stickers, plus A4 and A3
-                peel-to-paste posters and Framez. We dispatch in 2 days. Cards are next.
+                peel-to-paste posters and Framez. Art cards and music cards too. We dispatch the next day.
               </p>
             </Reveal>
           </div>

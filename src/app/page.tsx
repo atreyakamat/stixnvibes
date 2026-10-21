@@ -59,8 +59,8 @@ export default function Home() {
               </Reveal>
             </div>
             <Reveal className="max-w-sm text-paper/70">
-              Stickers are where we started. Now there are peel-to-paste posters and Framez too.
-              Cards are coming next.
+              Stickers are where we started. Now there are peel-to-paste posters, Framez, art cards
+              and music cards too.
             </Reveal>
           </div>
           <div className="mt-12">

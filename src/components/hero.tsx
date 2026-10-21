@@ -53,7 +53,7 @@ export function Hero() {
           <div className="fade-up lg:col-span-4 lg:pb-4" style={{ ["--d" as string]: "450ms" }}>
             <p className="max-w-md text-lg leading-relaxed text-paper/80">
               Waterproof stickers, peel-to-paste posters and Framez for people who want their stuff to
-              look like them. Made in Goa, dispatched in 2 days.
+              look like them. Made in Goa, dispatched the next day.
             </p>
             <div className="mt-8 flex flex-wrap gap-3">
               <Link href="/#products" className="btn btn-primary">

@@ -180,6 +180,7 @@ export function StickerLab() {
           <p className="mt-3 text-paper/70" aria-live="polite">
             {current?.blurb}
           </p>
+          <p className="mt-1 text-sm text-mute">Want another shape? We cut any shape, so mention it in the details.</p>
         </fieldset>
 
         <div className="mt-8">

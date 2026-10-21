@@ -7,6 +7,8 @@ const TYPES = [
   "Custom stickers",
   "Brand or bulk order",
   "Event or pop-up",
+  "Sponsorship",
+  "Stall invite",
   "Collab",
   "Something else",
 ] as const;
