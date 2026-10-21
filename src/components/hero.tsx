@@ -2,8 +2,10 @@
 
 import Link from "next/link";
 import { useRef } from "react";
-import { motion, useReducedMotion, useScroll, useTransform } from "motion/react";
+import { motion, useScroll, useTransform } from "motion/react";
+import { useReducedMotion } from "@/lib/use-reduced-motion";
 import { stickerSrc } from "@/content/site";
+import { HeroPeel } from "./hero-peel";
 import { HeroVideo } from "./hero-video";
 import { ImageTrail } from "./image-trail";
 
@@ -42,9 +44,10 @@ export function Hero() {
             style={{ scale: frameScale, y: frameY }}
             className="ice fade-up relative aspect-[4/3] overflow-hidden rounded-[1.75rem] sm:aspect-[16/9] lg:col-span-8"
           >
-            <HeroVideo />
-            <div className="pointer-events-none absolute inset-0 z-[1] bg-gradient-to-t from-ink/70 via-transparent to-transparent" />
-            <p className="label absolute bottom-5 left-5 z-[3] text-paper/80">Make it stick. Literally.</p>
+            <HeroPeel>
+              <HeroVideo />
+              <div className="pointer-events-none absolute inset-0 z-[1] bg-gradient-to-t from-ink/70 via-transparent to-transparent" />
+            </HeroPeel>
           </motion.div>
 
           <div className="fade-up lg:col-span-4 lg:pb-4" style={{ ["--d" as string]: "450ms" }}>
@@ -67,20 +70,20 @@ export function Hero() {
 
       {/* Real sticker art layered over the frame edge for depth. */}
       <motion.img
-        src={stickerSrc("sticker-12")}
+        src={stickerSrc("sticker-09")}
         alt=""
         aria-hidden="true"
-        width={449}
-        height={480}
+        width={418}
+        height={382}
         style={{ y: stickerA, ["--r" as string]: "8deg", ["--d" as string]: "700ms" }}
         className="sticker-shadow drop-in pointer-events-none absolute right-[4%] top-[38%] z-10 hidden w-[clamp(7rem,11vw,11rem)] rotate-[8deg] lg:block"
       />
       <motion.img
-        src={stickerSrc("sticker-26")}
+        src={stickerSrc("sticker-30")}
         alt=""
         aria-hidden="true"
-        width={333}
-        height={480}
+        width={288}
+        height={367}
         style={{ y: stickerB, ["--r" as string]: "-10deg", ["--d" as string]: "850ms" }}
         className="sticker-shadow drop-in pointer-events-none absolute bottom-[2%] right-[4%] z-10 w-[clamp(5.5rem,10vw,9.5rem)] -rotate-[10deg] lg:bottom-[6%] lg:left-[1%] lg:right-auto"
       />

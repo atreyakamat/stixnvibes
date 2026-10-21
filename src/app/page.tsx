@@ -1,10 +1,12 @@
 import Link from "next/link";
 import { Hero } from "@/components/hero";
-import { PathMarquee } from "@/components/path-marquee";
+import { FindUs } from "@/components/find-us";
+import { LaptopScroll } from "@/components/laptop-scroll";
 import { Reveal } from "@/components/reveal";
 import { StickerGravity } from "@/components/sticker-gravity";
+import { VibePicker } from "@/components/vibe-picker";
 import { CtaBand, FaqList, ProductGrid, SectionLabel, Sticker } from "@/components/ui";
-import { brandUseCases, customServices, process, site, vibes } from "@/content/site";
+import { brandUseCases, customServices, process, site } from "@/content/site";
 
 export default function Home() {
   return (
@@ -40,6 +42,8 @@ export default function Home() {
         </div>
       </section>
 
+      <LaptopScroll />
+
       {/* 02 Products */}
       <section id="products" aria-labelledby="products-title" className="scroll-mt-24 pt-28 md:pt-40">
         <div className="container-x">
@@ -65,15 +69,16 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Vibes on a path */}
-      <section aria-labelledby="vibes-title" className="overflow-hidden pt-24 md:pt-32">
+      {/* 03 Pick your vibe */}
+      <section id="vibes" aria-labelledby="vibes-title" className="scroll-mt-24 pt-28 md:pt-40">
         <div className="container-x">
-          <h2 id="vibes-title" className="label text-mute">
-            Collections in the works: <span className="sr-only">{vibes.join(", ")}</span>
-          </h2>
-        </div>
-        <div className="-mx-[5vw] mt-2">
-          <PathMarquee items={vibes} />
+          <SectionLabel index="03">Pick your vibe</SectionLabel>
+          <Reveal>
+            <h2 id="vibes-title" className="display mt-6 mb-12 text-[clamp(2.8rem,8vw,7.5rem)]">
+              What&apos;s your <span className="text-lemon">mood?</span>
+            </h2>
+          </Reveal>
+          <VibePicker />
         </div>
       </section>
 
@@ -81,7 +86,7 @@ export default function Home() {
       <section aria-labelledby="custom-title" className="pt-20 md:pt-28">
         <div className="container-x grid gap-12 lg:grid-cols-12">
           <div className="lg:col-span-6">
-            <SectionLabel index="03">Custom</SectionLabel>
+            <SectionLabel index="04">Custom</SectionLabel>
             <Reveal>
               <h2 id="custom-title" className="display mt-6 text-[clamp(2.8rem,8vw,7.5rem)]">
                 Turn your idea into a <span className="text-lemon">sticker.</span>
@@ -91,8 +96,8 @@ export default function Home() {
               Bring a drawing, a logo, a meme or just a feeling. We help you make it real.
             </Reveal>
             <Reveal className="mt-8">
-              <Link href="/custom/" className="btn btn-primary">
-                See custom options
+              <Link href="/custom/#try" className="btn btn-primary">
+                Try it on your artwork
               </Link>
             </Reveal>
           </div>
@@ -127,7 +132,7 @@ export default function Home() {
             <div className="relative z-10 grid gap-10 lg:grid-cols-12">
               <div className="lg:col-span-7">
                 <p className="label flex items-center gap-3 text-ink/70">
-                  <span>04</span>
+                  <span>05</span>
                   <span className="h-px w-8 bg-ink/30" aria-hidden="true" />
                   For brands
                 </p>
@@ -159,7 +164,20 @@ export default function Home() {
         </div>
       </section>
 
-      {/* 05 About */}
+      {/* 06 Find us */}
+      <section id="find-us" aria-labelledby="find-title" className="scroll-mt-24 pt-28 md:pt-40">
+        <div className="container-x">
+          <SectionLabel index="06">Find us</SectionLabel>
+          <Reveal>
+            <h2 id="find-title" className="display mt-6 mb-12 text-[clamp(2.8rem,8vw,7.5rem)]">
+              Catch us in <span className="text-lemon">Goa.</span>
+            </h2>
+          </Reveal>
+          <FindUs />
+        </div>
+      </section>
+
+      {/* 07 About */}
       <section aria-labelledby="about-title" className="pt-28 md:pt-40">
         <div className="container-x grid items-center gap-12 lg:grid-cols-12">
           <div className="relative order-2 aspect-square max-w-md lg:order-1 lg:col-span-5">
@@ -168,7 +186,7 @@ export default function Home() {
             <Sticker id="sticker-05" rotate={-12} className="absolute bottom-[2%] left-[24%] w-[44%]" />
           </div>
           <div className="order-1 lg:order-2 lg:col-span-6 lg:col-start-7">
-            <SectionLabel index="05">Who we are</SectionLabel>
+            <SectionLabel index="07">Who we are</SectionLabel>
             <Reveal>
               <h2 id="about-title" className="display mt-6 text-[clamp(2.8rem,8vw,7.5rem)]">
                 {site.origin}
@@ -194,7 +212,7 @@ export default function Home() {
       <section aria-labelledby="faq-title" className="pt-28 md:pt-40">
         <div className="container-x grid gap-10 lg:grid-cols-12">
           <div className="lg:col-span-4">
-            <SectionLabel index="06">Questions</SectionLabel>
+            <SectionLabel index="08">Questions</SectionLabel>
             <h2 id="faq-title" className="display mt-6 text-6xl md:text-7xl">
               Good to know
             </h2>

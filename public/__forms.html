@@ -3,7 +3,7 @@
   <head><meta charset="utf-8" /><meta name="robots" content="noindex" /><title>Forms</title></head>
   <body>
     <!-- Netlify Forms reads this file at deploy time to register the form.
-         Keep the field names in sync with src/components/enquiry-form.tsx. -->
+         Keep the field names in sync with src/components/enquiry-form.tsx and sticker-lab.tsx. -->
     <form name="enquiry" data-netlify="true" netlify-honeypot="bot-field" hidden>
       <input type="hidden" name="form-name" value="enquiry" />
       <input name="bot-field" />
@@ -16,6 +16,16 @@
       <input name="timeline" />
       <textarea name="message"></textarea>
       <input name="page" />
+    </form>
+    <form name="sticker-upload" data-netlify="true" netlify-honeypot="bot-field" enctype="multipart/form-data" hidden>
+      <input type="hidden" name="form-name" value="sticker-upload" />
+      <input name="bot-field" />
+      <input name="cut" />
+      <input name="name" />
+      <input name="email" />
+      <input name="details" />
+      <input name="rights" />
+      <input type="file" name="artwork" />
     </form>
   </body>
 </html>

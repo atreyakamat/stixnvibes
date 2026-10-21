@@ -14,6 +14,7 @@ export const site = {
     email: "hello@stixnvibes.com",
     instagram: "https://instagram.com/stixnvibes",
     instagramHandle: "@stixnvibes",
+    instagramDm: "https://ig.me/m/stixnvibes",
     whatsapp: "https://wa.me/917744020601",
   },
 } as const;
