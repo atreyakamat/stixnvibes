@@ -42,7 +42,9 @@ if [[ $ONLY == all || $ONLY == hero ]]; then
   # Phones: full 1080 x 1920.
   av1  "$OUT/stall/hero-tall.av1.mp4" -t 5 -i "$in" -vf "scale=1080:-2:flags=lanczos,$SHARPEN" -crf 44
   h264 "$OUT/stall/hero-tall.mp4"     -t 5 -i "$in" -vf "scale=1080:-2:flags=lanczos,$SHARPEN" -crf 26
-  still "$OUT/stall/hero-tall.webp" "scale=1080:-2:flags=lanczos,$SHARPEN" "$in" 82
+  # The phone poster is the page's largest image, so it stays under 100 KB.
+  # The full-resolution video replaces it a moment later.
+  still "$OUT/stall/hero-tall.webp" "scale=828:-2:flags=lanczos,$SHARPEN" "$in" 76
 fi
 
 if [[ $ONLY == all || $ONLY == clips ]]; then

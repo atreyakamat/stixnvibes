@@ -15,20 +15,28 @@ export function Hero() {
       aria-labelledby="hero-title"
       className="relative isolate flex min-h-[40rem] items-end overflow-hidden pb-10 pt-28 md:min-h-[100svh] md:pb-14"
     >
-      {/* Real footage from a stall. Wide crop on desktop, the vertical clip on phones. */}
+      {/* Real footage from a stall. Wide crop on desktop, the vertical clip on phones.
+          One <picture> carries the poster so phones fetch only the tall frame, early,
+          as the page's largest image. The videos fade in over it. */}
       <div className="absolute inset-0 -z-10">
+        <picture>
+          <source media="(min-width: 768px)" srcSet="/media/stall/hero-wide.webp" />
+          <img
+            src="/media/stall/hero-tall.webp"
+            alt="Students crowding around a Stix N Vibes sticker stall at a college in Goa"
+            className="absolute inset-0 size-full object-cover"
+            fetchPriority="high"
+            decoding="async"
+          />
+        </picture>
         <LoopVideo
           src="/media/stall/hero-wide.mp4"
           av1="/media/stall/hero-wide.av1.mp4"
-          poster="/media/stall/hero-wide.webp"
-          alt="Students crowding around a Stix N Vibes sticker stall at a college in Goa"
           className="hidden size-full md:block"
         />
         <LoopVideo
           src="/media/stall/hero-tall.mp4"
           av1="/media/stall/hero-tall.av1.mp4"
-          poster="/media/stall/hero-tall.webp"
-          alt="Students crowding around a Stix N Vibes sticker stall at a college in Goa"
           className="size-full md:hidden"
         />
         <div className="absolute inset-0 bg-gradient-to-t from-ink via-ink/55 to-ink/25" />

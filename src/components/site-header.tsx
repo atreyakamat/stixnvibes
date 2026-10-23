@@ -51,7 +51,7 @@ export function SiteHeader() {
       }`}
     >
       <div className="container-x flex h-16 items-center justify-between gap-6 md:h-20">
-        <Link href="/" aria-label="Stix N Vibes home" className="relative z-10">
+        <Link href="/" aria-label="Stix N Vibes" className="relative z-10">
           <Wordmark />
         </Link>
 

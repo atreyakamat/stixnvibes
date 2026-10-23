@@ -39,8 +39,9 @@ export function LoopVideo({
   src: string;
   // Sharper AV1 version at a similar size; browsers without AV1 use `src`.
   av1?: string;
-  poster: string;
-  alt: string;
+  // Without a poster the video fades in over whatever sits behind it.
+  poster?: string;
+  alt?: string;
   className?: string;
   priority?: boolean;
 }) {
@@ -69,14 +70,16 @@ export function LoopVideo({
 
   return (
     <div ref={box} className={`relative overflow-hidden ${className}`}>
-      <img
-        src={poster}
-        alt={alt}
-        className="absolute inset-0 size-full object-cover"
-        fetchPriority={priority ? "high" : undefined}
-        loading={priority ? "eager" : "lazy"}
-        decoding="async"
-      />
+      {poster && (
+        <img
+          src={poster}
+          alt={alt ?? ""}
+          className="absolute inset-0 size-full object-cover"
+          fetchPriority={priority ? "high" : undefined}
+          loading={priority ? "eager" : "lazy"}
+          decoding="async"
+        />
+      )}
       {allowed && near && !failed && (
         <video
           ref={video}
