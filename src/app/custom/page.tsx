@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { Reveal } from "@/components/reveal";
+import { StickerLab } from "@/components/sticker-lab";
 import { CtaBand, PageIntro, SectionLabel, Sticker } from "@/components/ui";
 import { customServices, process } from "@/content/site";
 
@@ -20,8 +21,16 @@ export default function CustomPage() {
         </p>
       </PageIntro>
 
-      <section aria-labelledby="what-title" className="container-x">
-        <SectionLabel index="01">What we make</SectionLabel>
+      <section id="try" aria-labelledby="try-title" className="container-x scroll-mt-24">
+        <SectionLabel index="01">Try it</SectionLabel>
+        <h2 id="try-title" className="display mt-5 mb-10 text-[clamp(2.6rem,6vw,5.5rem)]">
+          See your art as a sticker.
+        </h2>
+        <StickerLab />
+      </section>
+
+      <section aria-labelledby="what-title" className="container-x pt-28 md:pt-40">
+        <SectionLabel index="02">What we make</SectionLabel>
         <h2 id="what-title" className="sr-only">What we make</h2>
         <ul className="mt-8 grid gap-4 md:grid-cols-2">
           {customServices.map((s, i) => (
@@ -37,13 +46,13 @@ export default function CustomPage() {
       <section aria-labelledby="how-title" className="container-x pt-28 md:pt-40">
         <div className="grid gap-12 lg:grid-cols-12">
           <div className="lg:col-span-5">
-            <SectionLabel index="02">How it works</SectionLabel>
+            <SectionLabel index="03">How it works</SectionLabel>
             <h2 id="how-title" className="display mt-6 text-[clamp(2.8rem,7vw,6.5rem)]">
               Four steps. No fuss.
             </h2>
             <div className="relative mt-12 hidden h-72 lg:block">
-              <Sticker id="sticker-13" rotate={-8} className="absolute left-0 top-0 w-48" />
-              <Sticker id="sticker-27" rotate={10} className="absolute left-40 top-20 w-44" />
+              <Sticker id="lofi-13" rotate={-8} className="absolute left-0 top-0 w-48" />
+              <Sticker id="lofi-10" rotate={10} className="absolute left-40 top-20 w-44" />
             </div>
           </div>
           <ol className="divide-y divide-line border-y border-line lg:col-span-7">
@@ -63,7 +72,7 @@ export default function CustomPage() {
       <section aria-labelledby="art-title" className="container-x pt-28 md:pt-40">
         <div className="grid gap-8 rounded-[2rem] border border-line p-8 md:grid-cols-12 md:p-14">
           <div className="md:col-span-5">
-            <SectionLabel index="03">Your artwork</SectionLabel>
+            <SectionLabel index="04">Your artwork</SectionLabel>
             <h2 id="art-title" className="display mt-6 text-5xl md:text-6xl">
               Before you send
             </h2>

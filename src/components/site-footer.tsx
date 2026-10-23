@@ -14,11 +14,18 @@ export function SiteFooter() {
         <nav aria-label="Footer" className="md:col-span-3">
           <p className="label text-mute">Explore</p>
           <ul className="mt-4 space-y-2">
-            {[...nav, { href: "/contact/", label: "Contact" }].map((item) => (
+            {[...nav, { href: "/contact/", label: "Contact" } as (typeof nav)[number]].map((item) => (
               <li key={item.href}>
-                <Link href={item.href} className="hover:text-lemon">
-                  {item.label}
-                </Link>
+                {item.external ? (
+                  <a href={item.href} target="_blank" rel="noopener" className="hover:text-lemon">
+                    {item.label} <span aria-hidden="true">↗</span>
+                    <span className="sr-only">(opens in a new tab)</span>
+                  </a>
+                ) : (
+                  <Link href={item.href} className="hover:text-lemon">
+                    {item.label}
+                  </Link>
+                )}
               </li>
             ))}
           </ul>

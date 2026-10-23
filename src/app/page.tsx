@@ -1,15 +1,20 @@
 import Link from "next/link";
 import { Hero } from "@/components/hero";
-import { PathMarquee } from "@/components/path-marquee";
+import { FindUs } from "@/components/find-us";
+import { StallReel } from "@/components/stall-reel";
+import { ProofWall } from "@/components/proof-wall";
 import { Reveal } from "@/components/reveal";
+import { StickerMarquee } from "@/components/sticker-marquee";
 import { StickerGravity } from "@/components/sticker-gravity";
+import { VibePicker } from "@/components/vibe-picker";
 import { CtaBand, FaqList, ProductGrid, SectionLabel, Sticker } from "@/components/ui";
-import { brandUseCases, customServices, process, site, vibes } from "@/content/site";
+import { brandUseCases, customServices, process, site } from "@/content/site";
 
 export default function Home() {
   return (
     <>
       <Hero />
+      <StickerMarquee />
 
       {/* 01 Statement + physics pile */}
       <section aria-labelledby="statement" className="pt-28 md:pt-44">
@@ -40,6 +45,8 @@ export default function Home() {
         </div>
       </section>
 
+      <StallReel />
+
       {/* 02 Products */}
       <section id="products" aria-labelledby="products-title" className="scroll-mt-24 pt-28 md:pt-40">
         <div className="container-x">
@@ -55,8 +62,8 @@ export default function Home() {
               </Reveal>
             </div>
             <Reveal className="max-w-sm text-paper/70">
-              Stickers are where we started. Posters, frames and cards are next. Here is what you can
-              get now and what is coming.
+              Stickers are where we started. Now there are peel-to-paste posters, Framez, art cards
+              and music cards too.
             </Reveal>
           </div>
           <div className="mt-12">
@@ -65,15 +72,35 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Vibes on a path */}
-      <section aria-labelledby="vibes-title" className="overflow-hidden pt-24 md:pt-32">
+      {/* Proof: real stall clips */}
+      <section aria-labelledby="proof-title" className="overflow-x-clip pt-28 md:pt-40">
         <div className="container-x">
-          <h2 id="vibes-title" className="label text-mute">
-            Collections in the works: <span className="sr-only">{vibes.join(", ")}</span>
-          </h2>
+          <div className="flex flex-col justify-between gap-6 md:flex-row md:items-end">
+            <h2 id="proof-title" className="display text-[clamp(2.8rem,8vw,7.5rem)]">
+              Goa queues
+              <br />
+              for <span className="text-lemon">this.</span>
+            </h2>
+            <Reveal className="max-w-sm text-paper/70">
+              College fests, weekend stalls, every one of them packed. Real clips, no actors.
+            </Reveal>
+          </div>
+          <div className="mt-12 md:mt-16">
+            <ProofWall />
+          </div>
         </div>
-        <div className="-mx-[5vw] mt-2">
-          <PathMarquee items={vibes} />
+      </section>
+
+      {/* 03 Pick your vibe */}
+      <section id="vibes" aria-labelledby="vibes-title" className="scroll-mt-24 pt-28 md:pt-40">
+        <div className="container-x">
+          <SectionLabel index="03">Pick your vibe</SectionLabel>
+          <Reveal>
+            <h2 id="vibes-title" className="display mt-6 mb-12 text-[clamp(2.8rem,8vw,7.5rem)]">
+              What&apos;s your <span className="text-lemon">mood?</span>
+            </h2>
+          </Reveal>
+          <VibePicker />
         </div>
       </section>
 
@@ -81,7 +108,7 @@ export default function Home() {
       <section aria-labelledby="custom-title" className="pt-20 md:pt-28">
         <div className="container-x grid gap-12 lg:grid-cols-12">
           <div className="lg:col-span-6">
-            <SectionLabel index="03">Custom</SectionLabel>
+            <SectionLabel index="04">Custom</SectionLabel>
             <Reveal>
               <h2 id="custom-title" className="display mt-6 text-[clamp(2.8rem,8vw,7.5rem)]">
                 Turn your idea into a <span className="text-lemon">sticker.</span>
@@ -91,8 +118,8 @@ export default function Home() {
               Bring a drawing, a logo, a meme or just a feeling. We help you make it real.
             </Reveal>
             <Reveal className="mt-8">
-              <Link href="/custom/" className="btn btn-primary">
-                See custom options
+              <Link href="/custom/#try" className="btn btn-primary">
+                Try it on your artwork
               </Link>
             </Reveal>
           </div>
@@ -127,7 +154,7 @@ export default function Home() {
             <div className="relative z-10 grid gap-10 lg:grid-cols-12">
               <div className="lg:col-span-7">
                 <p className="label flex items-center gap-3 text-ink/70">
-                  <span>04</span>
+                  <span>05</span>
                   <span className="h-px w-8 bg-ink/30" aria-hidden="true" />
                   For brands
                 </p>
@@ -154,21 +181,34 @@ export default function Home() {
                 ))}
               </ul>
             </div>
-            <Sticker id="sticker-15" rotate={-8} className="absolute -bottom-10 right-6 hidden w-56 lg:block" />
+            <Sticker id="lofi-15" rotate={-8} className="absolute -bottom-10 right-6 hidden w-56 lg:block" />
           </div>
         </div>
       </section>
 
-      {/* 05 About */}
+      {/* 06 Find us */}
+      <section id="find-us" aria-labelledby="find-title" className="scroll-mt-24 pt-28 md:pt-40">
+        <div className="container-x">
+          <SectionLabel index="06">Find us</SectionLabel>
+          <Reveal>
+            <h2 id="find-title" className="display mt-6 mb-12 text-[clamp(2.8rem,8vw,7.5rem)]">
+              Catch us in <span className="text-lemon">Goa.</span>
+            </h2>
+          </Reveal>
+          <FindUs />
+        </div>
+      </section>
+
+      {/* 07 About */}
       <section aria-labelledby="about-title" className="pt-28 md:pt-40">
         <div className="container-x grid items-center gap-12 lg:grid-cols-12">
           <div className="relative order-2 aspect-square max-w-md lg:order-1 lg:col-span-5">
-            <Sticker id="sticker-09" rotate={-6} className="absolute left-[4%] top-[6%] w-[52%]" />
-            <Sticker id="sticker-18" rotate={9} className="absolute right-[2%] top-[22%] w-[46%]" />
-            <Sticker id="sticker-05" rotate={-12} className="absolute bottom-[2%] left-[24%] w-[44%]" />
+            <Sticker id="lofi-09" rotate={-6} className="absolute left-[4%] top-[6%] w-[52%]" />
+            <Sticker id="lofi-01" rotate={9} className="absolute right-[2%] top-[22%] w-[46%]" />
+            <Sticker id="lofi-05" rotate={-12} className="absolute bottom-[2%] left-[24%] w-[44%]" />
           </div>
           <div className="order-1 lg:order-2 lg:col-span-6 lg:col-start-7">
-            <SectionLabel index="05">Who we are</SectionLabel>
+            <SectionLabel index="07">Who we are</SectionLabel>
             <Reveal>
               <h2 id="about-title" className="display mt-6 text-[clamp(2.8rem,8vw,7.5rem)]">
                 {site.origin}
@@ -176,8 +216,9 @@ export default function Home() {
             </Reveal>
             <Reveal className="mt-6 max-w-lg space-y-4 text-lg text-paper/75">
               <p>
-                Stix N Vibes is a student-led startup. We design stickers, print them and sell them
-                face to face at pop-ups and events around Goa.
+                Stix N Vibes is a student-led startup started by Atreya Kamat and Kritik Sawant. We
+                wanted stickers, so we built a business out of it. We sell face to face at pop-ups
+                around Goa and cut stickers live at the stall.
               </p>
               <p>We think the things you carry every day should look like you.</p>
             </Reveal>
@@ -194,7 +235,7 @@ export default function Home() {
       <section aria-labelledby="faq-title" className="pt-28 md:pt-40">
         <div className="container-x grid gap-10 lg:grid-cols-12">
           <div className="lg:col-span-4">
-            <SectionLabel index="06">Questions</SectionLabel>
+            <SectionLabel index="08">Questions</SectionLabel>
             <h2 id="faq-title" className="display mt-6 text-6xl md:text-7xl">
               Good to know
             </h2>

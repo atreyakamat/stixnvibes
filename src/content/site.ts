@@ -3,27 +3,31 @@
 
 export const site = {
   name: "Stix N Vibes",
-  url: "https://stixnvibes.com",
+  // Netlify serves the site on www; the bare domain redirects here.
+  url: "https://www.stixnvibes.com",
   tagline: "Your stickers. Your vibe.",
   campaign: "Make it stick. Literally.",
   description:
-    "Stix N Vibes is a student-led sticker and print brand from Goa. Sticker packs, custom stickers and branded prints that say something.",
+    "Stix N Vibes is a student-led sticker and print brand from Goa. Waterproof stickers, custom stickers, peel-to-paste posters and Framez, dispatched the next day.",
   origin: "From Goa, for everywhere.",
   // confirm: carried over from the previous site
+  shop: "https://shop.stixnvibes.com",
   contact: {
     email: "hello@stixnvibes.com",
     instagram: "https://instagram.com/stixnvibes",
     instagramHandle: "@stixnvibes",
+    instagramDm: "https://ig.me/m/stixnvibes",
     whatsapp: "https://wa.me/917744020601",
   },
 } as const;
 
-export const nav = [
+export const nav: readonly { href: string; label: string; external?: boolean }[] = [
   { href: "/#products", label: "Products" },
   { href: "/custom/", label: "Custom" },
   { href: "/brands/", label: "For Brands" },
   { href: "/about/", label: "About" },
-] as const;
+  { href: site.shop, label: "Shop", external: true },
+];
 
 export type ProductStatus = "available" | "coming-soon";
 
@@ -44,7 +48,7 @@ export const products: Product[] = [
     name: "Sticker packs",
     line: "Curated sets built around one mood. Pick a pack. Set your vibe.",
     status: "available",
-    stickers: ["sticker-26", "sticker-12", "sticker-24"],
+    stickers: ["lofi-09", "lofi-12", "lofi-07"],
     shape: "pack",
   },
   {
@@ -52,47 +56,38 @@ export const products: Product[] = [
     name: "Custom stickers",
     line: "Your artwork, your logo or your inside joke, cut into a sticker.",
     status: "available",
-    stickers: ["sticker-19", "sticker-21"],
+    stickers: ["lofi-02", "lofi-04"],
     shape: "large",
   },
   {
     id: "posters",
-    name: "Sticker posters",
-    line: "A4 and A3 sheets that sit between a poster and a sticker collection.",
-    status: "coming-soon",
+    name: "Peel-to-paste posters",
+    line: "A4 and A3 posters that peel and paste onto your wall. No frame, no nails.",
+    status: "available",
     shape: "poster",
   },
   {
     id: "framez",
     name: "Framez",
-    line: "A4 and A3 wall decor. Build a wall that feels like you.",
-    status: "coming-soon",
+    line: "Wall decor for a wall that feels like you.",
+    status: "available",
     shape: "frame",
   },
   {
     id: "cards",
     name: "Cards",
     line: "Art cards to collect, gift or pin above your desk.",
-    status: "coming-soon",
+    status: "available",
     shape: "cards",
   },
   {
     id: "music",
     name: "Music cards",
     line: "A card for the song that means something.",
-    status: "coming-soon",
+    status: "available",
     shape: "music",
   },
 ];
-
-// Collection concepts from the brand brief. Not live collections yet.
-export const vibes = [
-  "Late Night",
-  "Street Mode",
-  "Soft Aesthetic",
-  "Chaos Club",
-  "Goa Chill",
-] as const;
 
 export const customServices = [
   {
@@ -152,25 +147,41 @@ export const brandBrief = [
 export const faqs = [
   {
     q: "Where can I buy Stix N Vibes stickers?",
-    a: "Find us at pop-up stalls and events around Goa. You can also message us on Instagram or WhatsApp. An online shop is on the way.",
+    a: "Order from our shop at shop.stixnvibes.com, or find us at pop-up stalls around Goa where you can pay by cash or UPI. For custom orders, message us on Instagram.",
+  },
+  {
+    q: "Are the stickers waterproof?",
+    a: "Yes. We print on waterproof paper vinyl, so they handle splashes, bottles and bags. Our splash-proof paper is made for everyday use.",
+  },
+  {
+    q: "How fast do you dispatch?",
+    a: "We dispatch the next day.",
+  },
+  {
+    q: "What is live sticker cutting?",
+    a: "At our stalls we cut stickers live, right in front of you. Come watch and take one home.",
   },
   {
     q: "Can you make stickers from my own design?",
     a: "Yes. Send us your artwork or your idea through the contact form. Only send artwork that you own or have permission to use.",
   },
   {
+    q: "What shapes and cuts can you do?",
+    a: "Any. We cut on a Cricut, so die cut, kiss cut and custom shapes are all fine. Tell us what you have in mind.",
+  },
+  {
+    q: "Do you take sponsorships or stall invites?",
+    a: "Yes. If you run an event, a market or a college fest and want us there, or want to sponsor us, send an enquiry or DM us on Instagram.",
+  },
+  {
     q: "Do you take bulk and brand orders?",
     a: "Yes. Tell us what you need on the For Brands page. We reply with options and a quote for your project.",
   },
-  {
-    q: "When do posters, Framez and cards launch?",
-    a: "Soon. Follow us on Instagram to see them first.",
-  },
 ] as const;
 
-export const stickerCount = 32;
-export const stickerSrc = (id: string) => `/stickers/${id}.webp`;
+export const stickerCount = 17;
+export const stickerSrc = (id: string) => `/lofi/${id}.webp`;
 export const allStickers = Array.from(
   { length: stickerCount },
-  (_, i) => `sticker-${String(i + 1).padStart(2, "0")}`,
+  (_, i) => `lofi-${String(i + 1).padStart(2, "0")}`,
 );

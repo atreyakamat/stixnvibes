@@ -20,8 +20,8 @@ export default function AboutPage() {
     <>
       <PageIntro label="Our story" title={<>From Goa, <span className="text-lemon">for everywhere.</span></>}>
         <p>
-          {site.name} is a student-led startup. We design stickers, print them and sell them face to
-          face at pop-ups and events around Goa.
+          {site.name} is a student-led startup started by Atreya Kamat and Kritik Sawant. We design
+          stickers, print them and sell them face to face at pop-ups and events around Goa.
         </p>
       </PageIntro>
 
@@ -34,19 +34,19 @@ export default function AboutPage() {
             </h2>
             <Reveal className="mt-6 space-y-4 text-lg text-paper/75">
               <p>
-                We started with a simple idea. The things you carry every day can show what you love,
-                what makes you laugh and who your people are.
+                We wanted stickers, so we made some. Then it turned into a business. The things you
+                carry every day can show what you love, what makes you laugh and who your people are.
               </p>
               <p>
-                Today we make sticker packs and custom stickers. Posters, Framez wall decor and cards
-                are next.
+                Today we make waterproof sticker packs and custom stickers, plus A4 and A3
+                peel-to-paste posters and Framez. Art cards and music cards too. We dispatch the next day.
               </p>
             </Reveal>
           </div>
           <div className="relative mx-auto aspect-square w-full max-w-md lg:col-span-5 lg:col-start-8">
-            <Sticker id="sticker-02" rotate={-8} className="absolute left-0 top-[4%] w-[48%]" />
-            <Sticker id="sticker-22" rotate={8} className="absolute right-0 top-[18%] w-[48%]" />
-            <Sticker id="sticker-31" rotate={-4} className="absolute bottom-0 left-[20%] w-[54%]" />
+            <Sticker id="lofi-02" rotate={-8} className="absolute left-0 top-[4%] w-[48%]" />
+            <Sticker id="lofi-05" rotate={8} className="absolute right-0 top-[18%] w-[48%]" />
+            <Sticker id="lofi-14" rotate={-4} className="absolute bottom-0 left-[20%] w-[54%]" />
           </div>
         </div>
       </section>
