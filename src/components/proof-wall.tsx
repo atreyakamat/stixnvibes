@@ -2,6 +2,7 @@ import { LoopVideo } from "./loop-video";
 
 const CLIPS = [1, 2, 3, 4, 5, 6].map((n) => ({
   src: `/media/stall/clip-${n}.mp4`,
+  av1: `/media/stall/clip-${n}.av1.mp4`,
   poster: `/media/stall/clip-${n}.webp`,
 }));
 
@@ -21,6 +22,7 @@ export function ProofWall() {
         >
           <LoopVideo
             src={c.src}
+            av1={c.av1}
             poster={c.poster}
             alt="Students crowding a Stix N Vibes stall, picking stickers and posters"
             className="aspect-[9/16] rounded-[1.25rem] ring-1 ring-paper/10"

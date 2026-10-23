@@ -27,7 +27,7 @@ export const metadata: Metadata = {
     siteName: site.name,
     title: `${site.name} | Your stickers. Your vibe.`,
     description: site.description,
-    images: [{ url: "/og.jpg", width: 1200, height: 630, alt: "A desk covered in Stix N Vibes stickers" }],
+    images: [{ url: "/og.jpg", width: 1200, height: 630, alt: "Stix N Vibes stickers over a crowded stall in Goa" }],
   },
   twitter: { card: "summary_large_image" },
 };

@@ -76,7 +76,7 @@ export function CutScrub() {
       setStep(s);
     };
 
-    const io = new IntersectionObserver(([e]) => e.isIntersecting && load(), { rootMargin: "100% 0px" });
+    const io = new IntersectionObserver(([e]) => e.isIntersecting && load(), { rootMargin: "40% 0px" });
     io.observe(el);
     if (reduce) {
       load();

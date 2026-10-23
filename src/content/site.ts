@@ -88,15 +88,6 @@ export const products: Product[] = [
   },
 ];
 
-// Collection concepts from the brand brief. Not live collections yet.
-export const vibes = [
-  "Late Night",
-  "Street Mode",
-  "Soft Aesthetic",
-  "Chaos Club",
-  "Goa Chill",
-] as const;
-
 export const customServices = [
   {
     title: "Stickers from your artwork",

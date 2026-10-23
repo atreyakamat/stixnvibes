@@ -84,7 +84,7 @@ export function VibePicker() {
             </motion.div>
           </AnimatePresence>
         </div>
-        <p className="label mt-3 text-mute">Collections in the works. Artwork shown is a preview.</p>
+        <p className="label mt-3 text-mute">Every sticker shown is a real design. Ask for the set on Instagram.</p>
       </div>
     </div>
   );

@@ -39,7 +39,7 @@ export function StickerLab() {
   // Start with a sample sticker so the preview is never empty.
   useEffect(() => {
     let live = true;
-    loadImage("/stickers/sticker-12.webp").then((img) => {
+    loadImage("/lofi/lofi-14.webp").then((img) => {
       if (live) setSource({ img, transparent: true, demo: true });
     });
     return () => {

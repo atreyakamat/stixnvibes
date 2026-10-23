@@ -21,12 +21,15 @@ function canPlay() {
  */
 export function LoopVideo({
   src,
+  av1,
   poster,
   alt,
   className = "",
   priority = false,
 }: {
   src: string;
+  // Sharper AV1 version at a similar size; browsers without AV1 use `src`.
+  av1?: string;
   poster: string;
   alt: string;
   className?: string;
@@ -68,7 +71,6 @@ export function LoopVideo({
       {allowed && near && !failed && (
         <video
           ref={video}
-          src={src}
           muted
           loop
           playsInline
@@ -76,11 +78,13 @@ export function LoopVideo({
           preload="metadata"
           aria-hidden="true"
           onPlaying={() => setPlaying(true)}
-          onError={() => setFailed(true)}
           className={`absolute inset-0 size-full object-cover transition-opacity duration-700 ${
             playing ? "opacity-100" : "opacity-0"
           }`}
-        />
+        >
+          {av1 && <source src={av1} type='video/mp4; codecs="av01.0.08M.10"' />}
+          <source src={src} type="video/mp4" onError={() => setFailed(true)} />
+        </video>
       )}
     </div>
   );

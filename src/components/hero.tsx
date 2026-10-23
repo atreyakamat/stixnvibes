@@ -19,13 +19,14 @@ export function Hero() {
       <div className="absolute inset-0 -z-10">
         <LoopVideo
           src="/media/stall/hero-wide.mp4"
+          av1="/media/stall/hero-wide.av1.mp4"
           poster="/media/stall/hero-wide.webp"
           alt="Students crowding around a Stix N Vibes sticker stall at a college in Goa"
           className="hidden size-full md:block"
-          priority
         />
         <LoopVideo
           src="/media/stall/hero-tall.mp4"
+          av1="/media/stall/hero-tall.av1.mp4"
           poster="/media/stall/hero-tall.webp"
           alt="Students crowding around a Stix N Vibes sticker stall at a college in Goa"
           className="size-full md:hidden"
