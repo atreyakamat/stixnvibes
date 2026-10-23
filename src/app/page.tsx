@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { Hero } from "@/components/hero";
 import { FindUs } from "@/components/find-us";
-import { CutScrub } from "@/components/cut-scrub";
+import { StallReel } from "@/components/stall-reel";
 import { ProofWall } from "@/components/proof-wall";
 import { Reveal } from "@/components/reveal";
 import { StickerMarquee } from "@/components/sticker-marquee";
@@ -45,7 +45,7 @@ export default function Home() {
         </div>
       </section>
 
-      <CutScrub />
+      <StallReel />
 
       {/* 02 Products */}
       <section id="products" aria-labelledby="products-title" className="scroll-mt-24 pt-28 md:pt-40">

@@ -384,3 +384,48 @@ html {
     translate: 0 -30px;
   }
 }
+
+/* Stall reel: the frame grows as the section pins (`--grow` 0 to 1 is set
+   from scroll) and stickers slap on one by one. */
+.reel-frame {
+  transform: scale(calc(0.84 + var(--grow, 1) * 0.16)) rotate(calc((1 - var(--grow, 1)) * -5deg));
+  transform-origin: center;
+}
+.slap {
+  translate: -50% -50%;
+  rotate: var(--r, 0deg);
+}
+.text-sticker {
+  border-radius: 0.6em;
+  background: var(--color-lemon);
+  color: var(--color-ink);
+  padding: 0.35em 0.7em 0.3em;
+  outline: 0.18em solid var(--color-paper);
+  box-shadow: 0 14px 22px rgb(0 0 0 / 0.5);
+}
+.js .slap:not([data-stuck]) {
+  opacity: 0;
+  scale: 1.6;
+}
+.slap[data-stuck] {
+  animation: slap 0.5s var(--ease-out-expo) both;
+}
+@keyframes slap {
+  0% {
+    opacity: 0;
+    scale: 1.6;
+  }
+  55% {
+    opacity: 1;
+    scale: 0.92;
+  }
+  100% {
+    opacity: 1;
+    scale: 1;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .slap[data-stuck] {
+    animation: none;
+  }
+}

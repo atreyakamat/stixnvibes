@@ -34,7 +34,7 @@ open http://localhost:4310.
 | – | Hero | `hero.tsx`, `sticker-board.tsx` | Real stall footage. Visitors peel stickers off and stick them anywhere on the page. |
 | – | Sticker marquee | `sticker-marquee.tsx` | CSS loop of the designs. Pauses on hover. |
 | 01 | Why stickers | `sticker-gravity.tsx` | Physics pile you can throw around (tap to flick on phones). |
-| – | We cut it live | `cut-scrub.tsx` | Scroll plays the Cricut clip frame by frame on a canvas. |
+| – | Pull up to the stall | `stall-reel.tsx` | The stall reel, pinned while you scroll. The frame grows, the headline lights up and six stickers slap onto it and stay stuck. |
 | 02 | What we make | `ui.tsx` (`ProductGrid`) | Products from `src/content/site.ts`. |
 | – | Goa queues for this | `proof-wall.tsx`, `loop-video.tsx` | Six stall clips that play only while on screen. |
 | 03 | Pick your vibe | `vibe-picker.tsx` | Collections from `src/content/vibes.ts`. |
@@ -55,7 +55,7 @@ Other pages: `/custom` (cut preview and artwork upload), `/brands`, `/about`, `/
 | Pop-up dates | `src/content/popups.ts` (add `{ date, name, place, note }`; past dates hide themselves) |
 | Sticker art | `public/lofi/` and `src/content/stickers.ts` (sizes) |
 | Hero and stall videos | `public/media/stall/` (see "Media" below) |
-| Cutting clip frames | `public/media/cut/f-001.webp` … `f-072.webp` |
+| Stall reel and the stickers that slap onto it | `public/media/stall/reel.*` and `STICKERS` in `src/components/stall-reel.tsx` |
 | Share image (WhatsApp, Instagram, X previews) | `public/og.jpg`, 1200 × 630 |
 | Forms | `src/components/enquiry-form.tsx`, `sticker-lab.tsx` and `public/__forms.html` (keep field names in sync) |
 
@@ -71,7 +71,7 @@ swapping a clip.
 | `hero-tall.av1.mp4` / `hero-tall.mp4` | same clip | Phone hero. 1080 × 1920. |
 | `clip-1` … `clip-6` | six stall clips (listed in the script) | Proof wall, 720 × 1280. |
 | `*.webp` posters | first second of each clip | Shown instantly; the video fades in over it. The phone hero poster is 828 px. |
-| `public/media/cut/` | `VID_20260925_065824094` | 72 WebP frames of the Cricut cutting. |
+| `reel.av1.mp4` / `reel.mp4` | `Video-6092` (the edited stall reel) | 720 × 1280, muted, first 9.6 s (the "Follow us" end card is cut; the section has a real Follow button). |
 | `public/lofi/` | `Untitled design (1).zip` | 17 designs, background removed, 420 px WebP. |
 
 How video loads:
@@ -102,8 +102,8 @@ Lighthouse with real throttling (23 Oct 2026): phone 88–89 (hero visible in
 - The phone hero poster is fetched first and kept under 100 KB (828 px). Keep it
   that small if you replace it: it decides how fast the page looks loaded.
 - Stickers are 420 px WebP (about 40 KB each) and load lazily below the hero.
-- Heavy pieces load late: matter-js when the pile is near, cutting frames when
-  that section is near, videos after page load.
+- Heavy pieces load late: matter-js when the pile is near, videos after page
+  load and only while on screen.
 - Effects use transforms and canvas only. Nothing runs off screen.
 
 ## Effects and fallbacks
@@ -112,7 +112,7 @@ Lighthouse with real throttling (23 Oct 2026): phone 88–89 (hero visible in
 | --- | --- | --- | --- |
 | Peel-and-stick hero | Stickers hidden, page works | Works without the squash animation | Four stickers, smaller |
 | Sticker pile | Static pile | Static pile | Tap to flick, page still scrolls |
-| Cutting scrub | Section shows text | One still frame | Same, compact list |
+| Stall reel | Poster with every sticker shown | Poster, no pinning, every sticker shown | Smaller frame, headline on one line |
 | Videos | Poster image | Poster image | Phone-shaped hero clip |
 | Glass header | Solid fallback where blur is unsupported | Same | Same |
 

@@ -1,9 +1,10 @@
 #!/usr/bin/env bash
-# Rebuilds every video, poster and cutting frame in public/media from the
+# Rebuilds every video and poster in public/media from the
 # original phone clips (G:\Assets). Needs ffmpeg with libsvtav1 and libx264.
 #
 #   SRC=/path/to/Assets scripts/encode-media.sh            # everything
 #   SRC=/path/to/Assets scripts/encode-media.sh hero       # only the hero
+#   (groups: hero, clips, reel)
 #
 # Each video is written twice: AV1 (sharp at a small size, used by most
 # browsers) and H.264 (fallback for older iPhones and Safari).
@@ -22,7 +23,9 @@ CLIPS=(
   VID_20260421_111806788.mp4
   VID_20261015_113815052.mp4
 )
-CUT="VID_20260925_065824094 (2).mp4"
+# Edited stall reel (Video-6092). The end card is trimmed off at 9.6 s; the
+# section has its own Follow button.
+REEL="Video-6092.mp4"
 
 SHARPEN="cas=0.25"
 WIDE_CROP="crop=2160:1350:0:(ih-1350)/2+300"
@@ -31,7 +34,7 @@ av1() { local out=$1; shift; ffmpeg -v error -y "$@" -an -c:v libsvtav1 -preset 
 h264() { local out=$1; shift; ffmpeg -v error -y "$@" -an -c:v libx264 -preset slower -tune film -profile:v high -pix_fmt yuv420p -movflags +faststart "$out"; }
 still() { local out=$1 vf=$2 in=$3 q=$4; ffmpeg -v error -y -ss 1 -i "$in" -frames:v 1 -vf "$vf" -c:v libwebp -quality "$q" "$out"; }
 
-mkdir -p "$OUT/stall" "$OUT/cut"
+mkdir -p "$OUT/stall"
 
 if [[ $ONLY == all || $ONLY == hero ]]; then
   in="$SRC/$HERO"
@@ -56,11 +59,12 @@ if [[ $ONLY == all || $ONLY == clips ]]; then
   done
 fi
 
-if [[ $ONLY == all || $ONLY == cut ]]; then
-  rm -f "$OUT"/cut/f-*.webp
-  # 72 frames across the whole clip, cropped to the cutting area.
-  ffmpeg -v error -y -i "$SRC/$CUT" -vf "fps=72/27.35,crop=2160:2700:0:200,scale=760:-2:flags=lanczos" \
-    -c:v libwebp -quality 74 "$OUT/cut/f-%03d.webp"
+if [[ $ONLY == all || $ONLY == reel ]]; then
+  in="$SRC/$REEL"
+  # The source is already 720 x 1280, so it keeps its size and gets more bits.
+  av1  "$OUT/stall/reel.av1.mp4" -t 9.6 -i "$in" -vf "cas=0.2" -crf 36
+  h264 "$OUT/stall/reel.mp4"     -t 9.6 -i "$in" -vf "cas=0.2" -crf 23
+  ffmpeg -v error -y -ss 1.2 -i "$in" -frames:v 1 -vf "cas=0.2" -c:v libwebp -quality 78 "$OUT/stall/reel.webp"
 fi
 
 echo "Done. Sizes:"
