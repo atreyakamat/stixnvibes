@@ -14,7 +14,7 @@ export const site = {
   shop: "https://shop.stixnvibes.com",
   // Behold JSON feed of the Instagram account (feeds.behold.so/<id>). Empty
   // hides the "Latest on Instagram" strip.
-  instagramFeed: "",
+  instagramFeed: "https://feeds.behold.so/KvgXwivRlCDgbWJhgv9T",
   contact: {
     email: "hello@stixnvibes.com",
     instagram: "https://instagram.com/stixnvibes",
