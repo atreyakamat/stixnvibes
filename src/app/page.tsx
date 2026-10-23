@@ -5,6 +5,7 @@ import { StallReel } from "@/components/stall-reel";
 import { InstagramLatest } from "@/components/instagram-latest";
 import { ProofWall } from "@/components/proof-wall";
 import { Reveal } from "@/components/reveal";
+import { StuckWall } from "@/components/stuck-wall";
 import { StickerMarquee } from "@/components/sticker-marquee";
 import { StickerGravity } from "@/components/sticker-gravity";
 import { VibePicker } from "@/components/vibe-picker";
@@ -91,6 +92,8 @@ export default function Home() {
           </div>
         </div>
       </section>
+
+      <StuckWall />
 
       {/* 03 Pick your vibe */}
       <section id="vibes" aria-labelledby="vibes-title" className="scroll-mt-24 pt-28 md:pt-40">

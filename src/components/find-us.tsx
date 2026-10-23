@@ -15,6 +15,10 @@ export function FindUs() {
           We set up at college events, markets and pop-ups around Goa, mostly on weekends. Dates go on
           Instagram first. We cut stickers live at the stall, so come watch. Cash and UPI both work.
         </p>
+        <p className="mt-8 flex flex-wrap items-center gap-3">
+          <span className="text-sticker display -rotate-2 text-xl md:text-2xl">Free mini sticker</span>
+          <span className="text-paper/80">Show us you follow {site.contact.instagramHandle} at the stall.</span>
+        </p>
         <div className="mt-8 flex flex-wrap gap-3">
           <a href={site.contact.instagramDm} target="_blank" rel="noopener" className="btn btn-primary">
             DM us on Instagram
@@ -50,7 +54,7 @@ export function FindUs() {
               bring the stickers, the Cricut and the crowd.
             </p>
             <div className="mt-8 flex flex-wrap gap-3">
-              <Link href="/contact/" className="btn btn-primary">
+              <Link href="/book/" className="btn btn-primary">
                 Invite us to your event
               </Link>
               <a href={site.contact.instagramDm} target="_blank" rel="noopener" className="btn btn-ghost">

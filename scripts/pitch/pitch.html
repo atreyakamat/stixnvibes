@@ -1,0 +1,108 @@
+<!doctype html>
+<!-- One-page organiser pitch. Render with `node scripts/pitch/render.mjs`,
+     which writes public/stixnvibes-stall-pitch.pdf. Keep the copy in step with
+     src/content/book.ts. -->
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<style>
+  @font-face { font-family: B; src: url(fonts/brico.woff2) format("woff2"); font-weight: 200 800; font-stretch: 75% 100%; }
+  @font-face { font-family: G; src: url(fonts/geist.woff2) format("woff2"); font-weight: 100 900; }
+  @page { size: A4; margin: 0; }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body { width: 210mm; height: 297mm; }
+  body { background: #070707; color: #f5f5ef; font-family: G, sans-serif; position: relative; overflow: hidden; font-size: 3.4mm; line-height: 1.45; }
+  .d { font-family: B; font-weight: 800; font-stretch: 75%; text-transform: uppercase; letter-spacing: -0.02em; line-height: 0.88; }
+  .lemon { color: #d7ff3f; }
+  .wrap { position: absolute; inset: 11mm 13mm; display: flex; flex-direction: column; }
+  .wrap > * { flex-shrink: 0; }
+  .top { display: flex; justify-content: space-between; align-items: center; }
+  .mark { display: flex; align-items: center; gap: 2mm; font-size: 7mm; }
+  .n { display: inline-grid; place-items: center; width: 7mm; height: 7mm; border-radius: 50%; background: #d7ff3f; color: #070707; font-size: 4.4mm; transform: rotate(-12deg); }
+  .pill { font-size: 2.7mm; letter-spacing: 0.18em; text-transform: uppercase; color: #9a9a94; }
+  h1 { font-size: 17mm; margin-top: 7mm; }
+  .lead { margin-top: 4mm; max-width: 140mm; font-size: 4mm; color: #c9c9c2; }
+  .photo { margin-top: 5mm; height: 54mm; border-radius: 5mm; overflow: hidden; position: relative; }
+  .photo img { width: 100%; height: 100%; object-fit: cover; object-position: center 40%; display: block; }
+  .tag { position: absolute; left: 4mm; bottom: 4mm; background: #d7ff3f; color: #070707; border-radius: 2mm; padding: 1.4mm 2.6mm 1mm; font-size: 4.6mm; outline: 0.6mm solid #f5f5ef; transform: rotate(-2deg); }
+  .label { font-size: 2.6mm; letter-spacing: 0.18em; text-transform: uppercase; color: #9a9a94; }
+  .grid { margin-top: 5mm; display: grid; grid-template-columns: repeat(4, 1fr); gap: 0.3mm; background: #292929; border: 0.3mm solid #292929; border-radius: 4mm; overflow: hidden; }
+  .grid div { background: #070707; padding: 3.5mm 4mm 4mm; }
+  .grid h3 { font-size: 5.4mm; margin: 2.5mm 0 1.5mm; }
+  .grid p { color: #b9b9b2; font-size: 3mm; line-height: 1.4; }
+  .drop { margin-top: 5mm; background: #d7ff3f; color: #070707; border-radius: 5mm; padding: 5mm 6mm; display: grid; grid-template-columns: 62mm 1fr; gap: 6mm; align-items: center; position: relative; }
+  .drop h2 { font-size: 9mm; }
+  .drop p { font-size: 3.4mm; color: #2a2a2a; }
+  .row { margin-top: 5mm; display: grid; grid-template-columns: 1fr 1fr; gap: 6mm; }
+  .row h2 { font-size: 7.6mm; margin-top: 2mm; }
+  .row ul { list-style: none; margin-top: 2.5mm; }
+  .row li { display: flex; gap: 2.5mm; margin-top: 1.5mm; color: #dcdcd5; }
+  .row li::before { content: ""; width: 1.4mm; height: 1.4mm; border-radius: 50%; background: #d7ff3f; margin-top: 1.6mm; flex-shrink: 0; }
+  .foot { margin-top: auto; display: flex; gap: 6mm; align-items: center; border-top: 0.3mm solid #292929; padding-top: 5mm; }
+  .qr { background: #fff; border-radius: 3mm; padding: 2mm; }
+  .qr img { display: block; width: 28mm; height: 28mm; }
+  .foot .t { font-size: 7.5mm; }
+  .contact { margin-top: 2.5mm; display: grid; grid-template-columns: auto auto; gap: 1mm 8mm; color: #dcdcd5; font-size: 3.3mm; }
+  .contact b { color: #9a9a94; font-weight: 500; margin-right: 2mm; }
+  .st { position: absolute; filter: drop-shadow(0 1.2mm 1.6mm rgb(0 0 0 / 0.6)); }
+</style>
+</head>
+<body>
+  <img class="st" src="sticker.png" style="width:34mm; right:8mm; top:30mm; transform:rotate(10deg); z-index:2" />
+  <div class="wrap">
+    <div class="top">
+      <div class="mark d">Stix <span class="n">N</span> Vibes</div>
+      <p class="pill">Student-led sticker stall · Goa</p>
+    </div>
+
+    <h1 class="d">Bring the stall<br /><span class="lemon">to your fest.</span></h1>
+    <p class="lead">We set up at college fests, markets and pop-ups around Goa, cut stickers live and bring a crowd with us.</p>
+
+    <div class="photo">
+      <img src="photo.jpg" alt="" />
+      <span class="tag d">Real stall. Real crowd.</span>
+    </div>
+
+    <div class="grid">
+      <div><p class="label">01</p><h3 class="d">Live sticker cutting</h3><p>A Cricut on the table cutting stickers while people watch. It pulls a crowd every time.</p></div>
+      <div><p class="label">02</p><h3 class="d">Tables full of designs</h3><p>Waterproof stickers, peel-to-paste posters, Framez, art cards and music cards.</p></div>
+      <div><p class="label">03</p><h3 class="d">A student-led story</h3><p>Two students who built a sticker brand in Goa. It fits college fests and youth events.</p></div>
+      <div><p class="label">04</p><h3 class="d">Quick queues</h3><p>Cash or UPI, small prices and fast picks, so the line keeps moving.</p></div>
+    </div>
+
+    <div class="drop">
+      <h2 class="d">A drop made for your fest.</h2>
+      <p>We design 3 to 5 stickers just for your event: your fest name, your campus, your inside jokes. They're sold only at your stall, so people grab them and post them.</p>
+    </div>
+
+    <div class="row">
+      <div>
+        <p class="label">Proof</p>
+        <h2 class="d">Best stall so far: <span class="lemon">WordsUp at Xavier's.</span></h2>
+        <p style="margin-top:2.5mm; color:#c9c9c2">Every stall goes on Instagram at @stixnvibes, so you can see the crowd before you book us.</p>
+      </div>
+      <div>
+        <p class="label">What we need</p>
+        <ul>
+          <li>A spot about the size of one or two tables</li>
+          <li>A plug point nearby for the Cricut</li>
+          <li>Your event name, date and expected crowd</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="foot">
+      <div class="qr"><img src="book-qr.svg" alt="" /></div>
+      <div>
+        <p class="t d">Invite us: <span class="lemon">stixnvibes.com/book</span></p>
+        <div class="contact">
+          <span><b>Instagram</b>@stixnvibes</span>
+          <span><b>WhatsApp</b>+91 77440 20601</span>
+          <span><b>Email</b>stixnvibes@gmail.com</span>
+          <span><b>Founders</b>Atreya Kamat, Kritik Sawant</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

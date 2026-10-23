@@ -58,6 +58,8 @@ Other pages: `/custom` (cut preview and artwork upload), `/brands`, `/about`, `/
 | Stall reel and the stickers that slap onto it | `public/media/stall/reel.*` and `STICKERS` in `src/components/stall-reel.tsx` |
 | Share image (WhatsApp, Instagram, X previews) | `public/og.jpg`, 1200 × 630 |
 | Forms | `src/components/enquiry-form.tsx`, `sticker-lab.tsx` and `public/__forms.html` (keep field names in sync) |
+| Book a stall page and the organiser pitch PDF | `src/content/book.ts`, `src/app/book/page.tsx`; PDF source in `scripts/pitch/` (`node scripts/pitch/render.mjs` rewrites `public/stixnvibes-stall-pitch.pdf`) |
+| Customer reviews and photos ("Stuck on you" wall) | `src/content/reviews.ts`; empty frames ask people to tag us until there are three |
 
 ## Media
 
