@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { site } from "@/content/site";
 import { popUps } from "@/content/popups";
 
@@ -11,7 +12,7 @@ export function FindUs() {
     <div className="grid gap-10 lg:grid-cols-12">
       <div className="lg:col-span-5">
         <p className="max-w-md text-lg text-paper/75">
-          We set up at college events, markets and pop-ups around Goa, mostly on Sundays. Dates go on
+          We set up at college events, markets and pop-ups around Goa, mostly on weekends. Dates go on
           Instagram first. We cut stickers live at the stall, so come watch. Cash and UPI both work.
         </p>
         <div className="mt-8 flex flex-wrap gap-3">
@@ -43,10 +44,19 @@ export function FindUs() {
         ) : (
           <div className="ice rounded-[1.5rem] p-8 md:p-10">
             <p className="label text-lemon">Next stall</p>
-            <p className="display mt-4 text-5xl md:text-6xl">Dates drop on Instagram.</p>
+            <p className="display mt-4 text-5xl md:text-6xl">Always up for a pop-up.</p>
             <p className="mt-4 max-w-md text-paper/70">
-              Send us a DM and we tell you where we are setting up next.
+              Weekends get us excited. Running a fest, a market or a college event? Invite us and we
+              bring the stickers, the Cricut and the crowd.
             </p>
+            <div className="mt-8 flex flex-wrap gap-3">
+              <Link href="/contact/" className="btn btn-primary">
+                Invite us to your event
+              </Link>
+              <a href={site.contact.instagramDm} target="_blank" rel="noopener" className="btn btn-ghost">
+                Ask where we are next
+              </a>
+            </div>
           </div>
         )}
       </div>

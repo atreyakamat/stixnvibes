@@ -82,7 +82,7 @@ export default function Home() {
               for <span className="text-lemon">this.</span>
             </h2>
             <Reveal className="max-w-sm text-paper/70">
-              College fests, Sunday stalls, every one of them packed. Real clips, no actors.
+              College fests, weekend stalls, every one of them packed. Real clips, no actors.
             </Reveal>
           </div>
           <div className="mt-12 md:mt-16">
