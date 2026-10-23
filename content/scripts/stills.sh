@@ -1,17 +1,17 @@
 #!/usr/bin/env bash
-# Render one still per scene (mid-scene) for a quick visual check.
-# Usage: scripts/stills.sh day-02 [day-05 ...]
+# Render one still per scene (mid-scene) and a contact sheet, for a quick visual check.
+# Usage: scripts/stills.sh day-02 [r001 ...]
 set -euo pipefail
 cd "$(dirname "$0")/.."
 B="${REMOTION_BROWSER:-/opt/pw-browsers/chromium_headless_shell-1243/chrome-headless-shell-linux64/chrome-headless-shell}"
 mkdir -p out/stills
 for id in "$@"; do
-  day=$((10#${id#day-}))
+  # Mirrors src/timeline.ts (which can't load in plain node because of the font import).
   frames=$(node --experimental-strip-types -e "
-    import('./src/reels.ts').then(async ({REELS}) => {
+    import('./src/catalog.ts').then(async ({findReel}) => {
       const vo = (await import('./src/vo.json', {with: {type: 'json'}})).default;
-      const reel = REELS.find(r => r.day === $day); let at = 0; const out = [];
-      reel.scenes.forEach((s, i) => { const v = s.vo ? (vo[\`\${$day}-\${i}\`] ?? 0) + 0.3 : 0;
+      const reel = findReel('$id'); let at = 0; const out = [];
+      reel.scenes.forEach((s, i) => { const v = s.vo ? (vo['$id-' + i] ?? 0) + 0.3 + (reel.breath ?? 0) : 0;
         const f = Math.ceil(Math.max(s.min ?? (s.kind === 'cta' ? 2 : 1.8), v) * 30); out.push(at + Math.floor(f * 0.7)); at += f; });
       console.log(out.join(' '));
     });" 2>/dev/null)
