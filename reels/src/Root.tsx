@@ -3,7 +3,7 @@ import { Composition } from "remotion";
 import { FPS, H, W } from "./brand";
 import { REELS } from "./reels";
 import { ReelComposition } from "./Reel";
-import { sceneStarts } from "./timeline";
+import { reelTimeline } from "./timeline";
 
 export const RemotionRoot: React.FC = () => (
   <>
@@ -15,7 +15,7 @@ export const RemotionRoot: React.FC = () => (
         fps={FPS}
         width={W}
         height={H}
-        durationInFrames={sceneStarts(reel).total}
+        durationInFrames={reelTimeline(reel).total}
         defaultProps={{ day: reel.day, music: true }}
       />
     ))}

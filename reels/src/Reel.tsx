@@ -1,10 +1,10 @@
 import React from "react";
 import { AbsoluteFill, Audio, interpolate, Sequence, staticFile, useCurrentFrame, useVideoConfig } from "remotion";
 import { C, fontFamily, SAFE } from "./brand";
-import { CtaScene, DesignsScene, FootageScene, LaptopScene, ListScene, TitleScene, VersusScene } from "./components/scenes";
+import { CtaScene, DesignsScene, FootageScene, ListScene, TitleScene, VersusScene } from "./components/scenes";
 import musicWindows from "./music-windows.json";
 import { REELS, type Scene } from "./reels";
-import { sceneFrames, sceneStarts, VO_LEAD, voSeconds } from "./timeline";
+import { reelTimeline, VO_LEAD, voSeconds } from "./timeline";
 
 export type ReelProps = { day: number; music: boolean };
 
@@ -20,8 +20,6 @@ const SceneView: React.FC<{ scene: Scene; frames: number; day: number }> = ({ sc
       return <VersusScene scene={scene} frames={frames} day={day} />;
     case "designs":
       return <DesignsScene scene={scene} frames={frames} day={day} />;
-    case "laptop":
-      return <LaptopScene scene={scene} frames={frames} day={day} />;
     case "cta":
       return <CtaScene scene={scene} frames={frames} day={day} />;
   }
@@ -111,7 +109,7 @@ const Subtitles: React.FC<{ text: string; seconds: number }> = ({ text, seconds 
 export const ReelComposition: React.FC<ReelProps> = ({ day, music }) => {
   const reel = REELS.find((r) => r.day === day)!;
   const { fps, durationInFrames } = useVideoConfig();
-  const { starts } = sceneStarts(reel);
+  const { starts, frames } = reelTimeline(reel);
   const window = musicWindows[reel.music];
   const musicStart = window.starts[day % window.starts.length];
   const spoken = (f: number) =>
@@ -120,8 +118,8 @@ export const ReelComposition: React.FC<ReelProps> = ({ day, music }) => {
   return (
     <AbsoluteFill style={{ background: C.ink }}>
       {reel.scenes.map((scene, i) => (
-        <Sequence key={i} from={starts[i]} durationInFrames={sceneFrames(reel, i)} name={`${i}: ${scene.kind}`}>
-          <SceneView scene={scene} frames={sceneFrames(reel, i)} day={day} />
+        <Sequence key={i} from={starts[i]} durationInFrames={frames[i]} name={`${i}: ${scene.kind}`}>
+          <SceneView scene={scene} frames={frames[i]} day={day} />
           {scene.vo ? (
             <Sequence from={Math.round(VO_LEAD * fps)}>
               <Audio src={staticFile(`vo/day-${String(day).padStart(2, "0")}/s${i}.wav`)} volume={1} />

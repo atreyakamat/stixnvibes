@@ -11,8 +11,8 @@ for id in "$@"; do
     import('./src/reels.ts').then(async ({REELS}) => {
       const vo = (await import('./src/vo.json', {with: {type: 'json'}})).default;
       const reel = REELS.find(r => r.day === $day); let at = 0; const out = [];
-      reel.scenes.forEach((s, i) => { const v = s.vo ? (vo[\`\${$day}-\${i}\`] ?? 0) + 0.55 : 0;
-        const f = Math.ceil(Math.max(s.min ?? (s.kind === 'cta' ? 2.4 : 2.5), v) * 30); out.push(at + Math.floor(f * 0.7)); at += f; });
+      reel.scenes.forEach((s, i) => { const v = s.vo ? (vo[\`\${$day}-\${i}\`] ?? 0) + 0.3 : 0;
+        const f = Math.ceil(Math.max(s.min ?? (s.kind === 'cta' ? 2 : 1.8), v) * 30); out.push(at + Math.floor(f * 0.7)); at += f; });
       console.log(out.join(' '));
     });" 2>/dev/null)
   for f in $frames; do

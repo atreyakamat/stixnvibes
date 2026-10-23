@@ -139,8 +139,8 @@ export const DotGrid: React.FC<{ color?: string }> = ({ color = "rgba(255,255,25
 );
 
 /** Quick white flash on a cut, so edits land on the beat. */
-export const CutFlash: React.FC = () => {
+export const CutFlash: React.FC<{ strength?: number }> = ({ strength = 0.55 }) => {
   const frame = useCurrentFrame();
-  const o = interpolate(frame, [0, 4], [0.55, 0], { extrapolateRight: "clamp" });
+  const o = interpolate(frame, [0, 3], [strength, 0], { extrapolateRight: "clamp" });
   return <div style={{ position: "absolute", inset: 0, background: C.white, opacity: o, pointerEvents: "none" }} />;
 };

@@ -30,17 +30,32 @@ const textBase: React.CSSProperties = {
 
 // ---------------------------------------------------------------- footage
 
-const ClipVideo: React.FC<{ name: keyof typeof CLIPS; frames: number }> = ({ name, frames }) => {
+/** Target seconds per cut. Short cuts keep reels fast. */
+const CUT = 0.85;
+
+const ClipVideo: React.FC<{ name: keyof typeof CLIPS; frames: number; offset?: number; punch?: boolean }> = ({
+  name,
+  frames,
+  offset = 0,
+  punch,
+}) => {
   const { fps } = useVideoConfig();
   const frame = useCurrentFrame();
   const [file, from, to] = CLIPS[name];
+  const seconds = frames / fps;
   // Slow the clip down rather than freeze when the slot is longer than the clip.
-  const rate = Math.min(1, Math.max(0.35, (to - from) / (frames / fps)));
+  const rate = Math.min(1, Math.max(0.35, (to - from) / seconds));
+  const room = Math.max(0, to - from - seconds * rate);
+  const start = from + (room > 0 ? offset % room : 0);
   return (
-    <AbsoluteFill style={{ scale: String(interpolate(frame, [0, frames], [1.1, 1.0])) }}>
+    <AbsoluteFill
+      style={{
+        scale: String(punch ? interpolate(frame, [0, 5, frames], [1.22, 1.12, 1.08], { extrapolateRight: "clamp" }) : interpolate(frame, [0, frames], [1.1, 1.0])),
+      }}
+    >
       <OffthreadVideo
         src={staticFile(`footage/${file}.mp4`)}
-        startFrom={Math.round(from * fps)}
+        startFrom={Math.round(start * fps)}
         playbackRate={rate}
         muted
         style={{ width: "100%", height: "100%", objectFit: "cover" }}
@@ -49,16 +64,28 @@ const ClipVideo: React.FC<{ name: keyof typeof CLIPS; frames: number }> = ({ nam
   );
 };
 
+/** Split a scene into fast cuts, cycling clips and jumping to new moments in each. */
+const cutsFor = (clips: (keyof typeof CLIPS)[], frames: number, fps: number) => {
+  const count = Math.max(clips.length, Math.round(frames / fps / CUT));
+  const per = Math.floor(frames / count);
+  const seen: Record<string, number> = {};
+  return Array.from({ length: count }, (_, k) => {
+    const name = clips[k % clips.length];
+    const j = (seen[name] = (seen[name] ?? -1) + 1);
+    return { name, from: k * per, frames: k === count - 1 ? frames - k * per : per, offset: j * 1.37, punch: k % 2 === 1 };
+  });
+};
+
 export const FootageScene: React.FC<Props<"footage">> = ({ scene, frames }) => {
-  const slot = Math.ceil(frames / scene.clips.length);
+  const { fps } = useVideoConfig();
   const words = scene.text?.split(" ") ?? [];
   const frame = useCurrentFrame();
   return (
     <AbsoluteFill style={{ background: C.ink }}>
-      {scene.clips.map((clip, i) => (
-        <Sequence key={i} from={i * slot} durationInFrames={slot}>
-          <ClipVideo name={clip} frames={slot} />
-          <CutFlash />
+      {cutsFor(scene.clips, frames, fps).map((cut, i) => (
+        <Sequence key={i} from={cut.from} durationInFrames={cut.frames}>
+          <ClipVideo name={cut.name} frames={cut.frames} offset={cut.offset} punch={cut.punch} />
+          <CutFlash strength={i === 0 ? 0.55 : 0.2} />
         </Sequence>
       ))}
       <AbsoluteFill
@@ -454,77 +481,10 @@ const FlashCuts: React.FC<{ frames: number; count: number }> = ({ frames, count 
     <>
       {Array.from({ length: count }, (_, i) => (
         <Sequence key={i} from={i * per} durationInFrames={per}>
-          <CutFlash />
+          <CutFlash strength={i === 0 ? 0.55 : 0.12} />
         </Sequence>
       ))}
     </>
-  );
-};
-
-// ---------------------------------------------------------------- laptop
-
-const LAPTOP_SPOTS = [
-  [70, 60, 300, -10],
-  [470, 40, 250, 8],
-  [560, 300, 280, -6],
-  [120, 360, 260, 12],
-  [330, 200, 230, -3],
-  [20, 560, 230, 6],
-  [430, 570, 250, -12],
-  [700, 520, 200, 9],
-] as const;
-
-export const LaptopScene: React.FC<Props<"laptop">> = ({ scene, frames }) => {
-  const frame = useCurrentFrame();
-  const ids = scene.ids.slice(0, LAPTOP_SPOTS.length);
-  const start = 14;
-  const gap = Math.max(6, Math.floor((frames - start - 40) / ids.length));
-  const done = start + gap * ids.length;
-  const beforeAfter = interpolate(frame, [done, done + 10], [0, 1], { extrapolateLeft: "clamp", extrapolateRight: "clamp" });
-  return (
-    <AbsoluteFill style={{ background: C.ink, overflow: "hidden" }}>
-      <DotGrid />
-      <div style={{ position: "absolute", left: 60, right: 60, top: 560 }}>
-        <div
-          style={{
-            position: "relative",
-            height: 820,
-            borderRadius: 46,
-            background: "linear-gradient(160deg, #3a3a3e, #1f1f22)",
-            border: "6px solid #4b4b50",
-            boxShadow: "0 40px 80px rgba(0,0,0,0.6)",
-            overflow: "hidden",
-          }}
-        >
-          {ids.map((n, i) => {
-            const [x, y, w, r] = LAPTOP_SPOTS[i];
-            const p = spring({ frame: frame - start - i * gap, fps: 30, config: { damping: 10, stiffness: 220 } });
-            return (
-              <Design
-                key={n}
-                n={n}
-                width={w}
-                style={{
-                  position: "absolute",
-                  left: x,
-                  top: y,
-                  opacity: p > 0.01 ? 1 : 0,
-                  scale: String(interpolate(p, [0, 1], [1.9, 1])),
-                  rotate: `${interpolate(p, [0, 1], [r * 3, r])}deg`,
-                }}
-              />
-            );
-          })}
-        </div>
-        <div style={{ height: 40, margin: "0 -40px", background: "linear-gradient(#55555a, #2c2c30)", borderRadius: "0 0 40px 40px" }} />
-      </div>
-      <div style={{ position: "absolute", top: SAFE.top + 60, left: 0, right: 0, textAlign: "center" }}>
-        <Tag size={72} tilt={-3}>
-          {beforeAfter > 0.5 ? "After" : scene.text ?? "Before"}
-        </Tag>
-      </div>
-      <CutFlash />
-    </AbsoluteFill>
   );
 };
 

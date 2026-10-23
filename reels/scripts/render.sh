@@ -9,8 +9,8 @@ B="${REMOTION_BROWSER:-/opt/pw-browsers/chromium_headless_shell-1243/chrome-head
 ids=("$@")
 if [ ${#ids[@]} -eq 0 ]; then ids=($(seq -f "day-%02g" 1 30)); fi
 mkdir -p out/post out/preview
-for id in "${ids[@]}"; do
-  for kind in post preview; do
+for kind in preview post; do
+  for id in "${ids[@]}"; do
     music=false; [ "$kind" = preview ] && music=true
     npx remotion render src/index.ts "$id" "out/$kind/$id.mp4" \
       --props="{\"day\":$((10#${id#day-})),\"music\":$music}" \

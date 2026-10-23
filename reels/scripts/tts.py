@@ -27,7 +27,7 @@ for line in json.load(sys.stdin):
     text = line["text"]
     for pattern, spoken in SAY:
         text = re.sub(pattern, spoken, text)
-    samples, rate = kokoro.create(text, voice=voice, speed=1.08, lang="en-us")
+    samples, rate = kokoro.create(text, voice=voice, speed=1.15, lang="en-us")
     out = root / "public" / "vo" / f"day-{line['day']:02d}" / f"s{line['scene']}.wav"
     out.parent.mkdir(parents=True, exist_ok=True)
     sf.write(out, samples, rate)
