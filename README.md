@@ -70,7 +70,7 @@ swapping a clip.
 | `hero-wide.av1.mp4` / `hero-wide.mp4` | `VID_20261014_113814693` | Desktop hero. 16:10 crop. AV1 (sharp, small) with an H.264 fallback. |
 | `hero-tall.av1.mp4` / `hero-tall.mp4` | same clip | Phone hero. 1080 × 1920. |
 | `clip-1` … `clip-6` | six stall clips (listed in the script) | Proof wall, 720 × 1280. |
-| `*.webp` posters | first second of each clip | Shown instantly; the video fades in over it. |
+| `*.webp` posters | first second of each clip | Shown instantly; the video fades in over it. The phone hero poster is 828 px. |
 | `public/media/cut/` | `VID_20260925_065824094` | 72 WebP frames of the Cricut cutting. |
 | `public/lofi/` | `Untitled design (1).zip` | 17 designs, background removed, 420 px WebP. |
 
@@ -94,8 +94,13 @@ How video loads:
 
 ## Performance
 
+Lighthouse with real throttling (23 Oct 2026): phone 88–89 (hero visible in
+2.8 s), desktop 98. Accessibility 96, best practices 100, SEO 100.
+
 - Static HTML from Netlify's CDN. Images, video and Next.js bundles are cached
   for a year (`netlify.toml`).
+- The phone hero poster is fetched first and kept under 100 KB (828 px). Keep it
+  that small if you replace it: it decides how fast the page looks loaded.
 - Stickers are 420 px WebP (about 40 KB each) and load lazily below the hero.
 - Heavy pieces load late: matter-js when the pile is near, cutting frames when
   that section is near, videos after page load.
