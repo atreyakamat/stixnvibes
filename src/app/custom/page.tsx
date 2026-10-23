@@ -51,8 +51,8 @@ export default function CustomPage() {
               Four steps. No fuss.
             </h2>
             <div className="relative mt-12 hidden h-72 lg:block">
-              <Sticker id="sticker-13" rotate={-8} className="absolute left-0 top-0 w-48" />
-              <Sticker id="sticker-27" rotate={10} className="absolute left-40 top-20 w-44" />
+              <Sticker id="lofi-13" rotate={-8} className="absolute left-0 top-0 w-48" />
+              <Sticker id="lofi-10" rotate={10} className="absolute left-40 top-20 w-44" />
             </div>
           </div>
           <ol className="divide-y divide-line border-y border-line lg:col-span-7">

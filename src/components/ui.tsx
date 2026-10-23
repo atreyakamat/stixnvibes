@@ -208,8 +208,8 @@ export function CtaBand({
   return (
     <section className="container-x pt-24 md:pt-36">
       <Reveal className="relative overflow-hidden rounded-[2rem] border border-line px-6 py-16 text-center md:px-16 md:py-24">
-        <Sticker id="sticker-24" rotate={-14} className="absolute left-6 top-6 hidden w-32 md:block" />
-        <Sticker id="sticker-30" rotate={12} className="absolute bottom-6 right-6 hidden w-32 md:block" />
+        <Sticker id="lofi-07" rotate={-14} className="absolute left-6 top-6 hidden w-32 md:block" />
+        <Sticker id="lofi-13" rotate={12} className="absolute bottom-6 right-6 hidden w-32 md:block" />
         <h2 className="display text-[clamp(3rem,10vw,9rem)]">{title}</h2>
         <div className="mt-10 flex flex-wrap justify-center gap-3">
           <Link href={primary.href} className="btn btn-primary">

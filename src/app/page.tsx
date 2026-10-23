@@ -1,7 +1,8 @@
 import Link from "next/link";
 import { Hero } from "@/components/hero";
 import { FindUs } from "@/components/find-us";
-import { LaptopScroll } from "@/components/laptop-scroll";
+import { CutScrub } from "@/components/cut-scrub";
+import { ProofWall } from "@/components/proof-wall";
 import { Reveal } from "@/components/reveal";
 import { StickerMarquee } from "@/components/sticker-marquee";
 import { StickerGravity } from "@/components/sticker-gravity";
@@ -13,9 +14,7 @@ export default function Home() {
   return (
     <>
       <Hero />
-      <div className="mt-20 md:mt-28">
-        <StickerMarquee />
-      </div>
+      <StickerMarquee />
 
       {/* 01 Statement + physics pile */}
       <section aria-labelledby="statement" className="pt-28 md:pt-44">
@@ -46,7 +45,7 @@ export default function Home() {
         </div>
       </section>
 
-      <LaptopScroll />
+      <CutScrub />
 
       {/* 02 Products */}
       <section id="products" aria-labelledby="products-title" className="scroll-mt-24 pt-28 md:pt-40">
@@ -69,6 +68,25 @@ export default function Home() {
           </div>
           <div className="mt-12">
             <ProductGrid />
+          </div>
+        </div>
+      </section>
+
+      {/* Proof: real stall clips */}
+      <section aria-labelledby="proof-title" className="overflow-x-clip pt-28 md:pt-40">
+        <div className="container-x">
+          <div className="flex flex-col justify-between gap-6 md:flex-row md:items-end">
+            <h2 id="proof-title" className="display text-[clamp(2.8rem,8vw,7.5rem)]">
+              Goa queues
+              <br />
+              for <span className="text-lemon">this.</span>
+            </h2>
+            <Reveal className="max-w-sm text-paper/70">
+              College fests, Sunday stalls, every one of them packed. Real clips, no actors.
+            </Reveal>
+          </div>
+          <div className="mt-12 md:mt-16">
+            <ProofWall />
           </div>
         </div>
       </section>
@@ -163,7 +181,7 @@ export default function Home() {
                 ))}
               </ul>
             </div>
-            <Sticker id="sticker-15" rotate={-8} className="absolute -bottom-10 right-6 hidden w-56 lg:block" />
+            <Sticker id="lofi-15" rotate={-8} className="absolute -bottom-10 right-6 hidden w-56 lg:block" />
           </div>
         </div>
       </section>
@@ -185,9 +203,9 @@ export default function Home() {
       <section aria-labelledby="about-title" className="pt-28 md:pt-40">
         <div className="container-x grid items-center gap-12 lg:grid-cols-12">
           <div className="relative order-2 aspect-square max-w-md lg:order-1 lg:col-span-5">
-            <Sticker id="sticker-09" rotate={-6} className="absolute left-[4%] top-[6%] w-[52%]" />
-            <Sticker id="sticker-18" rotate={9} className="absolute right-[2%] top-[22%] w-[46%]" />
-            <Sticker id="sticker-05" rotate={-12} className="absolute bottom-[2%] left-[24%] w-[44%]" />
+            <Sticker id="lofi-09" rotate={-6} className="absolute left-[4%] top-[6%] w-[52%]" />
+            <Sticker id="lofi-01" rotate={9} className="absolute right-[2%] top-[22%] w-[46%]" />
+            <Sticker id="lofi-05" rotate={-12} className="absolute bottom-[2%] left-[24%] w-[44%]" />
           </div>
           <div className="order-1 lg:order-2 lg:col-span-6 lg:col-start-7">
             <SectionLabel index="07">Who we are</SectionLabel>

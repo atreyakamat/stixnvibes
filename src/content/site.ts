@@ -47,7 +47,7 @@ export const products: Product[] = [
     name: "Sticker packs",
     line: "Curated sets built around one mood. Pick a pack. Set your vibe.",
     status: "available",
-    stickers: ["sticker-26", "sticker-12", "sticker-24"],
+    stickers: ["lofi-09", "lofi-12", "lofi-07"],
     shape: "pack",
   },
   {
@@ -55,7 +55,7 @@ export const products: Product[] = [
     name: "Custom stickers",
     line: "Your artwork, your logo or your inside joke, cut into a sticker.",
     status: "available",
-    stickers: ["sticker-19", "sticker-21"],
+    stickers: ["lofi-02", "lofi-04"],
     shape: "large",
   },
   {
@@ -187,9 +187,9 @@ export const faqs = [
   },
 ] as const;
 
-export const stickerCount = 32;
-export const stickerSrc = (id: string) => `/stickers/${id}.webp`;
+export const stickerCount = 17;
+export const stickerSrc = (id: string) => `/lofi/${id}.webp`;
 export const allStickers = Array.from(
   { length: stickerCount },
-  (_, i) => `sticker-${String(i + 1).padStart(2, "0")}`,
+  (_, i) => `lofi-${String(i + 1).padStart(2, "0")}`,
 );

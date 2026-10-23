@@ -8,20 +8,20 @@ type Item = { id: string; w: number; h: number; x: number; y: number; r: number 
 
 // Sticker sizes are relative to container width so the pile scales.
 const ITEMS: Omit<Item, "w" | "h">[] = [
-  { id: "sticker-12", x: 0.1, y: 0.52, r: -8 },
-  { id: "sticker-26", x: 0.24, y: 0.6, r: 6 },
-  { id: "sticker-19", x: 0.37, y: 0.58, r: -4 },
-  { id: "sticker-24", x: 0.5, y: 0.66, r: 10 },
-  { id: "sticker-10", x: 0.63, y: 0.55, r: -12 },
-  { id: "sticker-21", x: 0.76, y: 0.62, r: 4 },
-  { id: "sticker-08", x: 0.88, y: 0.57, r: -6 },
-  { id: "sticker-32", x: 0.18, y: 0.82, r: 3 },
-  { id: "sticker-17", x: 0.32, y: 0.85, r: -10 },
-  { id: "sticker-06", x: 0.45, y: 0.86, r: 7 },
-  { id: "sticker-23", x: 0.58, y: 0.84, r: -3 },
-  { id: "sticker-15", x: 0.71, y: 0.86, r: 9 },
-  { id: "sticker-03", x: 0.84, y: 0.84, r: -7 },
-  { id: "sticker-29", x: 0.06, y: 0.84, r: 12 },
+  { id: "lofi-12", x: 0.1, y: 0.52, r: -8 },
+  { id: "lofi-09", x: 0.24, y: 0.6, r: 6 },
+  { id: "lofi-02", x: 0.37, y: 0.58, r: -4 },
+  { id: "lofi-07", x: 0.5, y: 0.66, r: 10 },
+  { id: "lofi-10", x: 0.63, y: 0.55, r: -12 },
+  { id: "lofi-04", x: 0.76, y: 0.62, r: 4 },
+  { id: "lofi-08", x: 0.88, y: 0.57, r: -6 },
+  { id: "lofi-15", x: 0.18, y: 0.82, r: 3 },
+  { id: "lofi-17", x: 0.32, y: 0.85, r: -10 },
+  { id: "lofi-06", x: 0.45, y: 0.86, r: 7 },
+  { id: "lofi-13", x: 0.58, y: 0.84, r: -3 },
+  { id: "lofi-05", x: 0.71, y: 0.86, r: 9 },
+  { id: "lofi-03", x: 0.84, y: 0.84, r: -7 },
+  { id: "lofi-16", x: 0.06, y: 0.84, r: 12 },
 ];
 
 

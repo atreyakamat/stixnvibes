@@ -44,9 +44,9 @@ export default function AboutPage() {
             </Reveal>
           </div>
           <div className="relative mx-auto aspect-square w-full max-w-md lg:col-span-5 lg:col-start-8">
-            <Sticker id="sticker-02" rotate={-8} className="absolute left-0 top-[4%] w-[48%]" />
-            <Sticker id="sticker-22" rotate={8} className="absolute right-0 top-[18%] w-[48%]" />
-            <Sticker id="sticker-31" rotate={-4} className="absolute bottom-0 left-[20%] w-[54%]" />
+            <Sticker id="lofi-02" rotate={-8} className="absolute left-0 top-[4%] w-[48%]" />
+            <Sticker id="lofi-05" rotate={8} className="absolute right-0 top-[18%] w-[48%]" />
+            <Sticker id="lofi-14" rotate={-4} className="absolute bottom-0 left-[20%] w-[54%]" />
           </div>
         </div>
       </section>

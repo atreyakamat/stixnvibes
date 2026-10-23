@@ -8,20 +8,20 @@ import { stickerSize } from "@/content/stickers";
 
 // Positions are percentages of the laptop lid. Stand-in art until new stickers arrive.
 const PLACED = [
-  { id: "sticker-12", x: 6, y: 8, w: 22, r: -8 },
-  { id: "sticker-26", x: 62, y: 6, w: 17, r: 7 },
-  { id: "sticker-19", x: 34, y: 14, w: 24, r: -3 },
-  { id: "sticker-24", x: 78, y: 30, w: 15, r: 10 },
-  { id: "sticker-10", x: 12, y: 44, w: 21, r: 6 },
-  { id: "sticker-21", x: 44, y: 38, w: 20, r: -9 },
-  { id: "sticker-08", x: 66, y: 50, w: 22, r: 4 },
-  { id: "sticker-17", x: 4, y: 68, w: 19, r: -6 },
-  { id: "sticker-06", x: 30, y: 62, w: 15, r: 8 },
-  { id: "sticker-15", x: 50, y: 66, w: 23, r: -4 },
-  { id: "sticker-29", x: 80, y: 68, w: 15, r: 9 },
-  { id: "sticker-03", x: 24, y: 30, w: 15, r: -11 },
-  { id: "sticker-23", x: 56, y: 24, w: 15, r: 5 },
-  { id: "sticker-32", x: 74, y: 8, w: 18, r: -5 },
+  { id: "lofi-12", x: 6, y: 8, w: 22, r: -8 },
+  { id: "lofi-09", x: 62, y: 6, w: 17, r: 7 },
+  { id: "lofi-02", x: 34, y: 14, w: 24, r: -3 },
+  { id: "lofi-07", x: 78, y: 30, w: 15, r: 10 },
+  { id: "lofi-10", x: 12, y: 44, w: 21, r: 6 },
+  { id: "lofi-04", x: 44, y: 38, w: 20, r: -9 },
+  { id: "lofi-08", x: 66, y: 50, w: 22, r: 4 },
+  { id: "lofi-17", x: 4, y: 68, w: 19, r: -6 },
+  { id: "lofi-06", x: 30, y: 62, w: 15, r: 8 },
+  { id: "lofi-15", x: 50, y: 66, w: 23, r: -4 },
+  { id: "lofi-13", x: 80, y: 68, w: 15, r: 9 },
+  { id: "lofi-03", x: 24, y: 30, w: 15, r: -11 },
+  { id: "lofi-05", x: 56, y: 24, w: 15, r: 5 },
+  { id: "lofi-16", x: 74, y: 8, w: 18, r: -5 },
 ] as const;
 
 const START = 0.1;

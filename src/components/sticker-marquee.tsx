@@ -1,6 +1,6 @@
 import { Sticker } from "./ui";
 
-const ROW = ["sticker-05", "sticker-12", "sticker-18", "sticker-24", "sticker-09", "sticker-26", "sticker-02", "sticker-30"];
+const ROW = ["lofi-05", "lofi-12", "lofi-01", "lofi-07", "lofi-09", "lofi-09", "lofi-02", "lofi-13"];
 const TILT = [-6, 5, -3, 7, -8, 4, -5, 6];
 
 /** A slow loop of real stickers between the hero and the first section. */

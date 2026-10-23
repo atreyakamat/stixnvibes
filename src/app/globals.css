@@ -324,3 +324,50 @@
     }
   }
 }
+
+/* Peel-and-stick hero stickers. `scale` is animated separately from the
+   inline transform that holds each sticker's position. */
+.peelable {
+  filter: drop-shadow(0 1px 0 rgb(0 0 0 / 0.35)) drop-shadow(0 10px 14px rgb(0 0 0 / 0.5));
+  transition: filter 0.25s ease, transform 0.18s var(--ease-out-expo);
+  will-change: transform;
+}
+.peelable[data-state="peel"] {
+  cursor: grabbing;
+  transition: filter 0.25s ease;
+  filter: drop-shadow(0 2px 0 rgb(0 0 0 / 0.2)) drop-shadow(0 34px 30px rgb(0 0 0 / 0.55));
+}
+.peelable[data-state="stick"] {
+  animation: stick 0.38s var(--ease-out-expo);
+}
+@keyframes stick {
+  0% {
+    scale: 1.05;
+  }
+  45% {
+    scale: 0.94;
+  }
+  100% {
+    scale: 1;
+  }
+}
+.toast {
+  animation: toast 2.4s var(--ease-out-expo) forwards;
+}
+@keyframes toast {
+  0% {
+    opacity: 0;
+    translate: 0 12px;
+  }
+  12%,
+  80% {
+    opacity: 1;
+    translate: 0 0;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+html {
+  overflow-x: clip;
+}
