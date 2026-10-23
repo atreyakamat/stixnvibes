@@ -2,6 +2,7 @@ import Link from "next/link";
 import { Hero } from "@/components/hero";
 import { FindUs } from "@/components/find-us";
 import { StallReel } from "@/components/stall-reel";
+import { InstagramLatest } from "@/components/instagram-latest";
 import { ProofWall } from "@/components/proof-wall";
 import { Reveal } from "@/components/reveal";
 import { StickerMarquee } from "@/components/sticker-marquee";
@@ -196,6 +197,7 @@ export default function Home() {
             </h2>
           </Reveal>
           <FindUs />
+          <InstagramLatest />
         </div>
       </section>
 
