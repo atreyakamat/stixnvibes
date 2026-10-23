@@ -371,3 +371,16 @@
 html {
   overflow-x: clip;
 }
+
+/* Vibe picker: stickers drop onto the stage each time a vibe is picked. */
+.vibe-drop {
+  animation: vibe-drop 0.7s var(--ease-out-expo) both;
+}
+@keyframes vibe-drop {
+  from {
+    opacity: 0;
+    scale: 0.4;
+    rotate: calc(var(--r) - 40deg);
+    translate: 0 -30px;
+  }
+}

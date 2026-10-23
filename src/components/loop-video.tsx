@@ -15,6 +15,15 @@ function canPlay() {
   return !window.matchMedia(QUERY).matches && !saveData;
 }
 
+// Videos wait until the page has loaded and the main thread is idle, so they
+// never compete with the first paint or with hydration.
+function afterLoad(fn: () => void) {
+  const idle = () =>
+    "requestIdleCallback" in window ? requestIdleCallback(fn, { timeout: 1500 }) : setTimeout(fn, 300);
+  if (document.readyState === "complete") idle();
+  else window.addEventListener("load", idle, { once: true });
+}
+
 /**
  * A muted loop that only downloads and plays while it is on screen. The poster
  * carries the frame on its own, so reduced motion and data saver get a still.
@@ -48,7 +57,7 @@ export function LoopVideo({
     const io = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {
-          setNear(true);
+          afterLoad(() => setNear(true));
           video.current?.play().catch(() => {});
         } else video.current?.pause();
       },

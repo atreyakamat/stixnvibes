@@ -1,15 +1,12 @@
 "use client";
 
 import { useState } from "react";
-import { AnimatePresence, motion } from "motion/react";
-import { useReducedMotion } from "@/lib/use-reduced-motion";
 import { site, stickerSrc } from "@/content/site";
 import { stickerSize } from "@/content/stickers";
 import { vibes } from "@/content/vibes";
 
 export function VibePicker() {
   const [active, setActive] = useState(0);
-  const reduce = useReducedMotion();
   const vibe = vibes[active];
   const message = encodeURIComponent(
     `Hi Stix N Vibes! I like the ${vibe.name} vibe. Can you tell me what you have in it?`,
@@ -54,35 +51,37 @@ export function VibePicker() {
 
       <div className="lg:col-span-7">
         <div className="relative aspect-[5/4] overflow-hidden rounded-[1.75rem] border border-line bg-surface/40">
-          <motion.div
+          <div
             aria-hidden="true"
-            className="absolute inset-0"
-            animate={{ backgroundColor: vibe.tint }}
-            transition={{ duration: reduce ? 0 : 0.6 }}
+            className="absolute inset-0 transition-colors duration-700"
+            style={{ backgroundColor: vibe.tint }}
           />
-          <AnimatePresence>
-            <motion.div key={vibe.id} className="absolute inset-0" aria-hidden="true">
-              {vibe.stickers.map((s, i) => {
-                const [w, h] = stickerSize[s.id] ?? [1, 1];
-                return (
-                  <motion.img
-                    key={s.id}
-                    src={stickerSrc(s.id)}
-                    alt=""
-                    width={w}
-                    height={h}
-                    draggable={false}
-                    className="sticker-shadow absolute h-auto"
-                    style={{ left: `${s.x}%`, top: `${s.y}%`, width: `${s.w * 0.76}%` }}
-                    initial={reduce ? false : { opacity: 0, scale: 0.4, rotate: s.r - 40, y: -30 }}
-                    animate={{ opacity: 1, scale: 1, rotate: s.r, y: 0 }}
-                    exit={{ opacity: 0, scale: 0.8, transition: { duration: reduce ? 0 : 0.2 } }}
-                    transition={{ duration: reduce ? 0 : 0.7, delay: reduce ? 0 : 0.08 * i, ease: [0.16, 1, 0.3, 1] }}
-                  />
-                );
-              })}
-            </motion.div>
-          </AnimatePresence>
+          {/* Keyed so each pick replays the CSS drop-in. */}
+          <div key={vibe.id} className="absolute inset-0" aria-hidden="true">
+            {vibe.stickers.map((s, i) => {
+              const [w, h] = stickerSize[s.id] ?? [1, 1];
+              return (
+                <img
+                  key={s.id}
+                  src={stickerSrc(s.id)}
+                  alt=""
+                  width={w}
+                  height={h}
+                  loading="lazy"
+                  draggable={false}
+                  className="sticker-shadow vibe-drop absolute h-auto"
+                  style={{
+                    left: `${s.x}%`,
+                    top: `${s.y}%`,
+                    width: `${s.w * 0.76}%`,
+                    rotate: `${s.r}deg`,
+                    ["--r" as string]: `${s.r}deg`,
+                    animationDelay: `${i * 80}ms`,
+                  }}
+                />
+              );
+            })}
+          </div>
         </div>
         <p className="label mt-3 text-mute">Every sticker shown is a real design. Ask for the set on Instagram.</p>
       </div>

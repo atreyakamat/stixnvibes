@@ -3,7 +3,8 @@
 
 export const site = {
   name: "Stix N Vibes",
-  url: "https://stixnvibes.com",
+  // Netlify serves the site on www; the bare domain redirects here.
+  url: "https://www.stixnvibes.com",
   tagline: "Your stickers. Your vibe.",
   campaign: "Make it stick. Literally.",
   description:
