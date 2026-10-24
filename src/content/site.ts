@@ -28,6 +28,7 @@ export const nav: readonly { href: string; label: string; external?: boolean }[]
   { href: "/#products", label: "Products" },
   { href: "/custom/", label: "Custom" },
   { href: "/brands/", label: "For Brands" },
+  { href: "/book/", label: "Book a stall" },
   { href: "/about/", label: "About" },
   { href: site.shop, label: "Shop", external: true },
 ];
@@ -174,7 +175,7 @@ export const faqs = [
   },
   {
     q: "Do you take sponsorships or stall invites?",
-    a: "Yes. If you run an event, a market or a college fest and want us there, or want to sponsor us, send an enquiry or DM us on Instagram.",
+    a: "Yes. If you run an event, a market or a college fest and want us there, see the Book a stall page or DM us on Instagram. Sponsors can use the same form.",
   },
   {
     q: "Do you take bulk and brand orders?",
