@@ -126,7 +126,7 @@ Every enquiry and custom-sticker upload goes two ways at once: Netlify Forms kee
 Setup, once:
 
 1. At emailjs.com (free plan, 200 emails a month), add an Email Service and connect the Gmail inbox.
-2. Add an Email Template. Subject `{{title}}`, content `{{details}}`, Reply To `{{email}}`, To Email the inbox address.
+2. Add an Email Template. EmailJS's stock "Contact Us" template works as is: it gets `{{title}}`, `{{name}}`, `{{email}}`, `{{time}}` and the full submission as `{{message}}` (also `{{details}}`). Set Reply To to `{{email}}` and To Email to the inbox address.
 3. In Netlify → Project configuration → Environment variables, add `NEXT_PUBLIC_EMAILJS_SERVICE_ID`, `NEXT_PUBLIC_EMAILJS_TEMPLATE_ID` and `NEXT_PUBLIC_EMAILJS_PUBLIC_KEY` (Account → General in EmailJS), then redeploy.
 4. In EmailJS → Account → Security, allow only `https://www.stixnvibes.com` so nobody can send from the key elsewhere.
 

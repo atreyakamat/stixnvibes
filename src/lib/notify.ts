@@ -8,10 +8,17 @@ const KEY = process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY;
 
 export const emailEnabled = Boolean(SERVICE && TEMPLATE && KEY);
 
+const sentAt = new Intl.DateTimeFormat("en-IN", {
+  dateStyle: "medium",
+  timeStyle: "short",
+  timeZone: "Asia/Kolkata",
+});
+
 /**
  * Sends one email. `fields` become the lines of the email body, in order;
- * empty values are left out. The template uses {{title}}, {{name}},
- * {{email}} (also the Reply-To) and {{details}}.
+ * empty values are left out. The template can use {{title}}, {{name}},
+ * {{email}} (also the Reply-To), {{time}} and the body as {{message}} or
+ * {{details}}, so EmailJS's stock "Contact Us" template works unchanged.
  */
 export async function emailSubmission(title: string, fields: Record<string, string>) {
   if (!emailEnabled) throw new Error("EmailJS is not configured");
@@ -26,7 +33,14 @@ export async function emailSubmission(title: string, fields: Record<string, stri
       service_id: SERVICE,
       template_id: TEMPLATE,
       user_id: KEY,
-      template_params: { title, name: fields.Name ?? "", email: fields.Email ?? "", details },
+      template_params: {
+        title,
+        name: fields.Name ?? "",
+        email: fields.Email ?? "",
+        time: sentAt.format(new Date()),
+        message: details,
+        details,
+      },
     }),
   });
   if (!res.ok) throw new Error(`EmailJS ${res.status}`);
