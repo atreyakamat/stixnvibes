@@ -10,6 +10,7 @@ const TYPES = [
   "Event or pop-up",
   "Sponsorship",
   "Stall invite",
+  "Campus crew",
   "Collab",
   "Something else",
 ] as const;
@@ -32,11 +33,28 @@ function validate(data: FormData): Errors {
  * Posts to Netlify Forms (registered by public/__forms.html) and emails the
  * enquiry through EmailJS. The success message shows once either lands.
  */
-export function EnquiryForm({ variant = "general" }: { variant?: "general" | "brand" }) {
+// The brand and stall variants add two detail fields. They reuse the
+// `quantity` and `timeline` names so Netlify keeps one form.
+const DETAILS = {
+  brand: {
+    type: "Brand or bulk order",
+    org: "Brand or organisation",
+    quantity: { label: "Rough quantity and size", placeholder: "e.g. 500 stickers, about 5 cm" },
+    timeline: { label: "When do you need them?", placeholder: "e.g. before 15 December" },
+  },
+  stall: {
+    type: "Stall invite",
+    org: "Event, college or club",
+    quantity: { label: "Expected crowd", placeholder: "e.g. 800 students over two days" },
+    timeline: { label: "Event date and place", placeholder: "e.g. Sunday 14 December, Mapusa" },
+  },
+} as const;
+
+export function EnquiryForm({ variant = "general" }: { variant?: "general" | "brand" | "stall" }) {
   const uid = useId();
   const [errors, setErrors] = useState<Errors>({});
   const [state, setState] = useState<State>("idle");
-  const brand = variant === "brand";
+  const extra = variant === "general" ? null : DETAILS[variant];
 
   async function onSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
@@ -67,10 +85,10 @@ export function EnquiryForm({ variant = "general" }: { variant?: "general" | "br
             Name: get("name"),
             Email: get("email"),
             WhatsApp: get("phone"),
-            "Brand or organisation": get("company"),
+            [extra?.org ?? "Brand or organisation"]: get("company"),
             Type: get("type"),
-            Quantity: get("quantity"),
-            Timeline: get("timeline"),
+            [extra?.quantity.label ?? "Quantity"]: get("quantity"),
+            [extra?.timeline.label ?? "Timeline"]: get("timeline"),
             Message: get("message"),
             Page: get("page"),
           });
@@ -128,7 +146,7 @@ export function EnquiryForm({ variant = "general" }: { variant?: "general" | "br
                 type="radio"
                 name="type"
                 value={t}
-                defaultChecked={brand ? t === "Brand or bulk order" : i === 0}
+                defaultChecked={extra ? t === extra.type : i === 0}
                 className="peer sr-only"
               />
               <span className="inline-block rounded-full px-4 py-2 text-sm ring-1 ring-paper/20 transition-colors peer-checked:bg-lemon peer-checked:text-ink peer-checked:ring-lemon peer-focus-visible:outline-2 peer-focus-visible:outline-offset-2 peer-focus-visible:outline-lemon">
@@ -162,23 +180,23 @@ export function EnquiryForm({ variant = "general" }: { variant?: "general" | "br
         </div>
         <div>
           <label htmlFor={`${uid}-company`} className="mb-2 block text-sm text-paper/80">
-            Brand or organisation <span className="text-mute">(optional)</span>
+            {extra?.org ?? "Brand or organisation"} <span className="text-mute">(optional)</span>
           </label>
           <input id={`${uid}-company`} name="company" type="text" autoComplete="organization" className="field" />
         </div>
-        {brand && (
+        {extra && (
           <>
             <div>
               <label htmlFor={`${uid}-quantity`} className="mb-2 block text-sm text-paper/80">
-                Rough quantity and size <span className="text-mute">(optional)</span>
+                {extra.quantity.label} <span className="text-mute">(optional)</span>
               </label>
-              <input id={`${uid}-quantity`} name="quantity" type="text" placeholder="e.g. 500 stickers, about 5 cm" className="field" />
+              <input id={`${uid}-quantity`} name="quantity" type="text" placeholder={extra.quantity.placeholder} className="field" />
             </div>
             <div>
               <label htmlFor={`${uid}-timeline`} className="mb-2 block text-sm text-paper/80">
-                When do you need them? <span className="text-mute">(optional)</span>
+                {extra.timeline.label} <span className="text-mute">(optional)</span>
               </label>
-              <input id={`${uid}-timeline`} name="timeline" type="text" placeholder="e.g. before 15 December" className="field" />
+              <input id={`${uid}-timeline`} name="timeline" type="text" placeholder={extra.timeline.placeholder} className="field" />
             </div>
           </>
         )}
