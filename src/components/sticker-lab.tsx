@@ -3,6 +3,7 @@
 import { useEffect, useId, useRef, useState, type DragEvent, type FormEvent } from "react";
 import { CUTS, hasTransparency, renderPreview, type CutType } from "@/lib/cut-preview";
 import { site } from "@/content/site";
+import { deliver, emailSubmission } from "@/lib/notify";
 
 const MAX_BYTES = 8 * 1024 * 1024; // Netlify Forms upload limit per submission
 const TYPES = ["image/png", "image/jpeg", "image/webp", "image/svg+xml"];
@@ -116,9 +117,23 @@ export function StickerLab() {
     for (const key of ["name", "email", "details", "bot-field"]) body.set(key, String(data.get(key) ?? ""));
     body.set("rights", "confirmed");
     body.set("artwork", file as File);
+    const get = (k: string) => String(data.get(k) ?? "");
     try {
-      const res = await fetch("/__forms.html", { method: "POST", body });
-      if (!res.ok) throw new Error(String(res.status));
+      await deliver(
+        () => fetch("/__forms.html", { method: "POST", body }),
+        async () => {
+          if (get("bot-field")) return;
+          const art = file as File;
+          await emailSubmission(`New custom sticker: ${body.get("cut")} from ${get("name").trim()}`, {
+            Name: get("name"),
+            Email: get("email"),
+            Cut: String(body.get("cut")),
+            Details: get("details"),
+            // EmailJS can't carry the file; Netlify keeps it with the submission.
+            Artwork: `${art.name} (${Math.round(art.size / 1024)} KB), in Netlify > Forms > sticker-upload`,
+          });
+        },
+      );
       form.reset();
       setFile(null);
       setState("sent");

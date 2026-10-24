@@ -58,6 +58,7 @@ Other pages: `/custom` (cut preview and artwork upload), `/brands`, `/about`, `/
 | Stall reel and the stickers that slap onto it | `public/media/stall/reel.*` and `STICKERS` in `src/components/stall-reel.tsx` |
 | Share image (WhatsApp, Instagram, X previews) | `public/og.jpg`, 1200 × 630 |
 | Forms | `src/components/enquiry-form.tsx`, `sticker-lab.tsx` and `public/__forms.html` (keep field names in sync) |
+| Form emails | `src/lib/notify.ts` (EmailJS, see "Form emails" below) |
 | Book a stall page and the organiser pitch PDF | `src/content/book.ts`, `src/app/book/page.tsx`; PDF source in `scripts/pitch/` (`node scripts/pitch/render.mjs` rewrites `public/stixnvibes-stall-pitch.pdf`) |
 | Customer reviews and photos ("Stuck on you" wall) | `src/content/reviews.ts`; empty frames ask people to tag us until there are three |
 
@@ -117,6 +118,19 @@ Lighthouse with real throttling (23 Oct 2026): phone 88–89 (hero visible in
 | Stall reel | Poster with every sticker shown | Poster, no pinning, every sticker shown | Smaller frame, headline on one line |
 | Videos | Poster image | Poster image | Phone-shaped hero clip |
 | Glass header | Solid fallback where blur is unsupported | Same | Same |
+
+## Form emails
+
+Every enquiry and custom-sticker upload goes two ways at once: Netlify Forms keeps a copy, and EmailJS emails it to the inbox. The person sees "Got it." when either one lands. Uploaded artwork stays in Netlify (Forms → sticker-upload); the email names the file.
+
+Setup, once:
+
+1. At emailjs.com (free plan, 200 emails a month), add an Email Service and connect the Gmail inbox.
+2. Add an Email Template. EmailJS's stock "Contact Us" template works as is: it gets `{{title}}`, `{{name}}`, `{{email}}`, `{{time}}` and the full submission as `{{message}}` (also `{{details}}`). Set Reply To to `{{email}}` and To Email to the inbox address.
+3. In Netlify → Project configuration → Environment variables, add `NEXT_PUBLIC_EMAILJS_SERVICE_ID`, `NEXT_PUBLIC_EMAILJS_TEMPLATE_ID` and `NEXT_PUBLIC_EMAILJS_PUBLIC_KEY` (Account → General in EmailJS), then redeploy.
+4. In EmailJS → Account → Security, allow only `https://www.stixnvibes.com` so nobody can send from the key elsewhere.
+
+With any variable missing, the site skips the email and only posts to Netlify.
 
 ## Launch checklist
 

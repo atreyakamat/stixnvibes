@@ -2,6 +2,7 @@
 
 import { useId, useState, type FormEvent } from "react";
 import { site } from "@/content/site";
+import { deliver, emailSubmission } from "@/lib/notify";
 
 const TYPES = [
   "Custom stickers",
@@ -29,8 +30,8 @@ function validate(data: FormData): Errors {
 }
 
 /**
- * Posts to Netlify Forms (registered by public/__forms.html). The success
- * message only shows after Netlify accepts the submission.
+ * Posts to Netlify Forms (registered by public/__forms.html) and emails the
+ * enquiry through EmailJS. The success message shows once either lands.
  */
 // The brand and stall variants add two detail fields. They reuse the
 // `quantity` and `timeline` names so Netlify keeps one form.
@@ -68,13 +69,31 @@ export function EnquiryForm({ variant = "general" }: { variant?: "general" | "br
     }
     setState("sending");
     data.set("page", window.location.pathname);
+    const get = (k: string) => String(data.get(k) ?? "");
     try {
-      const res = await fetch("/__forms.html", {
-        method: "POST",
-        headers: { "Content-Type": "application/x-www-form-urlencoded" },
-        body: new URLSearchParams(data as unknown as Record<string, string>).toString(),
-      });
-      if (!res.ok) throw new Error(String(res.status));
+      await deliver(
+        () =>
+          fetch("/__forms.html", {
+            method: "POST",
+            headers: { "Content-Type": "application/x-www-form-urlencoded" },
+            body: new URLSearchParams(data as unknown as Record<string, string>).toString(),
+          }),
+        // The hidden bot-field is only ever filled in by spam bots.
+        async () => {
+          if (get("bot-field")) return;
+          await emailSubmission(`New enquiry: ${get("type")} from ${get("name").trim()}`, {
+            Name: get("name"),
+            Email: get("email"),
+            WhatsApp: get("phone"),
+            [extra?.org ?? "Brand or organisation"]: get("company"),
+            Type: get("type"),
+            [extra?.quantity.label ?? "Quantity"]: get("quantity"),
+            [extra?.timeline.label ?? "Timeline"]: get("timeline"),
+            Message: get("message"),
+            Page: get("page"),
+          });
+        },
+      );
       form.reset();
       setState("sent");
     } catch {
