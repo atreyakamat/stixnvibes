@@ -22,16 +22,17 @@ model_dir = Path(sys.argv[1])
 voice = sys.argv[2] if len(sys.argv) > 2 else "af_heart"
 kokoro = Kokoro(str(model_dir / "kokoro-v1.0.onnx"), str(model_dir / "voices-v1.0.bin"))
 
-durations = {}
+vo_json = root / "src" / "vo.json"
+durations = json.loads(vo_json.read_text()) if vo_json.exists() else {}
 for line in json.load(sys.stdin):
     text = line["text"]
     for pattern, spoken in SAY:
         text = re.sub(pattern, spoken, text)
     samples, rate = kokoro.create(text, voice=voice, speed=1.15, lang="en-us")
-    out = root / "public" / "vo" / f"day-{line['day']:02d}" / f"s{line['scene']}.wav"
+    out = root / "public" / "vo" / line["id"] / f"s{line['scene']}.wav"
     out.parent.mkdir(parents=True, exist_ok=True)
     sf.write(out, samples, rate)
-    durations[f"{line['day']}-{line['scene']}"] = round(len(samples) / rate, 3)
-    print(out.relative_to(root), durations[f"{line['day']}-{line['scene']}"], file=sys.stderr)
+    durations[f"{line['id']}-{line['scene']}"] = round(len(samples) / rate, 3)
+    print(out.relative_to(root), durations[f"{line['id']}-{line['scene']}"], file=sys.stderr)
 
-(root / "src" / "vo.json").write_text(json.dumps(durations, indent=2) + "\n")
+vo_json.write_text(json.dumps(dict(sorted(durations.items())), indent=2) + "\n")

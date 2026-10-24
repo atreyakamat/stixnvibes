@@ -544,3 +544,83 @@ export const CtaScene: React.FC<Props<"cta">> = ({ scene, day }) => {
     </AbsoluteFill>
   );
 };
+
+// ---------------------------------------------------------------- slide
+
+/** Collection slides: Soft Rebellion and Retro are square, Journal Jotz is 4:5. */
+const slideAspect = (src: string) => (src.startsWith("jj-") ? 1350 / 1080 : 1);
+
+export const SlideScene: React.FC<Props<"slide">> = ({ scene, frames }) => {
+  const frame = useCurrentFrame();
+  const aspect = slideAspect(scene.src);
+  const width = aspect > 1 ? 880 : 960;
+  const height = width * aspect;
+  const url = staticFile(`slides/${scene.src}.jpg`);
+  const enter = usePop(0, 13);
+  const focus = scene.focus ?? "zoom";
+
+  // Camera inside the card: scale plus an offset in card-fractions.
+  let scale = interpolate(frame, [0, frames], [1, 1.12]);
+  let dx = 0;
+  let dy = 0;
+  if (focus === "quads") {
+    // Hold the whole slide, then visit each quarter where one sticker sits.
+    const stops = [
+      [1, 0, 0],
+      [1.9, 0.25, 0.25],
+      [1.9, -0.25, 0.25],
+      [1.9, 0.25, -0.25],
+      [1.9, -0.25, -0.25],
+    ];
+    const seg = frames / stops.length;
+    const k = Math.min(stops.length - 1, Math.floor(frame / seg));
+    const prev = stops[Math.max(0, k - 1)];
+    const cur = stops[k];
+    const t = interpolate(frame - k * seg, [0, 9], [0, 1], { extrapolateRight: "clamp", easing: Easing.bezier(0.2, 0.9, 0.2, 1) });
+    const at = k === 0 ? cur : prev.map((v, i) => v + (cur[i] - v) * t);
+    [scale, dx, dy] = [at[0] * interpolate(frame - k * seg, [0, seg], [1, 1.04]), at[1], at[2]];
+  } else if (focus === "pan") {
+    scale = 1.6;
+    dy = interpolate(frame, [0, frames], [0.18, -0.18], { easing: Easing.inOut(Easing.cubic) });
+  }
+
+  return (
+    <AbsoluteFill style={{ background: C.ink, overflow: "hidden" }}>
+      <AbsoluteFill style={{ backgroundImage: `url(${url})`, backgroundSize: "cover", backgroundPosition: "center", filter: "blur(40px) brightness(0.45)", scale: "1.2" }} />
+      <AbsoluteFill style={{ justifyContent: "center", alignItems: "center", paddingTop: 80 }}>
+        <div
+          style={{
+            width,
+            height,
+            borderRadius: 36,
+            overflow: "hidden",
+            boxShadow: `0 0 0 10px ${C.white}, 0 40px 80px rgba(0,0,0,0.6)`,
+            opacity: Math.min(1, enter * 2),
+            scale: String(interpolate(enter, [0, 1], [0.85, 1])),
+            rotate: `${interpolate(enter, [0, 1], [-4, 0])}deg`,
+          }}
+        >
+          <div
+            style={{
+              width: "100%",
+              height: "100%",
+              backgroundImage: `url(${url})`,
+              backgroundSize: "cover",
+              backgroundPosition: "center",
+              scale: String(scale),
+              translate: `${dx * width}px ${dy * height}px`,
+            }}
+          />
+        </div>
+      </AbsoluteFill>
+      {scene.text ? (
+        <div style={{ position: "absolute", left: SAFE.side, right: SAFE.side, top: SAFE.top + 30, textAlign: "center" }}>
+          <Tag size={60} delay={3} tilt={-2}>
+            {scene.text}
+          </Tag>
+        </div>
+      ) : null}
+      <CutFlash />
+    </AbsoluteFill>
+  );
+};

@@ -1,12 +1,13 @@
 import React from "react";
 import { AbsoluteFill, Audio, interpolate, Sequence, staticFile, useCurrentFrame, useVideoConfig } from "remotion";
 import { C, fontFamily, SAFE } from "./brand";
-import { CtaScene, DesignsScene, FootageScene, ListScene, TitleScene, VersusScene } from "./components/scenes";
+import { findReel, seedOf } from "./catalog";
+import { CtaScene, DesignsScene, FootageScene, ListScene, SlideScene, TitleScene, VersusScene } from "./components/scenes";
 import musicWindows from "./music-windows.json";
-import { REELS, type Scene } from "./reels";
+import type { Scene } from "./reels";
 import { reelTimeline, VO_LEAD, voSeconds } from "./timeline";
 
-export type ReelProps = { day: number; music: boolean };
+export type ReelProps = { id: string; music: boolean };
 
 const SceneView: React.FC<{ scene: Scene; frames: number; day: number }> = ({ scene, frames, day }) => {
   switch (scene.kind) {
@@ -20,6 +21,8 @@ const SceneView: React.FC<{ scene: Scene; frames: number; day: number }> = ({ sc
       return <VersusScene scene={scene} frames={frames} day={day} />;
     case "designs":
       return <DesignsScene scene={scene} frames={frames} day={day} />;
+    case "slide":
+      return <SlideScene scene={scene} frames={frames} day={day} />;
     case "cta":
       return <CtaScene scene={scene} frames={frames} day={day} />;
   }
@@ -56,6 +59,29 @@ const ChallengeBar: React.FC<{ day: number }> = ({ day }) => (
           }}
         />
       ))}
+    </div>
+  </div>
+);
+
+/** Series name and episode for reels outside the challenge. */
+const SeriesBadge: React.FC<{ series: string; ep?: number }> = ({ series, ep }) => (
+  <div style={{ position: "absolute", top: SAFE.top - 90, left: SAFE.side, display: "flex", gap: 10 }}>
+    <div
+      style={{
+        fontFamily,
+        fontWeight: 800,
+        fontSize: 32,
+        color: C.ink,
+        background: C.lemon,
+        borderRadius: 14,
+        padding: "8px 16px",
+        border: `3px solid ${C.ink}`,
+        textTransform: "uppercase",
+        letterSpacing: "0.02em",
+      }}
+    >
+      {series}
+      {ep ? ` · ${String(ep).padStart(2, "0")}` : ""}
     </div>
   </div>
 );
@@ -106,29 +132,34 @@ const Subtitles: React.FC<{ text: string; seconds: number }> = ({ text, seconds 
   );
 };
 
-export const ReelComposition: React.FC<ReelProps> = ({ day, music }) => {
-  const reel = REELS.find((r) => r.day === day)!;
+export const ReelComposition: React.FC<ReelProps> = ({ id, music }) => {
+  const reel = findReel(id);
+  const seed = reel.day ?? seedOf(id);
   const { fps, durationInFrames } = useVideoConfig();
   const { starts, frames } = reelTimeline(reel);
   const window = musicWindows[reel.music];
-  const musicStart = window.starts[day % window.starts.length];
+  const musicStart = window.starts[seed % window.starts.length];
   const spoken = (f: number) =>
-    reel.scenes.some((s, i) => s.vo && f >= starts[i] && f < starts[i] + (voSeconds(day, i) + VO_LEAD + 0.2) * fps);
+    reel.scenes.some((s, i) => s.vo && f >= starts[i] && f < starts[i] + (voSeconds(id, i) + VO_LEAD + 0.2) * fps);
 
   return (
     <AbsoluteFill style={{ background: C.ink }}>
       {reel.scenes.map((scene, i) => (
         <Sequence key={i} from={starts[i]} durationInFrames={frames[i]} name={`${i}: ${scene.kind}`}>
-          <SceneView scene={scene} frames={frames[i]} day={day} />
+          <SceneView
+            scene={scene.kind === "cta" && !scene.line ? { ...scene, line: reel.day ? (reel.day < 30 ? `Follow for Day ${reel.day + 1}` : "Your stickers. Your vibe.") : "Follow for more vibes" } : scene}
+            frames={frames[i]}
+            day={seed}
+          />
           {scene.vo ? (
             <Sequence from={Math.round(VO_LEAD * fps)}>
-              <Audio src={staticFile(`vo/day-${String(day).padStart(2, "0")}/s${i}.wav`)} volume={1} />
-              {scene.kind !== "list" && scene.kind !== "versus" ? <Subtitles text={scene.vo} seconds={voSeconds(day, i)} /> : null}
+              <Audio src={staticFile(`vo/${id}/s${i}.wav`)} volume={1} />
+              {scene.kind !== "list" && scene.kind !== "versus" ? <Subtitles text={scene.vo} seconds={voSeconds(id, i)} /> : null}
             </Sequence>
           ) : null}
         </Sequence>
       ))}
-      <ChallengeBar day={day} />
+      {reel.day ? <ChallengeBar day={reel.day} /> : reel.series ? <SeriesBadge series={reel.series} ep={reel.ep} /> : null}
       {music ? (
         <Audio
           src={staticFile(`music/${reel.music}.mp3`)}

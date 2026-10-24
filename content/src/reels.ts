@@ -46,11 +46,20 @@ export type Scene = Base &
     | { kind: "list"; title: string; items: string[]; numbered?: boolean; clip?: ClipName }
     | { kind: "versus"; title: string; left: [string, string]; right: [string, string]; art?: "cut" | "paper" | "size" }
     | { kind: "designs"; text?: string; numbered?: boolean; ids?: number[]; layout?: "grid" | "rain" | "flash" }
+    | { kind: "slide"; src: SlideName; text?: string; focus?: "zoom" | "quads" | "pan" }
     | { kind: "cta"; line?: string }
   );
 
+export type SlideName = string;
+
 export type Reel = {
-  day: number;
+  /** 30-day challenge number. Reels with a day show the Day X/30 bar. */
+  day?: number;
+  /** Series name and episode, shown as a badge on series reels. */
+  series?: string;
+  ep?: number;
+  /** Extra seconds held after each voiceover line, so longer reels breathe. */
+  breath?: number;
   title: string;
   /** Music mix used for the preview render (m1..m5). */
   music: "m1" | "m2" | "m3" | "m4" | "m5";

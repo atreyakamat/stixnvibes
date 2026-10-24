@@ -1,11 +1,12 @@
 import { FPS } from "./brand";
-import type { Reel, Scene } from "./reels";
+import type { CatalogReel } from "./catalog";
+import type { Scene } from "./reels";
 import voJson from "./vo.json";
 
 const vo = voJson as Record<string, number>;
 
 /** Seconds of voiceover for a scene, or 0 when it has none. */
-export const voSeconds = (day: number, index: number) => vo[`${day}-${index}`] ?? 0;
+export const voSeconds = (id: string, index: number) => vo[`${id}-${index}`] ?? 0;
 
 /** Voiceover starts this long after its scene starts. */
 export const VO_LEAD = 0.1;
@@ -15,13 +16,13 @@ const defaultMin = (scene: Scene) => (scene.kind === "cta" ? 2 : 1.8);
 /** Reels must run at least this long; the end card absorbs the difference. */
 const MIN_SECONDS = 10;
 
-const baseFrames = (reel: Reel, index: number) => {
+const baseFrames = (reel: CatalogReel, index: number) => {
   const scene = reel.scenes[index];
-  const spoken = scene.vo ? voSeconds(reel.day, index) + VO_LEAD + 0.2 : 0;
+  const spoken = scene.vo ? voSeconds(reel.id, index) + VO_LEAD + 0.2 + (reel.breath ?? 0) : 0;
   return Math.ceil(Math.max(scene.min ?? defaultMin(scene), spoken) * FPS);
 };
 
-export const reelTimeline = (reel: Reel) => {
+export const reelTimeline = (reel: CatalogReel) => {
   const frames = reel.scenes.map((_, i) => baseFrames(reel, i));
   const short = MIN_SECONDS * FPS - frames.reduce((a, b) => a + b, 0);
   if (short > 0) frames[frames.length - 1] += short;
