@@ -16,7 +16,7 @@ export const site = {
   // hides the "Latest on Instagram" strip.
   instagramFeed: "https://feeds.behold.so/KvgXwivRlCDgbWJhgv9T",
   contact: {
-    email: "hello@stixnvibes.com",
+    email: "stixnvibes@gmail.com",
     instagram: "https://instagram.com/stixnvibes",
     instagramHandle: "@stixnvibes",
     instagramDm: "https://ig.me/m/stixnvibes",
