@@ -39,8 +39,8 @@ export function SiteFooter() {
               </a>
             </li>
             <li>
-              <a href={site.contact.whatsapp} className="hover:text-lemon" rel="noopener" target="_blank">
-                WhatsApp
+              <a href={site.contact.instagramDm} className="hover:text-lemon" rel="noopener" target="_blank">
+                DM on Instagram
               </a>
             </li>
             <li>

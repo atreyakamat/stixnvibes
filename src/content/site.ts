@@ -20,7 +20,6 @@ export const site = {
     instagram: "https://instagram.com/stixnvibes",
     instagramHandle: "@stixnvibes",
     instagramDm: "https://ig.me/m/stixnvibes",
-    whatsapp: "https://wa.me/917744020601",
   },
 } as const;
 
@@ -140,6 +139,23 @@ export const brandUseCases = [
   { title: "Launches and campaigns", body: "A small physical object that carries your message." },
 ] as const;
 
+// Bulk prices for custom stickers (waterproof vinyl, any cut shape, up to
+// about 5 cm). Draft numbers from the growth plan: Atreya sets the final ones.
+export const bulkTiers = [
+  { qty: "100–299", each: 12 },
+  { qty: "300–699", each: 9 },
+  { qty: "700–1,499", each: 8 },
+  { qty: "1,500+", each: 7 },
+] as const;
+
+export const bulkTerms = [
+  "Bigger than 5 cm: +₹3 a sticker. Mix designs in one order, priced on the total.",
+  "Send a ready logo and design is free. If we design it, it is ₹300, free on 700+.",
+  "A free proof before we cut anything.",
+  "50% advance on UPI to confirm, the rest on delivery or pickup.",
+  "Ready 2–3 days after you approve the proof. Free shipping above ₹250.",
+] as const;
+
 export const brandBrief = [
   "Your name and brand",
   "What the stickers are for",
@@ -179,7 +195,7 @@ export const faqs = [
   },
   {
     q: "Do you take bulk and brand orders?",
-    a: "Yes. Tell us what you need on the For Brands page. We reply with options and a quote for your project.",
+    a: "Yes. Bulk custom stickers start at ₹7 each, with a free proof before we cut. See the prices on the For Brands page, then send a brief or DM us on Instagram.",
   },
 ] as const;
 
