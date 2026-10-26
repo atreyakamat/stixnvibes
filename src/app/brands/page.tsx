@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 import { EnquiryForm } from "@/components/enquiry-form";
 import { Reveal } from "@/components/reveal";
 import { PageIntro, SectionLabel } from "@/components/ui";
@@ -72,9 +73,9 @@ export default function BrandsPage() {
               ))}
             </ul>
             <div className="mt-10 flex flex-wrap gap-3">
-              <a href="#enquiry-title" className="btn btn-primary">
-                Get a free mock-up
-              </a>
+              <Link href="/bulk/" className="btn btn-primary">
+                See bulk orders
+              </Link>
               <a href={site.contact.instagramDm} target="_blank" rel="noopener" className="btn btn-ghost">
                 DM us on Instagram
               </a>

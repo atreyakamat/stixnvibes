@@ -142,10 +142,10 @@ export const brandUseCases = [
 // Bulk prices for custom stickers (waterproof vinyl, any cut shape, up to
 // about 5 cm). Draft numbers from the growth plan: Atreya sets the final ones.
 export const bulkTiers = [
-  { qty: "100–299", each: 12 },
-  { qty: "300–699", each: 9 },
-  { qty: "700–1,499", each: 8 },
-  { qty: "1,500+", each: 7 },
+  { qty: "100–299", min: 100, each: 12 },
+  { qty: "300–699", min: 300, each: 9 },
+  { qty: "700–1,499", min: 700, each: 8 },
+  { qty: "1,500+", min: 1500, each: 7 },
 ] as const;
 
 export const bulkTerms = [
@@ -154,6 +154,29 @@ export const bulkTerms = [
   "A free proof before we cut anything.",
   "50% advance on UPI to confirm, the rest on delivery or pickup.",
   "Ready 2–3 days after you approve the proof. Free shipping above ₹250.",
+] as const;
+
+export const bulkSteps = [
+  { title: "Send your logo", body: "DM us on Instagram or fill the form below. A PNG, PDF or even a photo of your logo is fine." },
+  { title: "Get a free proof", body: "We send a mock-up of the sticker within a day. Change it as many times as you need." },
+  { title: "Confirm with 50%", body: "Pay half on UPI to lock your order. No hidden costs after the quote." },
+  { title: "We cut and deliver", body: "Ready 2–3 days after you approve. Pickup in Goa, delivery, or shipping anywhere in India." },
+] as const;
+
+export const bulkUses = [
+  { title: "Packaging", body: "Seal boxes and bags, and drop a thank-you sticker in every order." },
+  { title: "Counter freebies", body: "A sticker with the bill. People put it on laptops and bottles, and your logo travels." },
+  { title: "Events and launches", body: "Something people keep after the event ends." },
+  { title: "Merch", body: "Sticker packs your fans can afford, sold at your counter or online." },
+] as const;
+
+export const bulkFaqs = [
+  { q: "What is the minimum order?", a: "100 stickers. You can mix designs, and the price is set by the total." },
+  { q: "Are they waterproof?", a: "Yes. Waterproof vinyl that handles bottles, bags and laptops, with a clean cut around any shape." },
+  { q: "Can I see a sample first?", a: "Yes. DM us and we can drop a few test stickers with your logo, or send you photos of past work." },
+  { q: "Do I need a designer?", a: "No. Send what you have. If your logo needs cleaning up or you want a new design, we do it for ₹300, free on 700+ stickers." },
+  { q: "Do you ship outside Goa?", a: "Yes, anywhere in India. Shipping is free above ₹250." },
+  { q: "How do I pay?", a: "50% on UPI to confirm, the rest when you collect or before we ship." },
 ] as const;
 
 export const brandBrief = [
@@ -195,7 +218,7 @@ export const faqs = [
   },
   {
     q: "Do you take bulk and brand orders?",
-    a: "Yes. Bulk custom stickers start at ₹7 each, with a free proof before we cut. See the prices on the For Brands page, then send a brief or DM us on Instagram.",
+    a: "Yes. Bulk custom stickers start at ₹7 each, with a free proof before we cut. See stixnvibes.com/bulk for prices, then send a brief or DM us on Instagram.",
   },
 ] as const;
 

@@ -149,10 +149,10 @@ export function ProductGrid() {
   );
 }
 
-export function FaqList() {
+export function FaqList({ items = faqs }: { items?: readonly { q: string; a: string }[] }) {
   return (
     <div className="divide-y divide-line border-y border-line">
-      {faqs.map((f) => (
+      {items.map((f) => (
         <details key={f.q} className="group py-2">
           <summary className="flex cursor-pointer list-none items-center justify-between gap-6 py-4 text-lg font-medium md:text-xl [&::-webkit-details-marker]:hidden">
             {f.q}
