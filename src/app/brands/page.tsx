@@ -7,7 +7,7 @@ import { brandBrief, brandUseCases, bulkTerms, bulkTiers, site } from "@/content
 
 export const metadata: Metadata = {
   title: "Stickers for brands",
-  description: "Bulk and logo stickers for college clubs, fests, brands and events in Goa. From ₹7 a sticker, any cut shape, free proof.",
+  description: "Bulk and logo stickers for college clubs, fests, brands and events in Goa. From ₹5 a sticker, any cut shape, free proof.",
   alternates: { canonical: "/brands/" },
 };
 

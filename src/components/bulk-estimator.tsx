@@ -4,7 +4,7 @@ import { useId, useState } from "react";
 import { bulkTiers, site } from "@/content/site";
 
 const MIN = bulkTiers[0].min;
-const MAX = 3000;
+const MAX = 5000;
 const BIG_EXTRA = 3;
 
 const inr = (n: number) => `₹${n.toLocaleString("en-IN")}`;
@@ -13,7 +13,7 @@ const inr = (n: number) => `₹${n.toLocaleString("en-IN")}`;
 // 5 cm" rule in bulkTerms, so change those and this follows.
 export function BulkEstimator() {
   const id = useId();
-  const [qty, setQty] = useState(300);
+  const [qty, setQty] = useState(200);
   const [big, setBig] = useState(false);
 
   const tier = [...bulkTiers].reverse().find((t) => qty >= t.min) ?? bulkTiers[0];

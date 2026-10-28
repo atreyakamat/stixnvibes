@@ -140,17 +140,18 @@ export const brandUseCases = [
 ] as const;
 
 // Bulk prices for custom stickers (waterproof vinyl, any cut shape, up to
-// about 5 cm). Draft numbers from the growth plan: Atreya sets the final ones.
+// about 5 cm). Set by Atreya on 2026-10-28.
 export const bulkTiers = [
-  { qty: "100–299", min: 100, each: 12 },
-  { qty: "300–699", min: 300, each: 9 },
-  { qty: "700–1,499", min: 700, each: 8 },
-  { qty: "1,500+", min: 1500, each: 7 },
+  { qty: "50–199", min: 50, each: 9 },
+  { qty: "200–499", min: 200, each: 8 },
+  { qty: "500–999", min: 500, each: 7 },
+  { qty: "1,000–1,999", min: 1000, each: 6 },
+  { qty: "2,000+", min: 2000, each: 5 },
 ] as const;
 
 export const bulkTerms = [
   "Bigger than 5 cm: +₹3 a sticker. Mix designs in one order, priced on the total.",
-  "Send a ready logo and design is free. If we design it, it is ₹300, free on 700+.",
+  "Send a ready logo and design is free. If we design it, it is ₹300, free on 500+.",
   "A free proof before we cut anything.",
   "50% advance on UPI to confirm, the rest on delivery or pickup.",
   "Ready 2–3 days after you approve the proof. Free shipping above ₹250.",
@@ -171,10 +172,10 @@ export const bulkUses = [
 ] as const;
 
 export const bulkFaqs = [
-  { q: "What is the minimum order?", a: "100 stickers. You can mix designs, and the price is set by the total." },
+  { q: "What is the minimum order?", a: "50 stickers. You can mix designs, and the price is set by the total." },
   { q: "Are they waterproof?", a: "Yes. Waterproof vinyl that handles bottles, bags and laptops, with a clean cut around any shape." },
   { q: "Can I see a sample first?", a: "Yes. DM us and we can drop a few test stickers with your logo, or send you photos of past work." },
-  { q: "Do I need a designer?", a: "No. Send what you have. If your logo needs cleaning up or you want a new design, we do it for ₹300, free on 700+ stickers." },
+  { q: "Do I need a designer?", a: "No. Send what you have. If your logo needs cleaning up or you want a new design, we do it for ₹300, free on 500+ stickers." },
   { q: "Do you ship outside Goa?", a: "Yes, anywhere in India. Shipping is free above ₹250." },
   { q: "How do I pay?", a: "50% on UPI to confirm, the rest when you collect or before we ship." },
 ] as const;
@@ -218,7 +219,7 @@ export const faqs = [
   },
   {
     q: "Do you take bulk and brand orders?",
-    a: "Yes. Bulk custom stickers start at ₹7 each, with a free proof before we cut. See stixnvibes.com/bulk for prices, then send a brief or DM us on Instagram.",
+    a: "Yes. Bulk custom stickers start at ₹5 each, with a free proof before we cut. See stixnvibes.com/bulk for prices, then send a brief or DM us on Instagram.",
   },
 ] as const;
 

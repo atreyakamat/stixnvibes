@@ -8,7 +8,7 @@ import { brandBrief, bulkFaqs, bulkSteps, bulkTerms, bulkTiers, bulkUses, site }
 export const metadata: Metadata = {
   title: "Bulk logo stickers",
   description:
-    "Custom logo stickers for Goa brands, from ₹7 each. Waterproof vinyl, any cut shape, free proof, ready in 2–3 days.",
+    "Custom logo stickers for Goa brands, from ₹5 each. Waterproof vinyl, any cut shape, free proof, ready in 2–3 days.",
   alternates: { canonical: "/bulk/" },
 };
 
