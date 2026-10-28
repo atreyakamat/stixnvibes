@@ -226,8 +226,8 @@ export function EnquiryForm({ variant = "general" }: { variant?: "general" | "br
         {state === "failed" && (
           <p role="alert" className="text-sm text-[#ff9a80]">
             That did not send. Try again, or message us on{" "}
-            <a className="underline" href={site.contact.whatsapp}>
-              WhatsApp
+            <a className="underline" href={site.contact.instagramDm}>
+              Instagram
             </a>
             .
           </p>
