@@ -44,6 +44,11 @@ export function SiteFooter() {
               </a>
             </li>
             <li>
+              <a href={site.contact.tel} className="tabular-nums hover:text-lemon">
+                {site.contact.phone}
+              </a>
+            </li>
+            <li>
               <a href={`mailto:${site.contact.email}`} className="hover:text-lemon">
                 {site.contact.email}
               </a>
