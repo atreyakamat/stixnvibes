@@ -11,7 +11,7 @@ export const metadata: Metadata = {
 
 const channels = [
   { label: "Instagram", value: site.contact.instagramHandle, href: site.contact.instagram, external: true },
-  { label: "WhatsApp", value: "Message us", href: site.contact.whatsapp, external: true },
+  { label: "Instagram DM", value: "Message us", href: site.contact.instagramDm, external: true },
   { label: "Email", value: site.contact.email, href: `mailto:${site.contact.email}`, external: false },
 ];
 
