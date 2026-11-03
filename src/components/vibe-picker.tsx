@@ -8,9 +8,6 @@ import { vibes } from "@/content/vibes";
 export function VibePicker() {
   const [active, setActive] = useState(0);
   const vibe = vibes[active];
-  const message = encodeURIComponent(
-    `Hi Stix N Vibes! I like the ${vibe.name} vibe. Can you tell me what you have in it?`,
-  );
 
   return (
     <div className="grid gap-8 lg:grid-cols-12">
@@ -35,16 +32,12 @@ export function VibePicker() {
           {vibe.line}
         </p>
         <div className="mt-8 flex flex-wrap gap-3">
-          <a
-            href={`${site.contact.whatsapp}?text=${message}`}
-            target="_blank"
-            rel="noopener"
-            className="btn btn-primary"
-          >
-            Ask about {vibe.name}
+          {/* Instagram DM links cannot prefill a message, so the label names the vibe instead. */}
+          <a href={site.contact.instagramDm} target="_blank" rel="noopener" className="btn btn-primary">
+            Ask about {vibe.name} on Instagram
           </a>
-          <a href={site.contact.instagramDm} target="_blank" rel="noopener" className="btn btn-ghost">
-            DM on Instagram
+          <a href={site.shop} target="_blank" rel="noopener" className="btn btn-ghost">
+            Browse the shop
           </a>
         </div>
       </div>
