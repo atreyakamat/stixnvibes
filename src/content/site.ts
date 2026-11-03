@@ -20,6 +20,9 @@ export const site = {
     instagram: "https://instagram.com/stixnvibes",
     instagramHandle: "@stixnvibes",
     instagramDm: "https://ig.me/m/stixnvibes",
+    phone: "+91 87679 15905",
+    tel: "tel:+918767915905",
+    whatsapp: "https://wa.me/918767915905",
   },
 } as const;
 

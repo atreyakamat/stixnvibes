@@ -41,6 +41,7 @@ const structuredData = {
   image: `${site.url}/og.jpg`,
   description: site.description,
   slogan: site.tagline,
+  telephone: "+91-8767915905",
   areaServed: "Goa, India",
   address: { "@type": "PostalAddress", addressRegion: "Goa", addressCountry: "IN" },
   paymentAccepted: "Cash, UPI",
